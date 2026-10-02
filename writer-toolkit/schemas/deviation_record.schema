@@ -1,0 +1,19 @@
+schema_version: "0.3"
+name: deviation_record
+required:
+  - id
+  - parameter
+  - target
+  - actual
+  - deviation
+  - reason
+  - consequence
+  - status
+  - author_authorized
+  - checkpoint
+properties:
+  status:
+    enum: PROPOSED | AUTHOR-ACCEPTED | REJECTED
+  author_authorized: true|false
+rule: PROPOSED never equals AUTHOR-ACCEPTED
+authorization_rule: ACCEPTED DEVIATION requires an explicit author act; silence is insufficient
