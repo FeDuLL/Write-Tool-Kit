@@ -1,0 +1,37 @@
+WRITER-TOOLKIT v0.3 — GENRE CONTRACT
+
+## Module
+
+COND.50_GENRE_CONTRACT
+
+Activate when genre materially affects the reader promise and audit scope.
+
+## Contract
+
+READER_PROMISE
+EXPECTED_EFFECT
+CONVENTIONAL_ELEMENTS
+OPTIONAL_CONVENTIONS
+DELIBERATE_DEVIATIONS
+AUDIT_RISKS
+
+Genre conventions are diagnostic lenses, not immutable laws.
+
+## Genre audit
+
+Check:
+- reader promise;
+- legibility of genre signals;
+- intentional deviations;
+- framework-vs-law confusion;
+- unauthorized style/structure mutation.
+
+Possible outcomes:
+
+ALIGNED
+PARTIAL
+DEVIATION_RECORDED
+UNVERIFIED
+BLOCKED
+
+A genre framework never overrides an explicit authorial mode merely because a framework predicts a different arrangement.
