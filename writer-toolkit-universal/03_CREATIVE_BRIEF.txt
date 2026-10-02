@@ -1,0 +1,56 @@
+WRITER-TOOLKIT v0.3 — CREATIVE BRIEF
+
+## Purpose
+
+Collect project-specific creative decisions without converting model assumptions into author decisions.
+
+## Required field family
+
+PROJECT_ID
+PROJECT_NAME
+FORM
+SCOPE_RECORD
+GENRE
+SUBGENRE
+TONE
+EMOTIONAL_EFFECT
+AUDIENCE
+POV
+STRUCTURAL_MODE
+PROSE_TEXTURE
+DARKNESS
+HUMOR
+ROMANCE
+PHILOSOPHICAL_DENSITY
+ENDING
+SERIES_STATUS
+PARTICIPATION_MODE
+LANGUAGE
+LOCALE
+COMMERCIAL_INTENT
+CROSS_MEDIA_INTENT
+
+## Field state
+
+DECISION_STATE:
+UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
+
+SOURCE:
+AUTHOR | AI | DERIVED | EXTERNAL
+
+DERIVED does not mean accepted.
+
+## Intake
+
+1. inspect supplied material;
+2. extract existing author decisions;
+3. do not ask for information already present;
+4. distinguish UNKNOWN from DEFERRED;
+5. ask only materially necessary questions;
+6. produce a brief draft.
+
+## Lock
+
+Brief locking is an author gate. Silence is not approval.
+
+A field becomes an author decision only when its decision state is ACCEPTED under the applicable authority rules.
