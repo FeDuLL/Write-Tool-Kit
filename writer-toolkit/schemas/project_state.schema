@@ -1,0 +1,44 @@
+schema_version: "0.3"
+name: project_state
+required:
+  - toolkit_version
+  - schema_version
+  - project_id
+  - project_name
+  - current_stage
+  - current_unit
+  - form
+  - scope_record
+  - participation_mode
+  - complexity
+  - active_modules
+  - hard_requirements
+  - style_lock
+  - capability_profile
+  - ai_decided
+  - deviations
+  - blockers
+  - last_checkpoint
+properties:
+  current_stage: project lifecycle stage; stage labels are governed by the stage model
+  current_unit: project-defined production unit or null
+  form: project-declared form
+  scope_record: ref: scope_record.schema
+  participation_mode:
+    enum: HIGH-COLLABORATION | BALANCED | AUTONOMOUS-WITH-GATES
+  complexity:
+    enum: T1 | T2 | T3
+  active_modules: ref: active_modules.schema
+  hard_requirements: ref: hard_requirements.schema
+  style_lock: ref: style_lock.schema
+  capability_profile: ref: capability_profile.schema
+  ai_decided: list of ref: ai_decided.schema
+  deviations: list of ref: deviation_record.schema
+  blockers: list of explicit blocker records
+  last_checkpoint: checkpoint identifier or null
+  optional_persistent_state:
+    - domain_state
+    - character_state
+    - continuity_state
+    - stable_digest_reference
+rule: STATE is authoritative for project decisions and execution state, not literal manuscript prose
