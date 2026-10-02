@@ -1,0 +1,45 @@
+WRITER-TOOLKIT v0.3 — FORM
+
+## Form Contract
+
+FORM is an operational routing layer, not a genre rule.
+
+Every project resolves:
+- VOLUME_METRIC
+- STRUCTURAL_UNIT
+- PRODUCTION_UNIT
+- LOCK_UNIT
+- DONE_CRITERIA
+- AUDIT_PROFILE
+- PERSISTENCE_PROFILE
+
+The runtime does not choose the literary form.
+
+### Prose
+
+Possible units include CHAPTER, SCENE, SEQUENCE, EPISODE or another project-defined unit.
+
+### Screenplay
+
+STRUCTURAL_UNIT = SCENE / SEQUENCE
+PRODUCTION_UNIT = SCENE / SEQUENCE
+CHAPTER_MODEL = OFF
+VOLUME_METRIC = project-defined
+
+## Complexity
+
+T1 = COMPACT
+T2 = STANDARD
+T3 = HIGH-COMPLEXITY
+
+Complexity controls process depth/resources only. It does not activate hidden world, mystery, series, IP or commercial modules.
+
+## Screenplay routing
+
+Never import prose chapter logic into screenplay production or audit.
+
+Output budget may cause chunking but may not change the selected structural unit.
+
+## Gate
+
+FORM.CONTRACT_READY
