@@ -1,0 +1,18 @@
+schema_version: "0.3"
+name: bootstrap_status
+required:
+  - toolkit_version
+  - schema_version
+  - project_id
+  - current_stage
+  - current_unit
+  - active_modules
+  - capability_profile
+  - blockers
+  - next_authorized_action
+  - bootstrap_result
+bootstrap_result:
+  enum:
+    - READY
+    - BLOCKED
+    - UNVERIFIED
