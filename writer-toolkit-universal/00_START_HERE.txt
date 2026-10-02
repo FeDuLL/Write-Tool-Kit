@@ -1,0 +1,26 @@
+WRITER-TOOLKIT v0.3 — UNIVERSAL TXT
+
+LOAD ORDER
+
+00_START_HERE
+01_CORE
+02_RUNTIME
+03_CREATIVE_BRIEF
+04_FORM
+05_GENRE
+06_PROSE
+07_DEVELOPMENT
+08_SYNOPSIS
+09_PRODUCTION
+10_REVISION
+11_AUDIT
+12_PREPUBLICATION
+13_STATE
+14_EXPORT
+20+ CONDITIONAL MODULES only when active
+30_TEMPLATES
+40_SCHEMAS
+90_REFERENCE
+
+FORM is an operational routing layer, not a genre rule.
+Conditional modules remain inactive unless activated by current project state.
