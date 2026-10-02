@@ -1,0 +1,22 @@
+schema_version: "0.3"
+name: style_baseline
+required:
+  - baseline_id
+  - excerpts
+  - target_notes
+  - permitted_variations
+  - source_model
+  - source_runtime
+properties:
+  baseline_id: stable identifier for the accepted calibration baseline
+  excerpts:
+    type: list
+    item:
+      type: narrative | dialogue | interiority | description
+      text: preserved exemplar text
+  target_notes: prose contract notes grounded in the calibration
+  permitted_variations: allowed variation without treating it as drift
+  source_model: model/runtime provenance for the exemplar
+  source_runtime: runtime provenance for the exemplar
+acceptance_rule: baseline is established only when calibration artifact is preserved and the applicable author interaction is complete
+forbidden_claim: adjective-only description is not a sufficient baseline
