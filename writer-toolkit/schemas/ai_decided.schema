@@ -1,0 +1,18 @@
+schema_version: "0.3"
+name: ai_decided
+required:
+  - id
+  - field
+  - proposal
+  - reason
+  - source_context
+  - reversible
+  - author_action_required
+  - decision_state
+properties:
+  reversible: true|false
+  author_action_required: true|false
+  decision_state:
+    enum: PROPOSED | ACCEPTED | REJECTED | DEFERRED
+rule: AI-DECIDED records expose assumptions and prevent them from disappearing into prose
+rule_2: DERIVED or AI-originated does not imply AUTHOR acceptance
