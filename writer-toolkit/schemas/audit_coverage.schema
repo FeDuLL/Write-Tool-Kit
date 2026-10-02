@@ -1,0 +1,24 @@
+schema_version: "0.3"
+name: audit_coverage
+required:
+  - audit_id
+  - scope
+  - passes
+properties:
+  scope:
+    enum: CHAPTER | SCENE | SEQUENCE | EPISODE | MANUSCRIPT | PROJECT | OTHER
+  passes:
+    type: list
+    item_required:
+      - pass_id
+      - required
+      - executed
+      - evidence_available
+      - independence_required
+      - independence_available
+      - result
+    item_properties:
+      result:
+        enum: PASS | FAIL | UNVERIFIED | NOT_APPLICABLE
+rule: no FULLY_CHECKED claim until all required passes have a recorded state
+rule_2: unit-level coverage does not automatically equal full-manuscript coverage
