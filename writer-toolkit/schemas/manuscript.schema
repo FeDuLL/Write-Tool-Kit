@@ -1,0 +1,26 @@
+schema_version: "0.3"
+name: manuscript
+required:
+  - manuscript_id
+  - version
+  - form
+  - persisted
+  - location
+  - current_length
+  - completed_units
+  - checksum_or_integrity_marker
+properties:
+  manuscript_id: stable manuscript identifier
+  version: manuscript version/checkpoint version
+  form: declared project form
+  persisted: true|false
+  location: persisted artifact location or null when runtime cannot persist
+  current_length:
+    value: ...
+    metric: project/form-defined metric
+    exactness: EXACT | ESTIMATED | UNKNOWN
+  completed_units: list of production-unit identifiers
+  checksum_or_integrity_marker: adapter-dependent integrity marker or null
+authority: MANUSCRIPT is authoritative for literal text
+completion_rule: unit completion requires TEXT_PERSISTED = YES
+conflict_rule: conflicts with state are inspected and resolved explicitly; no blanket precedence rule
