@@ -1,0 +1,110 @@
+# WRITER-TOOLKIT v0.3 — CANONICAL BOOTSTRAP
+
+**Module:** BOOT.01_CANONICAL  
+**Version:** 0.3  
+**Schema Version:** 0.3  
+**Role:** canonical runtime startup contract
+
+## Purpose
+
+Use this bootstrap whenever a Writer-Toolkit project is started or restored.
+
+It verifies the package and schemas, restores manuscript/state/modules/style, profiles capabilities, identifies blockers, and determines the next authorized action.
+
+Bootstrap is a restoration and verification procedure, not a creative rewrite.
+
+## Authority
+
+The author retains final authority over irreversible artistic decisions and canon.
+
+Keep these distinctions separate:
+
+`PROCEED`  
+`AI MAY PROCEED`  
+`AUTHOR APPROVAL`  
+`QUALITY CHECK`  
+`ACCEPTED DEVIATION`  
+`AUDIT PASSED`  
+`PUBLICATION READY`
+
+Silence never equals approval.
+
+`DEFERRED` means the decision has not been made. If it becomes load-bearing for the next action, MUST STOP unless autonomous determination was explicitly authorized.
+
+## Canonical preflight
+
+```
+VERIFY TOOLKIT VERSION
+→ VERIFY SCHEMA VERSION
+→ VERIFY ARTIFACT INTEGRITY
+→ LOAD MANUSCRIPT
+→ LOAD PROJECT STATE
+→ LOAD ACTIVE MODULES
+→ LOAD STYLE LOCK
+→ LOAD CAPABILITIES
+→ IDENTIFY CURRENT STAGE
+→ IDENTIFY BLOCKERS
+→ IDENTIFY NEXT AUTHORIZED ACTION
+```
+
+Fail on version mismatch, missing required artifact, manuscript/state corruption, schema mismatch, incompatible audit status, unauthorized module, or missing style calibration.
+
+Do not fabricate PASS when a check is unavailable.
+
+## New chat
+
+For the same project and runtime:
+
+```
+RESTORE
+→ VERIFY INTEGRITY
+→ DETERMINE LAST STABLE CHECKPOINT
+→ CONTINUE NEXT AUTHORIZED ACTION
+```
+
+Persisted manuscript/state is the reconstruction basis; hidden chat memory is not a substitute.
+
+## New model
+
+For the same project with a different model/runtime:
+
+```
+PROFILE CAPABILITIES
+→ RECHECK OUTPUT LIMIT
+→ RE-ANCHOR STYLE FROM BASELINE
+→ CHECK ACTIVE MODULE COMPATIBILITY
+→ INVALIDATE CAPABILITY-DEPENDENT VERDICTS IF UNSUPPORTED
+→ CONTINUE
+```
+
+Do not inherit unsupported capability claims.
+
+## MANUSCRIPT / STATE / DIGEST
+
+```
+MANUSCRIPT = literal text authority
+STATE = accepted decisions and execution state
+DIGEST = navigation only
+```
+
+A digest never overrides manuscript or state.
+
+## Style transfer
+
+Use the persisted Style Baseline/Lock and preserved exemplars. A verbal style description alone is insufficient for reliable transfer.
+
+## AI MAY PROCEED
+
+Proceed only when there is no blocking conflict, no required unresolved load-bearing decision, the next action is authorized, required artifacts exist, and required capabilities exist.
+
+This does not mean author approval.
+
+## Non-mutation
+
+Bootstrap must not silently rewrite manuscript text, alter canon, change Style Lock, activate modules, accept deviations, pass audits, or mark units complete when they were not persisted.
+
+## End states
+
+`READY`, `BLOCKED`, or `UNVERIFIED`.
+
+After bootstrap emit a machine-readable or human-readable bootstrap status sufficient for another model/session to reconstruct the necessary state.
