@@ -1,0 +1,19 @@
+schema_version: "0.3"
+name: style_lock
+required:
+  - baseline_id
+  - locked_at
+  - model_profile
+  - runtime_profile
+  - permitted_variation
+  - status
+properties:
+  baseline_id: reference to style_baseline.schema baseline_id
+  locked_at: timestamp or checkpoint reference
+  model_profile: current model/runtime profile at lock time
+  runtime_profile: execution environment profile at lock time
+  permitted_variation: allowed stylistic variation
+  status:
+    enum: LOCKED | OPEN | SUPERSEDED
+rule: Style Lock is an execution reference, not an artistic prison
+change_rule: intentional load-bearing deviation requires PROPOSE -> AUTHOR DECISION -> UPDATE STYLE LOCK or REGISTER LOCAL DEVIATION
