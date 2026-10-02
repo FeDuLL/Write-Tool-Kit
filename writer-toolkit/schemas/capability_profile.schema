@@ -1,0 +1,15 @@
+schema_version: "0.3"
+name: capability_profile
+properties:
+  file_persistence: true|false
+  manuscript_access: true|false
+  full_manuscript_context: YES|NO|PARTIAL
+  exact_counting: true|false
+  output_capacity:
+    value: ...
+    exactness: EXACT|ESTIMATED|UNKNOWN
+  independent_review: true|false
+  state_transfer: true|false
+  external_tools: []
+  chunking: true|false
+  append_to_artifact: true|false
