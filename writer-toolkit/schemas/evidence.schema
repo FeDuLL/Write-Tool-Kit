@@ -1,0 +1,17 @@
+schema_version: "0.3"
+name: evidence
+required:
+  - source
+  - locator
+  - excerpt
+  - interpretation
+  - result
+properties:
+  result:
+    enum: PASS | FAIL | UNVERIFIED | NOT_APPLICABLE
+  source: artifact or review source identifier
+  locator: stable location within source
+  excerpt: relevant evidence fragment
+  interpretation: why the evidence supports the recorded result
+rule: production report alone is invalid evidence for a HARD-* PASS
+rule_2: when independent evidence is required but unavailable, result is UNVERIFIED
