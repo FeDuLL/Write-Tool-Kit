@@ -1,0 +1,42 @@
+schema_version: "0.3"
+name: handoff
+required_order:
+  - VERSION
+  - PROJECT_ID
+  - CURRENT_STAGE
+  - CURRENT_UNIT
+  - PROJECT_STATUS
+  - AUTHOR_DECISIONS
+  - AI_DECIDED
+  - DEFERRED
+  - OPEN_BLOCKERS
+  - SCOPE_RECORD
+  - STYLE_LOCK
+  - ACTIVE_MODULES
+  - CAPABILITY_PROFILE
+  - RECENT_MANUSCRIPT_CONTEXT
+  - CONTINUITY
+  - NEXT_AUTHORIZED_ACTION
+  - DO_NOT_DO
+properties:
+  VERSION: toolkit/bootstrap/schema version information
+  PROJECT_ID: stable project identifier
+  CURRENT_STAGE: stage identifier
+  CURRENT_UNIT: production unit or null
+  PROJECT_STATUS: project execution status
+  AUTHOR_DECISIONS: accepted author decisions relevant to continuation
+  AI_DECIDED: ref: ai_decided.schema
+  DEFERRED: unresolved decisions that are not yet accepted
+  OPEN_BLOCKERS: current blockers
+  SCOPE_RECORD: ref: scope_record.schema
+  STYLE_LOCK: ref: style_lock.schema
+  ACTIVE_MODULES: ref: active_modules.schema
+  CAPABILITY_PROFILE: ref: capability_profile.schema
+  RECENT_MANUSCRIPT_CONTEXT: navigation context from persisted manuscript
+  CONTINUITY: relevant continuity state
+  NEXT_AUTHORIZED_ACTION: next allowed operation
+  DO_NOT_DO: explicit handoff constraints and protected decisions
+rules:
+  - handoff is a portable reconstruction aid, not a replacement for manuscript/state
+  - DO_NOT_DO is especially important on model/runtime switching
+  - unresolved DEFERRED items remain unresolved unless explicitly authorized and decided
