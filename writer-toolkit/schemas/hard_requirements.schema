@@ -1,0 +1,18 @@
+schema_version: "0.3"
+name: hard_requirements
+item_required:
+  - id
+  - statement
+  - authority_class
+  - decision_state
+  - source
+properties:
+  id: stable requirement identifier
+  statement: requirement that must be preserved or checked
+  authority_class:
+    enum: PROJECT-HARD | DOMAIN-HARD | LITERARY-HARD | SOFT
+  decision_state:
+    enum: UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
+  source:
+    enum: AUTHOR | AI | DERIVED | EXTERNAL
+rule: explicit HARD requirements are auditable; unresolved load-bearing HARD requirements block authorized production
