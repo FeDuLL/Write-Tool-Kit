@@ -1,0 +1,34 @@
+schema_version: "0.3"
+name: creative_brief
+required:
+  - PROJECT_ID
+  - PROJECT_NAME
+  - FORM
+  - SCOPE_RECORD
+  - GENRE
+  - SUBGENRE
+  - TONE
+  - EMOTIONAL_EFFECT
+  - AUDIENCE
+  - POV
+  - STRUCTURAL_MODE
+  - PROSE_TEXTURE
+  - DARKNESS
+  - HUMOR
+  - ROMANCE
+  - PHILOSOPHICAL_DENSITY
+  - ENDING
+  - SERIES_STATUS
+  - PARTICIPATION_MODE
+  - LANGUAGE
+  - LOCALE
+  - COMMERCIAL_INTENT
+  - CROSS_MEDIA_INTENT
+field_contract:
+  decision_state:
+    enum: UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
+  source:
+    enum: AUTHOR | AI | DERIVED | EXTERNAL
+rule: DERIVED does not mean accepted
+acceptance_rule: only ACCEPTED values under applicable authority rules are author decisions
+scope_boundary: schema records brief data; it does not choose genre, prose style, scope, or structural mode for the author
