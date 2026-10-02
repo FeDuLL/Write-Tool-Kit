@@ -1,0 +1,234 @@
+WRITER-TOOLKIT v0.3 — PROSE
+===========================
+
+===== PROSE.01_PROSE_CONTRACT.md =====
+# PROSE.01_PROSE_CONTRACT
+
+**ID:** `PROSE.01_PROSE_CONTRACT`
+
+## INPUTS
+
+- Creative Brief;
+- Structural Mode;
+- Prose Texture;
+- audience;
+- POV;
+- form.
+
+## OUTPUT
+
+`PROSE_CONTRACT`
+
+## CONTRACT SHOULD DESCRIBE
+
+- narrative distance;
+- syntactic movement;
+- descriptive density;
+- interiority;
+- image density;
+- compression;
+- dialogue texture;
+- permitted variation;
+- forbidden drift patterns where relevant.
+
+## RULES
+
+No universal numeric targets.
+
+The contract must remain compatible with the selected form and structural mode.
+A framework or runtime constraint must not silently redefine the prose contract.
+
+## GATE
+
+`G2 — PROSE CONTRACT`
+
+PASS when prose texture exists or is validly deferred and a form-compatible
+contract exists.
+
+FAIL:
+
+`PROSE_TARGET_UNRESOLVED`
+
+when writing cannot safely proceed without it.
+
+===== PROSE.02_STYLE_BASELINE.md =====
+# PROSE.02_STYLE_BASELINE
+
+**ID:** `PROSE.02_STYLE_BASELINE`
+
+## TRIGGER
+
+- new project;
+- no baseline;
+- major model/runtime switch;
+- intentional style change.
+
+## PROCESS
+
+1. propose calibration material;
+2. generate short exemplar(s);
+3. audit against brief;
+4. author reviews;
+5. repair if required;
+6. store accepted exemplar(s).
+
+## OUTPUT
+
+```yaml
+style_baseline:
+  baseline_id: ...
+  excerpts:
+    - type: narrative | dialogue | interiority | description
+      text: ...
+  target_notes: ...
+  permitted_variations: ...
+  source_model: ...
+  source_runtime: ...
+```
+
+## GATE
+
+`STYLE.BASELINE_ESTABLISHED`
+
+## FAIL
+
+- baseline is adjective-only;
+- baseline was never preserved;
+- model calls itself calibrated without artifact;
+- baseline silently changes.
+
+===== PROSE.03_STYLE_LOCK.md =====
+# PROSE.03_STYLE_LOCK
+
+**ID:** `PROSE.03_STYLE_LOCK`
+
+## TRIGGER
+
+Baseline established.
+
+## OUTPUT
+
+```yaml
+style_lock:
+  baseline_id: ...
+  locked_at: ...
+  model_profile: ...
+  runtime_profile: ...
+  permitted_variation: ...
+  status: LOCKED | OPEN | SUPERSEDED
+```
+
+## LOCK SEMANTICS
+
+Style Lock is an execution reference, not an artistic prison.
+
+Intentional deviation requires:
+
+```text
+PROPOSE
+→ AUTHOR DECISION
+→ UPDATE STYLE LOCK
+   OR
+  REGISTER LOCAL DEVIATION
+```
+
+## GATE
+
+`G3 — STYLE LOCK`
+
+PASS when:
+
+- baseline persisted;
+- diagnostic completed;
+- required author interaction completed;
+- lock record stored.
+
+FAIL:
+
+`STYLE_BASELINE_MISSING`
+
+or
+
+`STYLE_CALIBRATION_NOT_COMPLETE`.
+
+===== PROSE.04_STYLE_DRIFT_AUDIT.md =====
+# PROSE.04_STYLE_DRIFT_AUDIT
+
+**ID:** `PROSE.04_STYLE_DRIFT_AUDIT`
+
+## INPUT
+
+Current artifact + Style Baseline/Lock.
+
+## HARD DIAGNOSTICS
+
+- obvious repetitive syntax;
+- forbidden production patterns;
+- repeated identical images;
+- accidental terminology leakage;
+- voice reassignment failure where applicable.
+
+## SOFT DIAGNOSTICS
+
+- rhythmic monotony;
+- overcompression;
+- summary replacing scene;
+- excessive declarative emotion;
+- flat dialogue voices.
+
+## OUTPUT
+
+```text
+STYLE DRIFT FINDINGS
+EVIDENCE
+SEVERITY
+RECOMMENDED ACTION
+```
+
+## RULE
+
+Soft diagnostic ≠ automatic FAIL.
+
+Findings are routed to Change Control / Revision as appropriate; the audit itself
+does not mutate the manuscript or Style Lock.
+
+===== PROSE_ENGINE.md =====
+# PROSE ENGINE
+
+**Layer:** ENGINE  
+**Activation:** when prose production is applicable  
+**Dependencies:** Creative Brief, Form Contract, Core state/evidence/change control
+
+## PURPOSE
+
+Перевести авторские требования к прозе в исполнимый Prose Contract, создать
+и сохранить Style Baseline, затем применять Style Lock без превращения
+эталона в художественную клетку.
+
+## PROCESS
+
+```text
+PROSE CONTRACT
+→ STYLE BASELINE
+→ CALIBRATION
+→ STYLE LOCK
+→ PRODUCTION
+→ STYLE DRIFT AUDIT
+```
+
+## CORE RULES
+
+- No universal numeric prose KPI.
+- Style target must be explicit enough to execute.
+- Baseline is an artifact, not an adjective list.
+- Style Lock is an execution reference.
+- Intentional deviation requires proposal + author decision.
+- A new model/runtime switch triggers baseline/lock re-anchoring as specified
+  by the project/bootstrap layer.
+
+## OUTPUTS
+
+- `PROSE_CONTRACT`
+- `STYLE_BASELINE`
+- `STYLE_LOCK`
+- `STYLE_DRIFT_FINDINGS`
