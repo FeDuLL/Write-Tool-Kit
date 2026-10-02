@@ -1,0 +1,16 @@
+schema_version: "0.3"
+name: scope_record
+
+scope_record:
+  mode: EXACT | RANGE | APPROX | FORM-DERIVED | UNKNOWN | NON-BINDING | DISCOVERY
+  metric: AL | CHARACTERS | WORDS | PAGES | MINUTES | OTHER
+  target_value: null
+  target_min: null
+  target_max: null
+  current_value: null
+  current_exactness: EXACT | ESTIMATED | UNKNOWN
+  deviation: null
+  deviation_status: NONE | WITHIN | OVER | UNDER | AUTHOR-ACCEPTED
+  owner: AUTHOR
+  binding: YES | NO
+  source: AUTHOR | DERIVED | PROJECT
