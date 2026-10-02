@@ -1,0 +1,19 @@
+schema_version: "0.3"
+name: active_modules
+example_shape:
+  hidden_world: OFF
+  reveal: OFF
+  series: OFF
+  ip: OFF
+  cross_media: OFF
+  commercial: OFF
+  genre_contract: OFF
+  locale: RU
+  screenplay: OFF
+  romance: OFF
+activation_sources:
+  - Creative Brief
+  - HARD requirements
+  - explicit author decisions
+  - form
+rule: old-project memory is never an activation source
