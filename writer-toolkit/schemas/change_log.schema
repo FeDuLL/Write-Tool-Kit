@@ -1,0 +1,23 @@
+schema_version: "0.3"
+name: change_log
+entry_required:
+  - change_id
+  - authority_classification
+  - target
+  - before
+  - after
+  - reason
+  - author_authorized
+  - checkpoint
+properties:
+  authority_classification:
+    enum: REPAIR | OPTIMIZATION | DEVELOPMENT PROPOSAL | AUTHOR DECISION
+  change_id: stable change identifier
+  target: manuscript, state, style, canon, or other artifact target
+  before: prior recorded value or description
+  after: resulting value or description
+  reason: rationale
+  author_authorized: true|false
+  checkpoint: checkpoint/version reference
+rule: no silent substantive revision
+rule_2: audit findings do not mutate the change log as manuscript approval; revision or explicit author action commits changes
