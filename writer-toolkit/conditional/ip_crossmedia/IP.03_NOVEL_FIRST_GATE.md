@@ -2,15 +2,17 @@
 
 ## Purpose
 
-When the literary work is the primary product, protect its independent integrity before cross-media optimization.
+Prevent speculative franchise logic from displacing the primary literary work.
 
 ## Gate questions
 
-- Is the literary artifact complete enough for its declared project stage?
-- Are cross-media changes clearly separated from core literary decisions?
-- Has marketing language been prevented from becoming canon?
-- Are adaptation conveniences documented as adaptations?
+```text
+Is the literary promise still intact?
+Does the current manuscript work on its own terms?
+Is a proposed cross-media feature necessary to solve a literary problem?
+Does the change preserve canon boundaries?
+```
 
-## Rule
+## Outcome
 
-Cross-media opportunity is not authority to weaken the literary artifact.
+Cross-media ideas that do not improve or protect the literary work remain external proposals rather than hidden production requirements.
