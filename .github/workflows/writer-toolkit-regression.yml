@@ -1,0 +1,63 @@
+name: Write-Tool-Kit CI / Regression Gate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression-gate:
+    name: Canonical + Anti-Drift + Schema/Phase-H
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Canonical tree and manifest verification
+        run: |
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          root = Path(".")
+          manifest = json.loads(Path("ci/canonical_manifest.json").read_text(encoding="utf-8"))
+          expected = {x["path"]: x for x in manifest}
+          actual = {}
+          for p in root.rglob("*"):
+              if not p.is_file() or ".git" in p.parts or "ci" in p.parts:
+                  continue
+              rel = p.as_posix()
+              actual[rel] = {"size": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+
+          missing = sorted(set(expected) - set(actual))
+          mismatched = sorted(
+              p for p in expected
+              if p in actual and (expected[p]["size"] != actual[p]["size"] or expected[p]["sha256"] != actual[p]["sha256"])
+          )
+          print(f"Canonical manifest entries: {len(expected)}")
+          print(f"Canonical files found: {len(actual)}")
+          print(f"Missing: {len(missing)}")
+          print(f"Hash/size mismatches: {len(mismatched)}")
+          if missing:
+              print("MISSING:", *missing, sep="\n  ")
+          if mismatched:
+              print("MISMATCH:", *mismatched, sep="\n  ")
+          if len(expected) != 142 or missing or mismatched:
+              raise SystemExit(1)
+          print("CANONICAL TREE / MANIFEST: PASS (142/142)")
+          PY
+
+      - name: Anti-drift regression
+        run: python3 ci/anti_drift_repo_test.py
+
+      - name: Schema / Phase-H regression
+        run: python3 ci/schema_phase_h_regression.py
+
+      - name: Gate summary
+        run: |
+          echo "PASS — canonical tree → manifest → anti-drift → schema/Phase-H"
