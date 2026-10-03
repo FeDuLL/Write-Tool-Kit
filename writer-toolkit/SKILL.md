@@ -20,7 +20,7 @@ This file is the Native Skill entrypoint/router.
 7. Identify blockers and the next authorized action.
 
 ## Load order
-```
+```text
 core/
 intake/
 form/
@@ -52,7 +52,9 @@ tests/         (only for testing/validation work)
 `reference/WRITER-TOOLKIT_v0.3_ARCHITECTURE_SPEC.md`
 `reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md`
 
+
 ## Form routing
+
 Every project must establish `FORM.CONTRACT_READY` before standard production.
 
 Screenplay projects activate `FORM.03_SCREENPLAY_PROFILE`; prose projects do not inherit screenplay-only rules.
