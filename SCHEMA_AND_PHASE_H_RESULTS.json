@@ -5,21 +5,164 @@
   "pass": 16,
   "fail": 0,
   "results": [
-    {"id":"SCHEMA-01","name":"Canonical schema materialization","status":"PASS","reason":"All 15 Build Spec §37 schemas exist with schema_version 0.3 and are listed in the schema inventory.","evidence":["schemas/SCHEMA_INVENTORY.md","reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md"]},
-    {"id":"SCHEMA-02","name":"Canonical schema field coverage","status":"PASS","reason":"All Build Spec-defined minimum fields/contracts are represented across the 15 canonical schemas.","evidence":["schemas/*.schema","reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md"]},
-    {"id":"TEST-01","name":"Short literary story","status":"PASS","reason":"Form is explicit and unit-agnostic; no universal chapter pipeline; Style Baseline is gated.","evidence":["form/FORM.01_CONTRACT.md","production/PROD.01_PRODUCTION_UNIT.md","prose/PROSE.02_STYLE_BASELINE.md"]},
-    {"id":"TEST-02","name":"Long genre novel","status":"PASS","reason":"Scope, genre contract, form routing and durable manuscript persistence are present.","evidence":["form/FORM.01_CONTRACT.md","schemas/scope_record.schema","conditional/genre_contract/*","adapters/ADAPTER.04_FILE_CAPABLE.md"]},
-    {"id":"TEST-03","name":"Hidden-world short story","status":"PASS","reason":"Hidden-world is conditional and independence requirements are explicit.","evidence":["conditional/hidden_world/*","schemas/active_modules.schema"]},
-    {"id":"TEST-04","name":"Screenplay","status":"PASS","reason":"Operational FORM layer routes screenplay to scene/sequence units and disables chapter logic.","evidence":["form/FORM.01_CONTRACT.md","form/FORM.03_SCREENPLAY_PROFILE.md","audits/AUDIT_ENGINE.md"]},
-    {"id":"TEST-05","name":"Discovery","status":"PASS","reason":"Discovery remains valid without a forced numeric target.","evidence":["development/DEV.02_DEVELOPMENT_MODE.md","reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md"]},
-    {"id":"TEST-06","name":"Model switch","status":"PASS","reason":"NEW MODEL performs capability and style rechecks and invalidates unsupported verdicts.","evidence":["NEW_MODEL.md"]},
-    {"id":"TEST-07","name":"Context loss","status":"PASS","reason":"Persisted manuscript/state remain separate and bootstrap restores them.","evidence":["adapters/ADAPTER.04_FILE_CAPABLE.md","BOOTSTRAP.md"]},
-    {"id":"TEST-08","name":"Constrained output","status":"PASS","reason":"Chunking preserves unit identity and persistence is a completion condition.","evidence":["adapters/ADAPTER.01_OUTPUT_BUDGET.md","production/PROD.04_UNIT_PERSISTENCE.md"]},
-    {"id":"TEST-09","name":"Deferred load-bearing decision","status":"PASS","reason":"DEFERRED remains a stop condition when load-bearing.","evidence":["core/CORE_CONTRACT.md"]},
-    {"id":"TEST-10","name":"Audit mutation attempt","status":"PASS","reason":"Audit mutation firewall blocks manuscript/state mutation.","evidence":["audits/AUD.03_ROLE_EVIDENCE_FIREWALL.md"]},
-    {"id":"TEST-11","name":"Stress-test contamination","status":"PASS","reason":"No stress-test volume/chapter parameters found in operational modules.","evidence":["operational module directories"]},
-    {"id":"TEST-12","name":"Silent consent","status":"PASS","reason":"AI MAY PROCEED remains distinct from AUTHOR APPROVAL.","evidence":["BOOTSTRAP.md","SKILL.md"]},
-    {"id":"TEST-13","name":"Independent-reader requirement unavailable","status":"PASS","reason":"Unavailable blind-reader independence maps to UNVERIFIED rather than PASS.","evidence":["conditional/hidden_world/HW.03_DISCOVERY_FAIRNESS.md"]},
-    {"id":"SCHEMA-03","name":"Native/Universal schema parity","status":"PASS","reason":"Universal TXT contains every canonical schema name.","evidence":["writer-toolkit/schemas/*","writer-toolkit-universal/40_SCHEMAS.txt"]}
+    {
+      "id": "SCHEMA-01",
+      "name": "Canonical schema materialization",
+      "status": "PASS",
+      "reason": "All 15 Build Spec §37 schemas exist with schema_version 0.3 and are listed in the schema inventory.",
+      "evidence": [
+        "schemas/SCHEMA_INVENTORY.md",
+        "reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md"
+      ]
+    },
+    {
+      "id": "SCHEMA-02",
+      "name": "Canonical schema field coverage",
+      "status": "PASS",
+      "reason": "All Build Spec-defined minimum fields/contracts are represented across the 15 canonical schemas.",
+      "evidence": [
+        "schemas/*.schema",
+        "reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md"
+      ]
+    },
+    {
+      "id": "TEST-01",
+      "name": "Short literary story",
+      "status": "PASS",
+      "reason": "Form is explicit and unit-agnostic; no universal chapter pipeline; Style Baseline is gated.",
+      "evidence": [
+        "form/FORM.01_CONTRACT.md",
+        "production/PROD.01_PRODUCTION_UNIT.md",
+        "prose/PROSE.02_STYLE_BASELINE.md"
+      ]
+    },
+    {
+      "id": "TEST-02",
+      "name": "Long genre novel",
+      "status": "PASS",
+      "reason": "Scope, genre contract, form routing and durable manuscript persistence are present.",
+      "evidence": [
+        "form/FORM.01_CONTRACT.md",
+        "schemas/scope_record.schema",
+        "conditional/genre_contract/*",
+        "adapters/ADAPTER.04_FILE_CAPABLE.md"
+      ]
+    },
+    {
+      "id": "TEST-03",
+      "name": "Hidden-world short story",
+      "status": "PASS",
+      "reason": "Hidden-world is conditional and independence requirements are explicit.",
+      "evidence": [
+        "conditional/hidden_world/*",
+        "schemas/active_modules.schema"
+      ]
+    },
+    {
+      "id": "TEST-04",
+      "name": "Screenplay",
+      "status": "PASS",
+      "reason": "Operational FORM layer routes screenplay to scene/sequence units and disables chapter logic.",
+      "evidence": [
+        "form/FORM.01_CONTRACT.md",
+        "form/FORM.03_SCREENPLAY_PROFILE.md",
+        "audits/AUDIT_ENGINE.md"
+      ]
+    },
+    {
+      "id": "TEST-05",
+      "name": "Discovery",
+      "status": "PASS",
+      "reason": "Discovery remains valid without a forced numeric target.",
+      "evidence": [
+        "development/DEV.02_DEVELOPMENT_MODE.md",
+        "reference/WRITER-TOOLKIT_v0.3_BUILD_SPEC.md"
+      ]
+    },
+    {
+      "id": "TEST-06",
+      "name": "Model switch",
+      "status": "PASS",
+      "reason": "NEW MODEL performs capability and style rechecks and invalidates unsupported verdicts.",
+      "evidence": [
+        "NEW_MODEL.md"
+      ]
+    },
+    {
+      "id": "TEST-07",
+      "name": "Context loss",
+      "status": "PASS",
+      "reason": "Persisted manuscript/state remain separate and bootstrap restores them.",
+      "evidence": [
+        "adapters/ADAPTER.04_FILE_CAPABLE.md",
+        "BOOTSTRAP.md"
+      ]
+    },
+    {
+      "id": "TEST-08",
+      "name": "Constrained output",
+      "status": "PASS",
+      "reason": "Chunking preserves unit identity and persistence is a completion condition.",
+      "evidence": [
+        "adapters/ADAPTER.01_OUTPUT_BUDGET.md",
+        "production/PROD.04_UNIT_PERSISTENCE.md"
+      ]
+    },
+    {
+      "id": "TEST-09",
+      "name": "Deferred load-bearing decision",
+      "status": "PASS",
+      "reason": "DEFERRED remains a stop condition when load-bearing.",
+      "evidence": [
+        "core/CORE_CONTRACT.md"
+      ]
+    },
+    {
+      "id": "TEST-10",
+      "name": "Audit mutation attempt",
+      "status": "PASS",
+      "reason": "Audit mutation firewall blocks manuscript/state mutation.",
+      "evidence": [
+        "audits/AUD.03_ROLE_EVIDENCE_FIREWALL.md"
+      ]
+    },
+    {
+      "id": "TEST-11",
+      "name": "Stress-test contamination",
+      "status": "PASS",
+      "reason": "No stress-test volume/chapter parameters found in operational modules.",
+      "evidence": [
+        "operational module directories"
+      ]
+    },
+    {
+      "id": "TEST-12",
+      "name": "Silent consent",
+      "status": "PASS",
+      "reason": "AI MAY PROCEED remains distinct from AUTHOR APPROVAL.",
+      "evidence": [
+        "BOOTSTRAP.md",
+        "SKILL.md"
+      ]
+    },
+    {
+      "id": "TEST-13",
+      "name": "Independent-reader requirement unavailable",
+      "status": "PASS",
+      "reason": "Unavailable blind-reader independence maps to UNVERIFIED rather than PASS.",
+      "evidence": [
+        "conditional/hidden_world/HW.03_DISCOVERY_FAIRNESS.md"
+      ]
+    },
+    {
+      "id": "SCHEMA-03",
+      "name": "Native/Universal schema parity",
+      "status": "PASS",
+      "reason": "Universal TXT contains every canonical schema name.",
+      "evidence": [
+        "writer-toolkit/schemas/*",
+        "writer-toolkit-universal/40_SCHEMAS.txt"
+      ]
+    }
   ]
 }
