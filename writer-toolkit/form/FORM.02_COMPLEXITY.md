@@ -6,7 +6,7 @@
 
 ## ALLOWED MODES
 
-```
+```text
 T1 = COMPACT
 T2 = STANDARD
 T3 = HIGH-COMPLEXITY
