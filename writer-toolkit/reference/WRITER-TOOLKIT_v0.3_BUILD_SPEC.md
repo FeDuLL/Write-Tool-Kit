@@ -997,6 +997,7 @@ OPEN BLOCKERS
 `READY_TO_WRITE` or blocker list.
 
 ---
+
 ## `PROD.03_WRITE_UNIT`
 
 Allowed only when:
@@ -1996,3 +1997,430 @@ Must verify:
 - no forced novel pipeline;
 - no forced target volume;
 - style baseline works.
+
+## TEST-02 Long genre novel
+
+Properties:
+
+```text
+LONG FORM
+DEFINED SCOPE
+GENRE CONTRACT ON
+HIDDEN WORLD OFF
+```
+
+Must verify:
+
+- scope tracking;
+- genre module;
+- persistence;
+- long-form production.
+
+## TEST-03 Hidden-world short story
+
+Properties:
+
+```text
+SHORT FORM
+HIDDEN_WORLD = ON
+REVEAL = ON
+```
+
+Must verify:
+- conditional module activation;
+- reader independence;
+- no hidden-world machinery when OFF.
+
+## TEST-04 Screenplay
+
+Properties:
+
+```text
+FORM = SCREENPLAY
+NO CHAPTER MODEL
+SCRIPT UNIT = SCENE/SEQUENCE
+```
+
+Must verify:
+- no prose chapter enforcement;
+- form-specific volume metric;
+- screenplay audit set.
+
+## TEST-05 Discovery
+
+Properties:
+
+```text
+DEVELOPMENT_MODE = DISCOVERY
+SCOPE_MODE = UNKNOWN
+```
+
+Must verify:
+- no forced numeric target;
+- retroactive state extraction.
+
+## TEST-06 Model switch
+
+Same project moves from model A to model B.
+
+Must verify:
+- capability recalc;
+- style baseline re-anchor;
+- invalidation of unsupported verdicts.
+
+## TEST-07 Context loss
+
+Conversation history becomes unavailable.
+
+Must verify:
+- manuscript survives if persistence exists;
+- state does not become substitute for text;
+- bootstrap restores project.
+
+## TEST-08 Constrained output
+
+Small response budget.
+
+Must verify:
+- chapter/unit is chunked rather than silently shrunk;
+- assembly preserves identity;
+- manuscript is persisted after completion.
+
+## TEST-09 Deferred load-bearing decision
+
+A parameter starts DEFERRED and later becomes necessary.
+
+Must verify:
+- MUST STOP;
+- no silent decision;
+- AI-DECIDED does not masquerade as acceptance.
+
+## TEST-10 Audit mutation attempt
+
+Auditor tries to modify manuscript during audit.
+
+Must verify:
+- blocked;
+- mutation recorded if technically detectable;
+- revision requires separate phase.
+
+## TEST-11 Stress-test contamination
+
+Project intentionally uses:
+
+```text
+4–5 AL
+20 chapters
+8,500 chars/chapter
+fantasy
+YA
+first-person
+```
+
+Must verify:
+- none becomes Core default;
+- values remain project-specific.
+
+## TEST-12 Silent consent
+
+Author does not answer after a non-load-bearing routine unit.
+
+Must verify:
+
+```text
+AI MAY PROCEED
+```
+
+but never:
+
+```text
+AUTHOR APPROVAL
+```
+
+## TEST-13 Independent-reader requirement unavailable
+
+Blind reveal audit requested in single writer session.
+
+Must verify:
+
+`UNVERIFIED`
+
+not:
+
+`PASS`.
+
+---
+
+# 47. IMPLEMENTATION ORDER
+
+Implementation must follow this order.
+
+## Phase A — Canonical schemas
+
+Build:
+
+1. manuscript;
+2. project state;
+3. scope;
+4. brief;
+5. style;
+6. capabilities;
+7. modules;
+8. hard requirements;
+9. deviations;
+10. AI-decided;
+11. audit coverage;
+12. evidence;
+13. change log;
+14. handoff.
+
+## Phase B — Core
+
+Build:
+
+1. authority;
+2. decision;
+3. artifact state;
+4. evidence policy;
+5. change control;
+6. runtime loop;
+7. knowledge;
+8. causality;
+9. persistence semantics.
+
+## Phase C — Engines
+
+Build:
+
+- brief;
+- prose;
+- development;
+- production;
+- revision;
+- audit.
+
+## Phase D — Conditional modules
+
+Build only after Core contracts are frozen.
+
+## Phase E — Adapters
+
+Build:
+
+- canonical abstract adapter;
+- file-capable;
+- chat-only;
+- small-context;
+- tool-enabled.
+
+## Phase F — Bootstrap
+
+Build one canonical bootstrap with:
+
+- NEW CHAT;
+- NEW MODEL.
+
+Then create optional thin wrappers.
+
+## Phase G — Distributions
+
+Compile:
+
+- Native Skill;
+- Universal TXT.
+
+## Phase H — Tests
+
+Run TEST-01 through TEST-13.
+
+---
+
+# 48. BUILD ACCEPTANCE CRITERIA
+
+v0.3 BUILD is accepted only when:
+
+### Architecture
+
+- all modules have an ID;
+- all conditional modules have activation conditions;
+- Core contains no stress-test parameters;
+- Runtime rules are separated from literary rules.
+
+### State
+
+- manuscript is persisted independently;
+- state and manuscript authority are separated;
+- all required states have explicit schemas;
+- unresolved states are not silently promoted.
+
+### Prose
+
+- style baseline exists;
+- style lock exists;
+- calibration has a real gate;
+- no universal numeric prose KPI is required.
+
+### Runtime
+
+- capabilities are declared;
+- response budget is separate from chapter size;
+- chunking is supported where possible;
+- unavailable capabilities produce UNVERIFIED/FAIL rather than fabricated PASS.
+
+### Audit
+
+- audit scope is explicit;
+- evidence is required;
+- independent audit is capability-aware;
+- audit is read-only;
+- full manuscript audit is distinct from unit diagnostics.
+
+### Author
+
+- silent consent does not equal approval;
+- AI MAY PROCEED is distinct from AUTHOR APPROVAL;
+- load-bearing decisions are protected;
+- ACCEPTED DEVIATION is explicit.
+
+### Portability
+
+- new chat bootstrap works;
+- new model bootstrap works;
+- model switch rechecks capabilities;
+- persisted project can be reconstructed without hidden chat memory.
+
+### Universality
+
+- short story works;
+- novel works;
+- discovery works;
+- screenplay path does not inherit prose-only rules;
+- hidden world can be completely inactive;
+- IP/commercial can be completely inactive;
+- no 4–5 AL default survives.
+
+---
+
+# 49. DELIVERABLES OF THE v0.3 BUILD
+
+Final implementation package must contain:
+
+```text
+writer-toolkit/
+├── SKILL.md
+├── core/
+├── intake/
+├── prose/
+├── development/
+├── production/
+├── revision/
+├── audits/
+├── conditional/
+├── adapters/
+├── schemas/
+├── templates/
+├── reference/
+├── tests/
+│
+├── BOOTSTRAP.md
+├── CHANGELOG.md
+└── README.md
+```
+
+Universal package:
+
+```text
+writer-toolkit-universal/
+├── 00_START_HERE.txt
+├── 01_CORE.txt
+├── 02_RUNTIME.txt
+├── 03_CREATIVE_BRIEF.txt
+├── 04_GENRE.txt
+├── 05_PROSE.txt
+├── 06_DEVELOPMENT.txt
+├── 07_SYNOPSIS.txt
+├── 08_PRODUCTION.txt
+├── 09_REVISION.txt
+├── 10_AUDIT.txt
+├── 11_PREPUBLICATION.txt
+├── 12_STATE.txt
+├── 13_EXPORT.txt
+├── 20_CONDITIONAL_HIDDEN_WORLD.txt
+├── 21_CONDITIONAL_SERIES.txt
+├── 22_CONDITIONAL_IP.txt
+├── 23_CONDITIONAL_COMMERCIAL.txt
+├── 30_TEMPLATES.txt
+├── 40_SCHEMAS.txt
+└── 90_REFERENCE.txt
+```
+
+---
+
+# 50. BUILD FREEZE RULE
+
+Before writing implementation files:
+
+1. Any new universal rule must identify why it belongs in Core.
+2. Any project-specific value must identify its Project field.
+3. Any conditional rule must identify its activation flag.
+4. Any runtime assumption must identify its Adapter capability.
+5. Any new status must prove it cannot be represented by an existing status.
+6. Any new audit must identify its evidence and independence requirements.
+7. Any new field must have a persistence destination.
+8. Any new gate must have:
+   - trigger;
+   - preconditions;
+   - pass;
+   - fail;
+   - owner;
+   - next action.
+
+This prevents v0.3 from repeating the drift of v0.2.
+
+---
+
+# 51. NEXT BUILD ARTIFACTS
+
+After this Build Spec, implementation order is:
+
+```text
+1. schemas/
+2. core/
+3. prose/
+4. development/
+5. production/
+6. revision/
+7. audits/
+8. conditional/
+9. adapters/
+10. bootstrap
+11. universal TXT
+12. native SKILL
+13. templates
+14. tests
+```
+
+The next concrete implementation artifact should be the canonical schema package, starting with:
+
+```text
+creative_brief.schema
+project_state.schema
+manuscript.schema
+scope_record.schema
+style_baseline.schema
+style_lock.schema
+capability_profile.schema
+active_modules.schema
+```
+
+Only after those schemas are stable should the operational modules be written.
+
+---
+
+# 52. FINAL BUILD CONTRACT
+
+Writer-Toolkit v0.3 is considered correctly implemented only if the following proposition is true:
+
+> The same Core can be applied to materially different literary projects without importing the length, genre, architecture, style, runtime, or commercial assumptions of a previous project, while preserving author sovereignty, persisted manuscript integrity, explicit decision state, form-sensitive execution, evidence-grounded audits, and model/runtime portability.
+
+That is the primary engineering acceptance test of v0.3.
