@@ -1,37 +1,100 @@
 WRITER-TOOLKIT v0.3 — GENRE CONTRACT
+====================================
 
-## Module
+===== GENRE_CONTRACT_MODULE.md =====
+# Genre Contract Module
 
-COND.50_GENRE_CONTRACT
+## Module ID
 
-Activate when genre materially affects the reader promise and audit scope.
+`COND.50_GENRE_CONTRACT`
 
-## Contract
+## Activation
 
+Activate when the author requests genre contracting or when genre materially affects the reader promise and audit scope.
+
+## Contract fields
+
+```text
 READER_PROMISE
 EXPECTED_EFFECT
 CONVENTIONAL_ELEMENTS
 OPTIONAL_CONVENTIONS
 DELIBERATE_DEVIATIONS
 AUDIT_RISKS
+```
+
+## Principle
 
 Genre conventions are diagnostic lenses, not immutable laws.
 
-## Genre audit
+Structural frameworks and genre models may inform diagnosis, but they never override an explicit authorial mode merely because a framework predicts a different arrangement.
 
-Check:
-- reader promise;
-- legibility of genre signals;
-- intentional deviations;
-- framework-vs-law confusion;
-- unauthorized style/structure mutation.
+===== GNR.01_GENRE_PROFILE.md =====
+# GNR.01 — Genre Profile
 
-Possible outcomes:
+## Suggested fields
 
+```text
+PRIMARY_GENRE
+SUBGENRE
+TONAL_MODE
+AUDIENCE
+FORM
+READER_PROMISE
+EXPECTED_EMOTIONAL_EFFECT
+COMPARABLE_TRADITIONS
+GENRE_CERTAINTY
+```
+
+## Rule
+
+Genre profile describes the intended contract. It does not by itself force a fixed plot template, chapter rhythm, or prose texture.
+
+===== GNR.02_GENRE_CONTRACT.md =====
+# GNR.02 — Genre Contract
+
+## Build the contract
+
+1. Define the reader promise.
+2. Identify conventional signals that support that promise.
+3. Mark conventions that are optional.
+4. Record deliberate deviations explicitly when load-bearing.
+5. Convert the resulting contract into project-state fields.
+
+## Deviation semantics
+
+```text
+PROPOSED
+ACCEPTED
+REJECTED
+DEFERRED
+```
+
+`DEFERRED` remains unresolved and cannot silently become `ACCEPTED`.
+
+## Author sovereignty
+
+An intentional artistic deviation can be valid even when it conflicts with a conventional genre expectation, provided the project can still articulate what reader experience it is promising.
+
+===== GNR.03_GENRE_AUDIT.md =====
+# GNR.03 — Genre Audit
+
+## Audit questions
+
+- Does the work fulfill its declared reader promise?
+- Are genre signals sufficiently legible for the declared audience?
+- Are deviations intentional and represented in state?
+- Is a framework being mistaken for a law?
+- Are genre expectations causing unauthorized style or structure mutations?
+
+## Outcomes
+
+```text
 ALIGNED
 PARTIAL
 DEVIATION_RECORDED
 UNVERIFIED
 BLOCKED
+```
 
-A genre framework never overrides an explicit authorial mode merely because a framework predicts a different arrangement.
+The audit is descriptive and corrective. It does not rank genres or impose a universal formula.
