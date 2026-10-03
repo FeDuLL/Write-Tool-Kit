@@ -997,3 +997,628 @@ Exit:
 - genre contract exists where relevant;
 - prose contract exists;
 - style calibration trigger known.
+## STAGE 3 — STYLE CALIBRATION
+
+Exit:
+- STYLE BASELINE exists;
+- diagnostics performed;
+- corrections completed if needed;
+- STYLE LOCK recorded.
+
+## STAGE 4 — DEVELOPMENT
+
+Possible paths:
+
+```text
+ARCHITECT
+DISCOVERY
+HYBRID
+```
+
+Exit:
+- approved development artifact exists;
+- planned material is represented;
+- AI-decided items are visible;
+- synopsis approval semantics are satisfied.
+
+## STAGE 5 — PRODUCTION
+
+Exit for a unit:
+- unit persisted;
+- artifact state updated;
+- local continuity checked;
+- allowed diagnostics completed;
+- no unresolved blocking hard conflict.
+
+Author checkpoint frequency depends on participation mode.
+
+## STAGE 6 — DRAFT COMPLETION
+
+Exit:
+- all intended production units exist;
+- synopsis/plan coverage checked;
+- HARD requirements checked;
+- ending/promise condition satisfied where relevant;
+- scope record updated if scope is active.
+
+## STAGE 7 — FULL MANUSCRIPT AUDIT
+
+Exit:
+- all required passes executed;
+- coverage recorded;
+- independent-only passes either completed or explicitly UNVERIFIED.
+
+## STAGE 8 — REVISION
+
+Cycle:
+
+```text
+DIAGNOSE
+→ LOCATE
+→ PROPOSE
+→ TEST
+→ REWRITE
+→ RE-AUDIT
+→ RECORD
+```
+
+Exit:
+- targeted issues resolved;
+- no silent substantive changes;
+- relevant audits re-run.
+
+## STAGE 9 — PREPUBLICATION
+
+Exit:
+- final full manuscript audit passed;
+- required independent checks passed;
+- change ledger complete;
+- export artifact successfully assembled;
+- no blocking UNVERIFIED conditions.
+
+Only then may:
+
+`PUBLICATION READY`
+
+be assigned.
+
+---
+
+# 20. AUTHOR PARTICIPATION MODES
+
+The author should not be forced into one interaction pattern.
+
+Possible modes:
+
+```text
+HIGH-COLLABORATION
+BALANCED
+AUTONOMOUS-WITH-GATES
+```
+
+## HIGH-COLLABORATION
+
+Frequent checkpoints.
+
+## BALANCED
+
+AI proceeds through routine work and pauses at major decision gates.
+
+## AUTONOMOUS-WITH-GATES
+
+AI may proceed across routine production units but MUST STOP on load-bearing decisions and hard conflicts.
+
+Changing participation mode is an author decision and is recorded in Project State.
+
+---
+
+# 21. AI MAY PROCEED / MUST STOP / PROPOSE
+
+## AI MAY PROCEED
+
+Only already-authorized or mechanical actions:
+
+- write the next scene/unit from accepted plan;
+- maintain state;
+- persist text;
+- run allowed diagnostics;
+- perform mechanical repairs;
+- apply locked prose baseline;
+- update navigation notes without changing canon.
+
+## AI MUST STOP
+
+- unresolved HARD conflict;
+- load-bearing decision not authorized;
+- DEFERRED decision becomes necessary;
+- requested scope changes materially;
+- ending changes;
+- protagonist identity/core arc changes;
+- form changes;
+- reveal architecture changes;
+- authority class changes;
+- unavailable capability makes a required gate unverifiable.
+
+## AI PROPOSES
+
+When a better solution is possible but not already authorized.
+
+It presents:
+
+- problem;
+- options;
+- trade-offs;
+- consequences;
+- voice risk.
+
+---
+
+# 22. CONDITIONAL MODULES
+
+## 22.1. HIDDEN WORLD / REVEAL
+
+Activate only if:
+- hidden truth exists;
+- reveal timing matters;
+- audience knowledge differs materially from world truth.
+
+Contains:
+- hidden ontology;
+- reader knowledge;
+- discovery fairness;
+- reveal integrity;
+- epistemic bridges;
+- blind reader audit;
+- ontology persistence.
+
+## 22.2. SERIES
+
+Activate when:
+- continuation architecture is intended.
+
+Contains:
+- book state;
+- series arc;
+- escalation;
+- reserved reveals;
+- long-term continuity.
+
+## 22.3. IP / CROSS-MEDIA
+
+Activate when:
+- explicit cross-media intent exists.
+
+Contains:
+- core world truth;
+- medium adaptation;
+- audience knowledge;
+- license/marketing expression;
+- asset register.
+
+## 22.4. COMMERCIAL
+
+Activate when author requests commercial analysis.
+
+Commercial data may influence:
+- positioning;
+- packaging;
+- audience targeting;
+- marketing hypotheses.
+
+It must not silently rewrite:
+- artistic core;
+- character psychology;
+- theme;
+- ending;
+- world truth.
+
+## 22.5. GENRE MODULES
+
+Activated by genre.
+
+Genre contract is a diagnostic lens, not an absolute artistic law.
+
+## 22.6. LOCALE MODULE
+
+Language/cultural production rules belong here.
+
+For the current user workflow, Russian is the primary target locale.
+
+---
+
+# 23. BOOTSTRAP ARCHITECTURE
+
+## 23.1. One canonical bootstrap
+
+The system has one source of truth:
+
+`BOOTSTRAP CORE`
+
+It contains two branches.
+
+### NEW CHAT
+
+Used when the model/runtime is essentially unchanged but the chat context is new.
+
+Sequence:
+
+```text
+VERIFY VERSION
+→ VERIFY ARTIFACT INTEGRITY
+→ LOAD MANUSCRIPT / STATE
+→ DETERMINE CURRENT STAGE
+→ LOAD ACTIVE MODULES
+→ RESTORE STYLE LOCK
+→ CHECK BLOCKERS
+→ STATE NEXT AUTHORIZED ACTION
+```
+
+### NEW MODEL
+
+All above plus:
+
+```text
+PROFILE CAPABILITIES
+→ RECALCULATE OUTPUT BUDGET
+→ RE-ANCHOR STYLE FROM STYLE BASELINE
+→ VERIFY ACTIVE MODULE COMPATIBILITY
+→ RECHECK CAPABILITY-DEPENDENT VERDICTS
+→ MARK UNSUPPORTED VERDICTS UNVERIFIED
+```
+
+## 23.2. Thin launch wrappers
+
+For usability, distribution may provide:
+
+```text
+NEW_CHAT
+NEW_MODEL
+```
+
+as thin wrappers around the canonical bootstrap.
+
+They must not contain divergent rules.
+
+---
+
+# 24. SCHEMA SET
+
+v0.3 requires explicit schemas rather than fields described only in prose.
+
+Minimum schemas:
+
+```text
+creative_brief.schema
+project_state.schema
+scope_record.schema
+style_baseline.schema
+style_lock.schema
+capability_profile.schema
+active_modules.schema
+hard_requirements.schema
+deviation_record.schema
+audit_coverage.schema
+change_log.schema
+handoff.schema
+```
+
+Schemas should be portable plain text / Markdown / JSON-compatible where appropriate.
+
+---
+
+# 25. UNIVERSAL TXT DISTRIBUTION
+
+For weak or context-limited models, provide a deterministic sequence.
+
+Recommended:
+
+```text
+00_START_HERE.txt
+01_CORE.txt
+02_RUNTIME.txt
+03_CREATIVE_BRIEF.txt
+04_GENRE.txt
+05_PROSE.txt
+06_DEVELOPMENT.txt
+07_SYNOPSIS.txt
+08_PRODUCTION.txt
+09_REVISION.txt
+10_AUDIT.txt
+11_PREPUBLICATION.txt
+12_STATE.txt
+13_EXPORT.txt
+20_CONDITIONAL_HIDDEN_WORLD.txt
+21_CONDITIONAL_SERIES.txt
+22_CONDITIONAL_IP.txt
+23_CONDITIONAL_COMMERCIAL.txt
+30_TEMPLATES.txt
+40_SCHEMAS.txt
+90_REFERENCE.txt
+```
+
+`20+` conditional modules are loaded only when active.
+
+The TXT distribution must not require a model to load the entire system into a single context.
+
+---
+
+# 26. NATIVE SKILL DISTRIBUTION
+
+Canonical native structure:
+
+```text
+writer-toolkit/
+├── SKILL.md
+├── core/
+├── intake/
+├── prose/
+├── development/
+├── production/
+├── revision/
+├── audits/
+├── conditional/
+├── adapters/
+├── schemas/
+├── templates/
+├── reference/
+└── tests/
+```
+
+`SKILL.md` is an entrypoint/router, not the entire system.
+
+---
+
+# 27. VERSIONING
+
+Single source:
+
+```text
+WRITER-TOOLKIT VERSION = 0.3
+SCHEMA VERSION = 0.3
+BOOTSTRAP VERSION = 0.3
+```
+
+Change history is stored outside the operational Core.
+
+No automatic state migrations are required at this architectural stage.
+
+Bootstrap must detect:
+
+- Toolkit version mismatch;
+- Schema mismatch;
+- missing required artifacts;
+- stale project state;
+- incompatible capability-dependent audit results.
+
+---
+
+# 28. MIGRATION v0.2 → v0.3
+
+Migration is conceptual first; exact migration scripts come later.
+
+## Keep
+
+- Author Sovereignty;
+- Authority/Decision/Artifact separation;
+- Core Development Loop;
+- Causality;
+- Character architecture;
+- Knowledge discipline;
+- Form-scale principle;
+- Framework-as-lens rule;
+- Anti-AI prose principles;
+- Revision protocol;
+- Commercial firewall;
+- evidence policy.
+
+## Move
+
+- Hidden-world → conditional module;
+- Locale → locale module;
+- Commercial/IP → conditional modules;
+- Framework bibliography → reference;
+- Runtime budget → adapter;
+- form-specific production logic → form modules.
+
+## Replace
+
+- RESPONSE-BUDGET / CHAPTER-SIZE → separate contracts;
+- vague Style Calibration → Style Baseline/Lock;
+- state precedence list → split manuscript/decision authority;
+- DEFERRED loophole → explicit firewall;
+- implicit capability assumptions → capability profile.
+
+## Add
+
+- MANUSCRIPT persistence;
+- SCOPE_RECORD;
+- STYLE_BASELINE;
+- STYLE_LOCK;
+- AI-DECIDED;
+- DEVIATION_RECORD;
+- CAPABILITY_PROFILE;
+- ACTIVE_MODULES;
+- role model;
+- audit independence class;
+- canonical bootstrap;
+- schemas.
+
+## Remove from Core
+
+- stress-test journal;
+- hidden-world material as always-loaded instruction;
+- universal one-response chapter rule;
+- universal numeric volume assumptions;
+- test-specific narrative parameters.
+
+---
+
+# 29. ACCEPTANCE CRITERIA FOR v0.3 ARCHITECTURE
+
+Before implementation, the architecture specification itself is accepted only if a reviewer can answer “YES” to all:
+
+1. Can a short story use it without receiving a novel pipeline?
+2. Can a novel use it without assuming a fixed length?
+3. Can the author leave scope UNKNOWN?
+4. Can the author use discovery mode?
+5. Can a screenplay avoid prose-only rules?
+6. Can hidden-world modules remain completely inactive?
+7. Can commercial/IP remain completely inactive?
+8. Can Russian remain the current target locale without making the architecture logically Russian-only?
+9. Can a model with no file system still persist state in portable form?
+10. Can a file-capable runtime assemble a chapter across multiple outputs?
+11. Can a model proceed without asking approval for every routine step?
+12. Can it never silently convert a load-bearing unresolved decision into canon?
+13. Can audit findings be produced without changing the manuscript?
+14. Can an audit report UNVERIFIED instead of fabricating PASS?
+15. Can a new model re-enter the project without relying on hidden previous chat memory?
+16. Can manuscript text survive context loss?
+17. Can style be re-anchored after model change?
+18. Can the system distinguish a project decision from a runtime limitation?
+19. Can a project remain smaller or larger than any previous test without breaking the Toolkit?
+20. Can no prior stress-test decision leak into Core?
+
+---
+
+# 30. ANTI-DRIFT TESTS
+
+Before calling v0.3 complete, run at least these project variants:
+
+### Test A — short literary story
+No mystery, no series, no IP, unknown initial volume.
+
+### Test B — long commercial genre novel
+Defined scope, explicit genre contract, no hidden ontology.
+
+### Test C — hidden-world story
+Short form, complex epistemic reveal.
+
+This verifies that complexity and feature activation are independent.
+
+### Test D — screenplay
+No chapters, screenplay-specific production units and volume metric.
+
+### Test E — discovery writer
+Scope initially UNKNOWN, architecture emerges during production.
+
+### Test F — model switch
+Same project moved to another model/runtime.
+
+### Test G — context loss
+Old chat disappears; only persisted package remains.
+
+### Test H — constrained runtime
+Small response budget requires chunked manuscript assembly.
+
+---
+
+# 31. NON-GOALS
+
+v0.3 does not attempt to:
+
+- quantify artistic quality with one score;
+- guarantee commercial success;
+- guarantee publication success;
+- replace an editor or human reader;
+- decide author's artistic goals;
+- create a universal theory of literature;
+- force one narrative structure;
+- force one prose style;
+- make every audit independent;
+- eliminate all model-specific behavior.
+
+---
+
+# 32. FINAL ARCHITECTURAL FORMULA
+
+The intended v0.3 system is:
+
+```text
+AUTHOR
+  ↓
+PROJECT CONTRACT
+  ↓
+CORE AUTHORITY + STATE
+  ↓
+FORM / PROJECT FLAGS
+  ↓
+ACTIVE MODULES
+  ↓
+PROSE BASELINE / STYLE LOCK
+  ↓
+DEVELOPMENT
+  ↓
+PRODUCTION
+  ↓
+PERSISTED MANUSCRIPT
+  ↓
+DIAGNOSTICS
+  ↓
+FULL AUDIT
+  ↓
+REVISION
+  ↓
+RE-AUDIT
+  ↓
+PUBLICATION PACKAGE
+```
+
+Runtime sits beside the process:
+
+```text
+RUNTIME
+  ├── capabilities
+  ├── output budget
+  ├── persistence
+  ├── chunking
+  └── external review
+```
+
+Runtime constraints are not allowed to silently redefine literary form.
+
+---
+
+# 33. IMPLEMENTATION ORDER
+
+The actual v0.3 build should proceed in this order:
+
+1. Canonical Core.
+2. Canonical state schemas.
+3. Creative Brief schema.
+4. Scope Record.
+5. Style Baseline/Lock.
+6. Runtime/Capability Adapter contract.
+7. Bootstrap Core.
+8. Production/persistence contract.
+9. Audit role and evidence model.
+10. Conditional module contracts.
+11. Universal TXT distribution.
+12. Native Skill distribution.
+13. Templates.
+14. Regression tests.
+15. New stress tests.
+
+Do not write the final giant `SKILL.md` first.
+
+Build the canonical architecture and schemas first, then compile distributions from it.
+
+---
+
+# 34. IMPLEMENTATION STATUS
+
+This document is an architecture specification, not yet the final v0.3 Skill.
+
+Canonical next artifact:
+
+`WRITER-TOOLKIT_v0.3_BUILD_SPEC.md`
+
+That build specification should turn every item above into:
+
+- exact module contract;
+- exact schema;
+- exact trigger;
+- exact gate;
+- exact output;
+- exact fail condition.
+
+Only after that should the v0.3 modules be written.
