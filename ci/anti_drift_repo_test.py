@@ -34,8 +34,8 @@ scope = read("schemas/scope_record.schema")
 check("AD-05","DISCOVERY is an explicit development mode",
       lambda: (all(x in dev for x in ["ARCHITECT","DISCOVERY","HYBRID"]), "three modes enumerated"))
 check("AD-06","DISCOVERY does not require architect-first planning",
-      lambda: ("DRAFT / EXPLORE" in dev and "EXTRACT STATE" in dev and "STABILIZE ACCEPTED PROSE/CANON" in dev and "must not force an architect-first process" in dev.lower()),
-               "discovery non-forcing rule present")
+      lambda: (("DRAFT / EXPLORE" in dev and "EXTRACT STATE" in dev and "STABILIZE ACCEPTED PROSE/CANON" in dev and "must not force an architect-first process" in dev.lower()),
+               "discovery non-forcing rule present"))
 check("AD-07","Scope supports UNKNOWN/DISCOVERY without fixed target",
       lambda: ("UNKNOWN" in scope and "DISCOVERY" in scope and "target_value: null" in scope, "nullable target and open modes present"))
 check("AD-08","No universal numeric volume target in core/form/scope",
