@@ -1,0 +1,30 @@
+{
+  "project_name": "Discovery Variant Fixture",
+  "form": "NOVEL",
+  "development_mode": "DISCOVERY",
+  "scope": {
+    "mode": "UNKNOWN",
+    "metric": "AL",
+    "target_value": null,
+    "binding": "NO"
+  },
+  "before_draft": {
+    "architecture_status": "OPEN",
+    "load_bearing_unknowns": [
+      "ending mechanism"
+    ]
+  },
+  "draft_units": [
+    "scene_01",
+    "scene_02"
+  ],
+  "after_extract": {
+    "accepted_observations": [
+      "protagonist avoids direct confrontation"
+    ],
+    "deferred_decisions": [
+      "ending mechanism"
+    ]
+  },
+  "continuation_authorized": true
+}
