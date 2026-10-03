@@ -1,0 +1,278 @@
+WRITER-TOOLKIT v0.3 — AUDIT
+===========================
+
+
+===== AUD.01_COVERAGE =====
+# AUD.01_COVERAGE
+
+**ID:** `AUD.01_COVERAGE`
+
+## SCHEMA
+
+```yaml
+audit_coverage:
+  audit_id: ...
+  scope: CHAPTER | SEQUENCE | MANUSCRIPT | PROJECT
+  passes:
+    - pass_id: ...
+      required: true|false
+      executed: true|false
+      evidence_available: true|false
+      independence_required: true|false
+      independence_available: true|false
+      result: PASS | FAIL | UNVERIFIED | NOT_APPLICABLE
+```
+
+## RULE
+
+No `FULLY_CHECKED` claim until all required passes have a recorded state.
+
+## COVERAGE CHECK
+
+The engine must track:
+
+- what scope was audited;
+- which passes were required;
+- which passes executed;
+- whether evidence exists;
+- whether independence was required and available;
+- the resulting status.
+
+Chapter-level audits do not automatically count as a full-manuscript audit.
+
+
+===== AUD.02_PASS_CLASSIFICATION =====
+# AUD.02_PASS_CLASSIFICATION
+
+**ID:** `AUD.02_PASS_CLASSIFICATION`
+
+## HARD FALSIFIABLE
+
+Examples:
+
+- forbidden terms;
+- chronology;
+- continuity;
+- hard requirement;
+- exact state match;
+- explicit epistemic bridge.
+
+Result:
+
+```text
+PASS | FAIL
+```
+
+Only when the relevant evidence is available.
+
+## SOFT DIAGNOSTIC
+
+Examples:
+
+- repetition;
+- prose drift;
+- monotony.
+
+Result:
+
+```text
+FINDING | NO_SIGNIFICANT_FINDING
+```
+
+This is not a universal binary quality verdict.
+
+## INDEPENDENT READER
+
+Examples:
+
+- reveal inference;
+- first-read effect.
+
+Result:
+
+```text
+PASS
+FAIL
+UNVERIFIED
+```
+
+`UNVERIFIED` if independent capability is unavailable.
+
+## RULE
+
+Do not represent epistemically blind checks as independently verified simply
+because the same model performed the writing and audit.
+
+
+===== AUD.03_ROLE_EVIDENCE_FIREWALL =====
+# AUD.03_ROLE_EVIDENCE_FIREWALL
+
+**ID:** `AUD.03_ROLE_EVIDENCE_FIREWALL`
+
+## ROLE MODEL
+
+```text
+AUTHOR
+WRITER
+AUDITOR
+```
+
+A single model may perform several roles sequentially.
+
+Current role must be explicit.
+
+Example:
+
+```text
+ROLE = WRITER
+ACTION = DRAFT
+```
+
+then:
+
+```text
+ROLE = AUDITOR
+ACTION = HARD_CONTINUITY_CHECK
+```
+
+Role switch alone does not create independence.
+
+## EVIDENCE
+
+For every `HARD-* PASS`:
+
+```yaml
+evidence:
+  source: ...
+  locator: ...
+  excerpt: ...
+  interpretation: ...
+  result: PASS
+```
+
+A production report alone is invalid evidence.
+
+## MUTATION FIREWALL — FORBIDDEN DURING AUDIT
+
+```text
+MANUSCRIPT EDIT
+STATE EDIT
+AUTHORITY EDIT
+DEVIATION ACCEPTANCE
+STYLE LOCK UPDATE
+CANON UPDATE
+```
+
+## ALLOWED DURING AUDIT
+
+```text
+FIND
+DESCRIBE
+CLASSIFY
+PROPOSE
+```
+
+Only Revision or explicit Author action can commit changes.
+
+## REQUIRED BEHAVIOR WHEN INDEPENDENCE IS UNAVAILABLE
+
+Where independence is required for a valid result and the capability is not
+available:
+
+```text
+RESULT = UNVERIFIED
+```
+
+Never fabricate PASS.
+
+## OUTPUT
+
+- findings;
+- evidence records;
+- coverage status;
+- explicit UNVERIFIED where required;
+- proposals routed to Revision / Author.
+
+
+===== AUDIT_ENGINE =====
+# AUDIT ENGINE
+
+**Layer:** ENGINE  
+**Activation:** when diagnostics or formal audit are required  
+**Dependencies:** Core authority/state/evidence, manuscript/state artifacts, applicable engines, capability profile, FORM contract
+
+## PURPOSE
+
+Проводить проверку в явном scope с соответствующей evidence policy,
+различать falsifiable checks, soft diagnostics и independent-reader checks,
+и не использовать аудит как скрытый канал редактирования.
+
+## FORM ROUTING
+
+Every formal audit loads the current `AUDIT_PROFILE` from the Form Contract.
+
+For:
+
+```text
+FORM = SCREENPLAY
+```
+
+the form-specific set includes:
+
+```text
+FORM_UNIT_INTEGRITY
+SCENE_SEQUENCE_CONTINUITY
+SCREENPLAY_FORMAT_CONSISTENCY
+DIALOGUE_ACTION_SEPARATION
+CHAPTER_RULE_CONTAMINATION
+```
+
+Generic audits remain applicable where relevant.
+
+## AUDIT SCOPES
+
+```text
+CHAPTER
+SCENE
+SEQUENCE
+MANUSCRIPT
+PROJECT
+```
+
+For screenplay, `CHAPTER` is not a required scope.
+
+## RESULT SEMANTICS
+
+```text
+PASS
+FAIL
+UNVERIFIED
+NOT_APPLICABLE
+```
+
+For soft diagnostics:
+
+```text
+FINDING
+NO_SIGNIFICANT_FINDING
+```
+
+## FULL CHECK RULE
+
+No `FULLY_CHECKED` claim until all required passes have a recorded state.
+
+## ROLE MODEL
+
+```text
+AUTHOR
+WRITER
+AUDITOR
+```
+
+One model may perform multiple roles sequentially.
+
+Role switching does not automatically create independence.
+
+## FORM SAFETY
+
+A form-specific audit profile may add checks, but it may not silently redefine the generic Core.
