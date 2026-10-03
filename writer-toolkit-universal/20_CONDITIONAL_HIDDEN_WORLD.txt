@@ -1,0 +1,208 @@
+WRITER-TOOLKIT v0.3 — HIDDEN WORLD
+==================================
+
+===== HIDDEN_WORLD_MODULE.md =====
+# Hidden World Module
+
+## Module ID
+
+`COND.01_HIDDEN_WORLD`
+
+## Activation
+
+Activate only when the project contains a required concealed layer such as:
+
+```text
+HIDDEN_WORLD = ON
+```
+
+or an equivalent explicit hard reveal requirement.
+
+Typical activation reasons may include concealed ontology, hidden identity, secret system rules, delayed cosmology, or a mystery whose fairness depends on controlled information release.
+
+## Inputs
+
+- `WORLD_TRUTH`
+- `SURFACE_WORLD`
+- `CHARACTER_KNOWLEDGE`
+- `READER_KNOWLEDGE`
+- `REVEAL_PLAN`
+
+## Outputs
+
+```text
+HIDDEN_ONTOLOGY
+SURFACE_MODEL
+EPISTEMIC_BRIDGES
+REVEAL_STATE
+DISCOVERY_CONSTRAINTS
+```
+
+## Operating rules
+
+1. Hidden truth and apparent truth are stored separately.
+2. Character knowledge is not inferred from model knowledge.
+3. A reveal must have an information path appropriate to the chosen viewpoint and form.
+4. A secret is not automatically fair merely because clues exist.
+5. First-read inference claims require independent evidence; unavailable independence is `UNVERIFIED`.
+6. This module never authorizes the model to reveal or redefine the hidden truth on its own.
+
+## Inactive behavior
+
+When the module is OFF, no hidden ontology, reveal schedule, concealment audit, or secret-state persistence is created merely by stylistic inference.
+
+===== HW.01_REVEAL_CONTRACT.md =====
+# HW.01 — Reveal Contract
+
+## Purpose
+
+Define what is hidden, from whom, until when, and by what legitimate information path it can become known.
+
+## Required fields
+
+```text
+HIDDEN_ELEMENT
+WHO_KNOWS
+WHO_DOES_NOT_KNOW
+INTENDED_READER_AWARENESS
+VIEWPOINT_ACCESS
+REVEAL_TRIGGER
+REVEAL_MECHANISM
+RESERVED_CLUES
+FORBIDDEN_LEAKS
+TARGET_REVEAL_STATE
+```
+
+## State distinction
+
+```text
+WORLD_TRUTH
+CHARACTER_KNOWLEDGE
+READER_KNOWLEDGE
+PUBLIC_BELIEF
+```
+
+These are not interchangeable.
+
+## Gate
+
+A reveal plan is not complete until every load-bearing hidden fact has a declared reveal state and an epistemic route appropriate to the project form.
+
+===== HW.02_ONTOLOGY_AND_SURFACE.md =====
+# HW.02 — Ontology and Surface
+
+## Purpose
+
+Keep the actual world model distinct from the model that characters and readers can reasonably construct before the reveal.
+
+## Required separation
+
+```text
+HIDDEN_ONTOLOGY
+SURFACE_MODEL
+PUBLIC_BELIEF
+CHARACTER_INTERPRETATION
+READER_INTERPRETATION
+```
+
+## Rule
+
+The model may use knowledge of hidden ontology for planning, but prose generation must respect the active character/reader epistemic state.
+
+## Check
+
+For every hidden element ask:
+
+```text
+Could the current viewpoint legitimately know this?
+Could the current character infer this from available evidence?
+Does the wording leak ontology through terminology or authorial framing?
+```
+
+An answer of `NO` to the first two questions is a block against direct assertion, not a license to invent a different fact.
+
+===== HW.03_DISCOVERY_FAIRNESS.md =====
+# HW.03 — Discovery Fairness
+
+## Purpose
+
+Assess whether the intended revelation is discoverable in a way consistent with the chosen literary form.
+
+## Fairness is not the same as clue count
+
+The audit should examine:
+
+- clue accessibility;
+- clue interpretability;
+- convergence of independent signals;
+- availability of plausible false interpretations;
+- whether the reveal is retroactively intelligible;
+- whether prior chapters contain accidental direct answers.
+
+## Independence rule
+
+For a claim about what a fresh reader would infer on first read:
+
+```text
+INDEPENDENT_READER = REQUIRED
+```
+
+Without suitable independent evidence:
+
+```text
+UNVERIFIED
+```
+
+A writer session that already knows the secret cannot certify first-read discovery behavior by role-play alone.
+
+===== HW.04_REVEAL_AUDITS.md =====
+# HW.04 — Reveal Audits
+
+## Audit classes
+
+### Leak Audit
+Checks for accidental direct or indirect disclosure before the intended point.
+
+### Fairness Audit
+Checks whether the reveal has sufficient information support for the promised reader experience.
+
+### Retrospective Coherence Audit
+Checks whether the revealed truth makes prior evidence more coherent without requiring impossible knowledge.
+
+### Epistemic Integrity Audit
+Checks character knowledge, narrator access, and reader access separately.
+
+## Read-only rule
+
+Audits may report findings and propose repairs. They do not silently rewrite manuscript, state, canon, or reveal schedule.
+
+===== HW.05_REVEAL_PERSISTENCE.md =====
+# HW.05 — Reveal Persistence
+
+## Purpose
+
+Persist hidden-world state so a new chat or model does not lose the distinction between truth, belief, and reveal status.
+
+## Persistence fields
+
+```text
+HIDDEN_ELEMENT_ID
+WORLD_TRUTH_REF
+CURRENT_REVEAL_STATE
+CHARACTER_KNOWLEDGE_STATE
+READER_KNOWLEDGE_STATE
+PUBLIC_BELIEF_STATE
+RESERVED_REVEAL
+LAST_CHECKED_UNIT
+OPEN_RISKS
+```
+
+## Authority
+
+`STATE` is authoritative for decisions and reveal status.
+
+`MANUSCRIPT` remains authoritative for literal prose.
+
+`DIGEST` is navigation only.
+
+Conflicts are resolved by inspection; there is no blanket rule that a snapshot overrides the manuscript.
