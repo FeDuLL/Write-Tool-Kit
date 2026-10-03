@@ -4,7 +4,7 @@
 **Layer:** FORM
 **Trigger:**
 
-```
+```text
 FORM = SCREENPLAY
 ```
 
@@ -14,7 +14,7 @@ Provide the required screenplay routing without importing prose chapter logic.
 
 ## OPERATIONAL PROFILE
 
-```
+```text
 STRUCTURAL_UNIT = SCENE / SEQUENCE
 PRODUCTION_UNIT = SCENE / SEQUENCE
 LOCK_UNIT = SCENE / SEQUENCE / SEQUENCE_BATCH
@@ -35,7 +35,7 @@ SCREENPLAY_AUDIT_PROFILE = ON
 
 At minimum:
 
-```
+```text
 FORM_UNIT_INTEGRITY
 SCENE_SEQUENCE_CONTINUITY
 SCREENPLAY_FORMAT_CONSISTENCY
@@ -61,7 +61,7 @@ A screenplay unit is complete when:
 
 ## FAIL
 
-```
+```text
 SCREENPLAY_CHAPTER_CONTAMINATION
 SCREENPLAY_UNIT_UNDEFINED
 SCREENPLAY_AUDIT_PROFILE_MISSING
