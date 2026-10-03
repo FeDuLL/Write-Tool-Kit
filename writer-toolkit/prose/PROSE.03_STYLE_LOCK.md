@@ -24,7 +24,7 @@ Style Lock is an execution reference, not an artistic prison.
 
 Intentional deviation requires:
 
-```
+```text
 PROPOSE
 → AUTHOR DECISION
 → UPDATE STYLE LOCK
