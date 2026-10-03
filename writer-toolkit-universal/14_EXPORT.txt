@@ -1,7 +1,5 @@
 WRITER-TOOLKIT v0.3 — EXPORT / BOOTSTRAP
 
-===== ADAPTER.07_INTEGRITY_EXPORT.md =====
-
 # ADAPTER.07 — INTEGRITY / EXPORT
 
 **ID:** ADAPTER.07  
@@ -68,7 +66,9 @@ with the reason recorded.
 
 A valid handoff must retain enough artifact identity and state information for a new session/model to re-open the project without relying on hidden conversation memory.
 
-===== BOOTSTRAP.md =====
+
+
+===== BOOTSTRAP =====
 
 # WRITER-TOOLKIT v0.3 — CANONICAL BOOTSTRAP
 
