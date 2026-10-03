@@ -1,0 +1,8 @@
+toolkit_version: 0.3
+schema_version: 0.3
+form: SCREENPLAY
+production_unit: SCENE
+lock_unit: SEQUENCE
+scope: {mode: APPROX, metric: PAGES, target_value: null, binding: NO}
+chapter_model: OFF
+audit_profile: SCREENPLAY
