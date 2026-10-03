@@ -4,7 +4,7 @@
 
 ## Required fields
 
-```
+```text
 PROJECT_ID
 PROJECT_NAME
 FORM
@@ -34,7 +34,7 @@ CROSS_MEDIA_INTENT
 
 Every substantive field uses:
 
-```
+```text
 DECISION_STATE:
 UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
 
