@@ -23,7 +23,7 @@ New project OR project without valid Creative Brief.
 
 ## OUTPUT
 
-```
+```text
 CREATIVE BRIEF DRAFT
 AI-DECIDED
 MATERIALLY MISSING
