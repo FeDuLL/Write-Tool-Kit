@@ -1,74 +1,129 @@
 # WRITER-TOOLKIT v0.3 — CANONICAL BOOTSTRAP
 
-**Module:** BOOT.01_CANONICAL  
-**Version:** 0.3  
-**Schema Version:** 0.3  
+**Module:** BOOT.01_CANONICAL
+**Version:** 0.3
+**Schema Version:** 0.3
+**Phase:** F
 **Role:** canonical runtime startup contract
 
-## Purpose
+# 1. PURPOSE
 
 Use this bootstrap whenever a Writer-Toolkit project is started or restored.
 
-It verifies the package and schemas, restores manuscript/state/modules/style, profiles capabilities, identifies blockers, and determines the next authorized action.
+The bootstrap must:
+
+1. verify the Toolkit package;
+2. verify schema compatibility;
+3. verify artifact integrity where the adapter supports it;
+4. restore the manuscript;
+5. restore Project State;
+6. restore active modules;
+7. restore Style Lock;
+8. inspect current runtime capabilities;
+9. determine the current stage/unit;
+10. identify blockers;
+11. identify the next authorized action.
 
 Bootstrap is a restoration and verification procedure, not a creative rewrite.
 
-## Authority
+# 2. AUTHORITY
 
 The author retains final authority over irreversible artistic decisions and canon.
 
 Keep these distinctions separate:
 
-`PROCEED`  
-`AI MAY PROCEED`  
-`AUTHOR APPROVAL`  
-`QUALITY CHECK`  
-`ACCEPTED DEVIATION`  
-`AUDIT PASSED`  
-`PUBLICATION READY`
+PROCEED
+AI MAY PROCEED
+AUTHOR APPROVAL
+QUALITY CHECK
+ACCEPTED DEVIATION
+AUDIT PASSED
+PUBLICATION READY
 
 Silence never equals approval.
 
-`DEFERRED` means the decision has not been made. If it becomes load-bearing for the next action, MUST STOP unless autonomous determination was explicitly authorized.
+DEFERRED means the decision has not been made. If it becomes load-bearing for the next action, MUST STOP.
 
-## Canonical preflight
+# 3. BOOT.01 — CANONICAL PREFLIGHT
 
+Execute in this order:
+
+```text
+1. VERIFY TOOLKIT VERSION
+2. VERIFY SCHEMA VERSION
+3. VERIFY ARTIFACT INTEGRITY
+4. LOAD MANUSCRIPT
+5. LOAD PROJECT STATE
+6. LOAD ACTIVE MODULES
+7. LOAD STYLE LOCK
+8. LOAD CAPABILITIES
+9. IDENTIFY CURRENT STAGE
+10. IDENTIFY BLOCKERS
+11. IDENTIFY NEXT AUTHORIZED ACTION
 ```
-VERIFY TOOLKIT VERSION
-→ VERIFY SCHEMA VERSION
-→ VERIFY ARTIFACT INTEGRITY
-→ LOAD MANUSCRIPT
-→ LOAD PROJECT STATE
-→ LOAD ACTIVE MODULES
-→ LOAD STYLE LOCK
-→ LOAD CAPABILITIES
-→ IDENTIFY CURRENT STAGE
-→ IDENTIFY BLOCKERS
-→ IDENTIFY NEXT AUTHORIZED ACTION
+
+Fail on:
+- version mismatch;
+- missing required artifact;
+- manuscript unavailable when required;
+- state corruption;
+- schema mismatch;
+- incompatible audit status.
+
+Use:
+VERSION_MISMATCH
+SCHEMA_MISMATCH
+BOOTSTRAP_INTEGRITY_ERROR
+MANUSCRIPT_MISSING
+STATE_INTEGRITY_ERROR
+MODULE_MISSING / MODULE_NOT_AUTHORIZED
+STYLE_BASELINE_MISSING
+STYLE_CALIBRATION_NOT_COMPLETE
+
+Do not fabricate PASS when an integrity or capability check is unavailable.
+
+# 4. BOOT.02 — NEW CHAT
+
+Trigger:
+
+```text
+NEW CONVERSATION
+SAME PROJECT
+SAME MODEL / RUNTIME
 ```
 
-Fail on version mismatch, missing required artifact, manuscript/state corruption, schema mismatch, incompatible audit status, unauthorized module, or missing style calibration.
+Run canonical preflight first.
 
-Do not fabricate PASS when a check is unavailable.
+Then:
 
-## New chat
-
-For the same project and runtime:
-
-```
+```text
 RESTORE
 → VERIFY INTEGRITY
 → DETERMINE LAST STABLE CHECKPOINT
 → CONTINUE NEXT AUTHORIZED ACTION
 ```
 
-Persisted manuscript/state is the reconstruction basis; hidden chat memory is not a substitute.
+Rules:
+1. Do not reinterpret settled decisions from scratch.
+2. Do not use hidden prior chat memory as a substitute for persistence.
+3. Use persisted manuscript/state as the reconstruction basis.
+4. If the last checkpoint is incomplete, restore the last stable checkpoint and report the gap.
+5. Continue only when the next action is authorized and not blocked.
 
-## New model
+# 5. BOOT.03 — NEW MODEL
 
-For the same project with a different model/runtime:
+Trigger:
 
+```text
+SAME PROJECT
+DIFFERENT MODEL AND/OR RUNTIME
 ```
+
+Run canonical preflight first.
+
+Then:
+
+```text
 PROFILE CAPABILITIES
 → RECHECK OUTPUT LIMIT
 → RE-ANCHOR STYLE FROM BASELINE
@@ -77,34 +132,142 @@ PROFILE CAPABILITIES
 → CONTINUE
 ```
 
-Do not inherit unsupported capability claims.
+## 5.1 Capability re-profile
 
-## MANUSCRIPT / STATE / DIGEST
+Do not inherit old capability claims blindly.
 
+Produce a new Capability Profile for the current runtime.
+
+## 5.2 Output-budget recheck
+
+Recalculate practical output capacity.
+
+Do not turn runtime limits into a new chapter size, structural decision, or prose style.
+
+Where possible:
+
+```text
+CHUNK
+→ PERSIST
+→ ASSEMBLE
 ```
-MANUSCRIPT = literal text authority
-STATE = accepted decisions and execution state
-DIGEST = navigation only
+
+## 5.3 Style re-anchoring
+
+Restore the persisted Style Baseline/Lock and preserved exemplars.
+
+A model must not replace them with its own preference for brevity, density, or "clean" prose merely because the model changed.
+
+## 5.4 Active-module compatibility
+
+Check whether every active module can run in the new environment.
+
+Do not silently disable or replace unavailable modules.
+
+## 5.5 Capability-dependent verdict invalidation
+
+If a previous verdict depended on a capability the new runtime lacks, it must not be presented as still verified.
+
+Examples:
+- FULL AUDIT
+- EXTERNAL REVIEW
+- EXACT COUNT
+- FULL-MANUSCRIPT COVERAGE
+- ARTIFACT INTEGRITY CHECK
+
+Invalidate or downgrade only the affected verdicts and record why.
+
+# 6. MANUSCRIPT / STATE / DIGEST
+
+These are separate artifacts:
+
+```text
+MANUSCRIPT
+STATE
+DIGEST
 ```
 
-A digest never overrides manuscript or state.
+MANUSCRIPT = authority for literal text.
 
-## Style transfer
+STATE = authority for accepted project decisions and execution state.
 
-Use the persisted Style Baseline/Lock and preserved exemplars. A verbal style description alone is insufficient for reliable transfer.
+DIGEST = navigation only.
 
-## AI MAY PROCEED
+Never let a digest override manuscript or state.
 
-Proceed only when there is no blocking conflict, no required unresolved load-bearing decision, the next action is authorized, required artifacts exist, and required capabilities exist.
+# 7. STYLE TRANSFER
 
-This does not mean author approval.
+For portability use:
 
-## Non-mutation
+```text
+STYLE DESCRIPTION
++
+PERSISTED STYLE BASELINE
++
+PRESERVED EXEMPLARS
++
+STYLE LOCK
+```
 
-Bootstrap must not silently rewrite manuscript text, alter canon, change Style Lock, activate modules, accept deviations, pass audits, or mark units complete when they were not persisted.
+A verbal description alone is not sufficient for reliable style transfer.
 
-## End states
+# 8. NEXT-ACTION REPORT
 
-`READY`, `BLOCKED`, or `UNVERIFIED`.
+Return:
 
-After bootstrap emit a machine-readable or human-readable bootstrap status sufficient for another model/session to reconstruct the necessary state.
+```text
+BOOTSTRAP STATUS
+CURRENT STAGE
+CURRENT UNIT
+ACTIVE MODULES
+CURRENT CAPABILITIES
+BLOCKERS
+DEFERRED LOAD-BEARING ITEMS
+STYLE STATUS
+NEXT AUTHORIZED ACTION
+DO_NOT_DO
+```
+
+# 9. AI MAY PROCEED
+
+AI MAY PROCEED when:
+
+```text
+NO BLOCKING HARD CONFLICT
+NO REQUIRED UNRESOLVED LOAD-BEARING DECISION
+NEXT ACTION IS ALREADY AUTHORIZED
+REQUIRED ARTIFACTS ARE AVAILABLE
+REQUIRED CAPABILITIES ARE AVAILABLE
+```
+
+This does NOT mean AUTHOR APPROVAL.
+
+# 10. NON-MUTATION
+
+Bootstrap is read/restore/check.
+
+It must not silently:
+- rewrite manuscript text;
+- alter canon;
+- change Style Lock;
+- activate conditional modules;
+- accept a deviation;
+- resolve a deferred decision;
+- mark an audit as passed;
+- mark a manuscript unit complete when it was not persisted.
+
+# 11. END STATES
+
+Bootstrap succeeds only as one of:
+
+READY
+BLOCKED
+UNVERIFIED
+
+A vague "BOOTSTRAP COMPLETE" is insufficient.
+
+# 12. CHECKPOINT
+
+After bootstrap emit BOOTSTRAP_STATUS.md or the machine-readable bootstrap_status.schema.
+
+The result must be sufficient for another model/session to reconstruct the necessary state without guessing.
