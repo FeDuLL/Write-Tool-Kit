@@ -101,39 +101,13 @@ check('AD-16','Form contract is active for every project and runtime cannot choo
 # Build report and package
 passed=sum(r['result']=='PASS' for r in results); failed=len(results)-passed
 stamp=datetime.now(timezone.utc).isoformat(timespec='seconds')
-report = f'''# WRITER-TOOLKIT v0.3 — ANTI-DRIFT VARIANT TEST
-
-Status: **{'PASS' if failed==0 else 'FAIL'}**
-Date: {stamp}
-Source package: `{SRC.name}`
-
-## Purpose
-
-Validate the high-risk anti-drift variants identified by the v0.3 architecture: screenplay/form independence, DISCOVERY workflow, UNKNOWN scope, conditional hidden-world activation, and runtime/form separation. This is an architecture/contract stress test, not a literary-quality verdict.
-
-## Results
-
-| ID | Check | Result |
-|---|---|---|
-'''
+report = f'''# WRITER-TOOLKIT v0.3 — ANTI-DRIFT VARIANT TEST\n\nStatus: **{'PASS' if failed==0 else 'FAIL'}**\nDate: {stamp}\nSource package: `{SRC.name}`\n\n## Purpose\n\nValidate the high-risk anti-drift variants identified by the v0.3 architecture: screenplay/form independence, DISCOVERY workflow, UNKNOWN scope, conditional hidden-world activation, and runtime/form separation. This is an architecture/contract stress test, not a literary-quality verdict.\n\n## Results\n\n| ID | Check | Result |\n|---|---|---|\n'''
 for r in results:
     report += f"| {r['id']} | {r['check']} | **{r['result']}** |\n"
-report += f'''
-**Total: {passed}/{len(results)} PASS; {failed} FAIL.**
-
-## Detailed evidence
-
-'''
+report += f'''\n**Total: {passed}/{len(results)} PASS; {failed} FAIL.**\n\n## Detailed evidence\n\n'''
 for r in results:
     report += f"### {r['id']} — {r['result']}\n{r['detail']}\n\n"
-report += '''## Interpretation
-
-PASS means the relevant contract is represented and the fixture variation did not trigger an architectural contradiction. It does not prove that arbitrary model output will always obey the contract; that remains an execution/runtime property.
-
-## Resulting gate
-
-With portability and these anti-drift variants passing, the next meaningful validation should be a **real second-model execution** or an external independent audit of the same persisted fixture. After that, a project-specific pilot using actual author material is more informative than additional synthetic architecture tests.
-'''
+report += '''## Interpretation\n\nPASS means the relevant contract is represented and the fixture variation did not trigger an architectural contradiction. It does not prove that arbitrary model output will always obey the contract; that remains an execution/runtime property.\n\n## Resulting gate\n\nWith portability and these anti-drift variants passing, the next meaningful validation should be a **real second-model execution** or an external independent audit of the same persisted fixture. After that, a project-specific pilot using actual author material is more informative than additional synthetic architecture tests.\n'''
 (ROOT.parent/'ANTI_DRIFT_VARIANT_TEST_REPORT.md').write_text(report,encoding='utf-8')
 json_path=ROOT.parent/'ANTI_DRIFT_VARIANT_RESULTS.json'
 json_path.write_text(json.dumps({'status':'PASS' if failed==0 else 'FAIL','pass':passed,'fail':failed,'total':len(results),'results':results},ensure_ascii=False,indent=2),encoding='utf-8')
