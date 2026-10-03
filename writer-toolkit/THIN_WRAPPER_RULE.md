@@ -18,6 +18,8 @@ They must not redefine:
 - module activation;
 - publication status.
 
-Canonical source: `BOOTSTRAP.md`
+Canonical source:
+
+`BOOTSTRAP.md`
 
 If a wrapper conflicts with the canonical bootstrap, the wrapper is defective.
