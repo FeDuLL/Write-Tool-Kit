@@ -1,11 +1,14 @@
 WRITER-TOOLKIT v0.3 — CREATIVE BRIEF
+====================================
 
-## Purpose
+===== BRIEF.01_SCHEMA.md =====
+# BRIEF.01_SCHEMA
 
-Collect project-specific creative decisions without converting model assumptions into author decisions.
+**ID:** `BRIEF.01_SCHEMA`
 
-## Required field family
+## Required fields
 
+```text
 PROJECT_ID
 PROJECT_NAME
 FORM
@@ -29,28 +32,174 @@ LANGUAGE
 LOCALE
 COMMERCIAL_INTENT
 CROSS_MEDIA_INTENT
+```
 
 ## Field state
 
+Every substantive field uses:
+
+```text
 DECISION_STATE:
 UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
 
 SOURCE:
 AUTHOR | AI | DERIVED | EXTERNAL
+```
 
-DERIVED does not mean accepted.
+`DERIVED` does not mean accepted.
 
-## Intake
+A derived value remains non-authoritative until the applicable authority rules
+make its status explicit.
 
-1. inspect supplied material;
-2. extract existing author decisions;
+## Acceptance conditions
+
+A brief field may be used as an author decision only when its decision state is
+`ACCEPTED` under the applicable authority rules.
+
+`UNKNOWN`, `OPEN`, `DEFERRED` and `PROPOSED` remain unresolved/non-authoritative.
+
+## Scope boundary
+
+This schema describes brief data. It does not select a genre, prose style,
+scope, or structural mode on the author's behalf.
+
+===== BRIEF.02_INTAKE.md =====
+# BRIEF.02_INTAKE
+
+**ID:** `BRIEF.02_INTAKE`
+
+## TRIGGER
+
+New project OR project without valid Creative Brief.
+
+## PRECONDITIONS
+
+- no valid current Creative Brief;
+- project context available to the extent possible.
+
+## PROCESS
+
+1. inspect user-provided material;
+2. extract already-defined author decisions;
 3. do not ask for information already present;
-4. distinguish UNKNOWN from DEFERRED;
-5. ask only materially necessary questions;
-6. produce a brief draft.
+4. determine materially missing fields;
+5. distinguish `UNKNOWN` from `DEFERRED`;
+6. propose only the minimum material questions;
+7. produce `CREATIVE BRIEF DRAFT`.
 
-## Lock
+## OUTPUT
 
-Brief locking is an author gate. Silence is not approval.
+```text
+CREATIVE BRIEF DRAFT
+AI-DECIDED
+MATERIALLY MISSING
+DEFERRED
+PROPOSED NEXT ACTION
+```
 
-A field becomes an author decision only when its decision state is ACCEPTED under the applicable authority rules.
+## GATE
+
+`BRIEF.READY_FOR_LOCK`
+
+## FAIL
+
+- invented author decision presented as known;
+- stress-test parameter imported as default;
+- omission of load-bearing field;
+- illustrative option set treated as exhaustive.
+
+===== BRIEF.03_LOCK.md =====
+# BRIEF.03_LOCK
+
+**ID:** `BRIEF.03_LOCK`
+
+## TRIGGER
+
+Author reviews/approves the brief.
+
+## PRECONDITIONS
+
+- brief draft exists;
+- all material author decisions are explicitly visible;
+- unresolved items are labeled.
+
+## MANDATORY OUTPUT
+
+```text
+AUTHOR DECISIONS
+AI-DECIDED / NOT-YOUR-DECISION-YET
+DEFERRED
+ACTIVE_MODULES
+SCOPE_RECORD
+PARTICIPATION_MODE
+```
+
+## GATE
+
+`BRIEF.LOCKED`
+
+## FAIL
+
+- unresolved author-required decision hidden;
+- AI assumption is not exposed;
+- required active module missing;
+- scope state inconsistent with project.
+
+## AUTHOR RULE
+
+Locking the brief is an author gate.
+
+Silence is not approval.
+
+===== BRIEF_ENGINE.md =====
+# BRIEF ENGINE
+
+**Layer:** ENGINE  
+**Activation:** New project OR project without valid Creative Brief  
+**Dependencies:** `CORE.01_AUTHORITY`, `CORE.02_STATE`, `CORE.03_EVIDENCE`,
+`CORE.04_CHANGE_CONTROL`, `CORE.05_RUNTIME_LOOP`
+
+## PURPOSE
+
+Собрать, проверить и зафиксировать Creative Brief без превращения предположений
+модели в авторские решения.
+
+## PROCESS
+
+```text
+INSPECT
+→ EXTRACT AUTHOR DECISIONS
+→ IDENTIFY MISSING / UNKNOWN / DEFERRED
+→ PROPOSE MINIMUM QUESTIONS
+→ BUILD BRIEF DRAFT
+→ AUTHOR REVIEW
+→ LOCK
+```
+
+## HARD RULES
+
+- Do not ask for information already present.
+- `DERIVED` does not mean `ACCEPTED`.
+- `DEFERRED` does not mean permission to decide later silently.
+- Test/stress-test values never become project defaults.
+- Closed option lists are not exhaustive unless the project says so.
+
+## OUTPUTS
+
+- Creative Brief Draft
+- AI-DECIDED
+- MATERIALLY MISSING
+- DEFERRED
+- PROPOSED NEXT ACTION
+- Locked brief package after author review
+
+## GATE
+
+`BRIEF.READY_FOR_LOCK` → `BRIEF.LOCKED`
+
+## FAIL
+
+- invented author decision presented as known;
+- hidden AI assumption;
+- omitted load-bearing field;
+- active module or scope state inconsistent with the project.
