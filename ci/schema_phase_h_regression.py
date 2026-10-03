@@ -17,7 +17,7 @@ for name in expected:
     p=native/"schemas"/name
     if not p.is_file(): fails.append(f"missing schema: {name}"); continue
     txt=p.read_text(encoding="utf-8")
-    if not re.search(r'^schema_version:\s*["\']?0\.3["\']?\s*
+    if not any(line.strip() in ('schema_version: "0.3"', "schema_version: '0.3'", "schema_version: 0.3") for line in txt.splitlines()):
         fails.append(f"schema_version != 0.3: {name}")
 inv=(native/"schemas"/"SCHEMA_INVENTORY.md").read_text(encoding="utf-8")
 for name in expected:
