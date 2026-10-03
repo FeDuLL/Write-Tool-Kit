@@ -1,8 +1,7 @@
 WRITER-TOOLKIT v0.3 — AUDIT
 ===========================
 
-
-===== AUD.01_COVERAGE =====
+===== AUD.01_COVERAGE.md =====
 # AUD.01_COVERAGE
 
 **ID:** `AUD.01_COVERAGE`
@@ -40,8 +39,7 @@ The engine must track:
 
 Chapter-level audits do not automatically count as a full-manuscript audit.
 
-
-===== AUD.02_PASS_CLASSIFICATION =====
+===== AUD.02_PASS_CLASSIFICATION.md =====
 # AUD.02_PASS_CLASSIFICATION
 
 **ID:** `AUD.02_PASS_CLASSIFICATION`
@@ -103,8 +101,7 @@ UNVERIFIED
 Do not represent epistemically blind checks as independently verified simply
 because the same model performed the writing and audit.
 
-
-===== AUD.03_ROLE_EVIDENCE_FIREWALL =====
+===== AUD.03_ROLE_EVIDENCE_FIREWALL.md =====
 # AUD.03_ROLE_EVIDENCE_FIREWALL
 
 **ID:** `AUD.03_ROLE_EVIDENCE_FIREWALL`
@@ -193,8 +190,7 @@ Never fabricate PASS.
 - explicit UNVERIFIED where required;
 - proposals routed to Revision / Author.
 
-
-===== AUDIT_ENGINE =====
+===== AUDIT_ENGINE.md =====
 # AUDIT ENGINE
 
 **Layer:** ENGINE  
