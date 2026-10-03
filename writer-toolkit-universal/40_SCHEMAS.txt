@@ -2,6 +2,7 @@ WRITER-TOOLKIT v0.3 — SCHEMAS
 =============================
 
 ===== active_modules.schema =====
+
 schema_version: "0.3"
 name: active_modules
 example_shape:
@@ -23,6 +24,7 @@ activation_sources:
 rule: old-project memory is never an activation source
 
 ===== ai_decided.schema =====
+
 schema_version: "0.3"
 name: ai_decided
 required:
@@ -43,6 +45,7 @@ rule: AI-DECIDED records expose assumptions and prevent them from disappearing i
 rule_2: DERIVED or AI-originated does not imply AUTHOR acceptance
 
 ===== audit_coverage.schema =====
+
 schema_version: "0.3"
 name: audit_coverage
 required:
@@ -69,6 +72,7 @@ rule: no FULLY_CHECKED claim until all required passes have a recorded state
 rule_2: unit-level coverage does not automatically equal full-manuscript coverage
 
 ===== bootstrap_status.schema =====
+
 schema_version: "0.3"
 name: bootstrap_status
 required:
@@ -89,6 +93,7 @@ bootstrap_result:
     - UNVERIFIED
 
 ===== capability_profile.schema =====
+
 schema_version: "0.3"
 name: capability_profile
 properties:
@@ -106,6 +111,7 @@ properties:
   append_to_artifact: true|false
 
 ===== change_log.schema =====
+
 schema_version: "0.3"
 name: change_log
 entry_required:
@@ -131,6 +137,7 @@ rule: no silent substantive revision
 rule_2: audit findings do not mutate the change log as manuscript approval; revision or explicit author action commits changes
 
 ===== creative_brief.schema =====
+
 schema_version: "0.3"
 name: creative_brief
 required:
@@ -167,6 +174,7 @@ acceptance_rule: only ACCEPTED values under applicable authority rules are autho
 scope_boundary: schema records brief data; it does not choose genre, prose style, scope, or structural mode for the author
 
 ===== deviation_record.schema =====
+
 schema_version: "0.3"
 name: deviation_record
 required:
@@ -188,6 +196,7 @@ rule: PROPOSED never equals AUTHOR-ACCEPTED
 authorization_rule: ACCEPTED DEVIATION requires an explicit author act; silence is insufficient
 
 ===== evidence.schema =====
+
 schema_version: "0.3"
 name: evidence
 required:
@@ -207,6 +216,7 @@ rule: production report alone is invalid evidence for a HARD-* PASS
 rule_2: when independent evidence is required but unavailable, result is UNVERIFIED
 
 ===== handoff.schema =====
+
 schema_version: "0.3"
 name: handoff
 required_order:
@@ -251,6 +261,7 @@ rules:
   - unresolved DEFERRED items remain unresolved unless explicitly authorized and decided
 
 ===== hard_requirements.schema =====
+
 schema_version: "0.3"
 name: hard_requirements
 item_required:
@@ -271,6 +282,7 @@ properties:
 rule: explicit HARD requirements are auditable; unresolved load-bearing HARD requirements block authorized production
 
 ===== manuscript.schema =====
+
 schema_version: "0.3"
 name: manuscript
 required:
@@ -299,6 +311,7 @@ completion_rule: unit completion requires TEXT_PERSISTED = YES
 conflict_rule: conflicts with state are inspected and resolved explicitly; no blanket precedence rule
 
 ===== project_state.schema =====
+
 schema_version: "0.3"
 name: project_state
 required:
@@ -345,6 +358,7 @@ properties:
 rule: STATE is authoritative for project decisions and execution state, not literal manuscript prose
 
 ===== scope_record.schema =====
+
 schema_version: "0.3"
 name: scope_record
 
@@ -363,6 +377,7 @@ scope_record:
   source: AUTHOR | DERIVED | PROJECT
 
 ===== style_baseline.schema =====
+
 schema_version: "0.3"
 name: style_baseline
 required:
@@ -387,6 +402,7 @@ acceptance_rule: baseline is established only when calibration artifact is prese
 forbidden_claim: adjective-only description is not a sufficient baseline
 
 ===== style_lock.schema =====
+
 schema_version: "0.3"
 name: style_lock
 required:
@@ -408,6 +424,7 @@ rule: Style Lock is an execution reference, not an artistic prison
 change_rule: intentional load-bearing deviation requires PROPOSE -> AUTHOR DECISION -> UPDATE STYLE LOCK or REGISTER LOCAL DEVIATION
 
 ===== SCHEMA_INVENTORY.md =====
+
 # WRITER-TOOLKIT v0.3 — SCHEMA INVENTORY
 
 Canonical implementation inventory. All 15 Build Spec schemas are physically materialized in this distribution.
