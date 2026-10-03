@@ -10,7 +10,7 @@ Translate the project `FORM` into an operational contract without imposing a uni
 
 ## INPUT
 
-```
+```text
 FORM
 SCOPE_RECORD
 PARTICIPATION_MODE
@@ -19,7 +19,7 @@ CURRENT_PROJECT_STATE
 
 ## OUTPUT
 
-```
+```text
 VOLUME_METRIC
 STRUCTURAL_UNIT
 PRODUCTION_UNIT
@@ -39,7 +39,7 @@ The runtime does not choose the literary form.
 
 Allowed structural/production units may include:
 
-```
+```text
 CHAPTER
 SCENE
 SEQUENCE
@@ -51,7 +51,7 @@ The exact unit remains project-defined.
 
 ### Screenplay
 
-```
+```text
 STRUCTURAL_UNIT = SCENE / SEQUENCE
 PRODUCTION_UNIT = SCENE / SEQUENCE
 ```
@@ -60,7 +60,7 @@ A screenplay has no mandatory chapter model.
 
 Its volume metric remains project-defined and may use:
 
-```
+```text
 PAGES
 MINUTES
 SCENES
@@ -74,7 +74,7 @@ OTHER
 
 ## FAIL CONDITIONS
 
-```
+```text
 FORM_UNDECLARED
 FORM_PIPELINE_CONFLICT
 PROSE_RULE_APPLIED_TO_SCREENPLAY
