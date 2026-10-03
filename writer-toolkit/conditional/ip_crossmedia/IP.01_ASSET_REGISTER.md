@@ -2,22 +2,23 @@
 
 ## Purpose
 
-Track reusable intellectual-property assets without confusing adaptation assets with core canon.
+Track potentially reusable or cross-media-sensitive assets without conflating reuse value with canon status.
 
 ## Suggested fields
 
 ```text
 ASSET_ID
-ASSET_TYPE
+ASSET_NAME
+TYPE
+CANON_STATUS
 CORE_TRUTH_REF
-MEDIUM
-STATUS
-OWNER
+MEDIUMS
 ADAPTATION_NOTES
-AUDIENCE_KNOWLEDGE
-LICENSE / MARKETING_STATUS
+AUDIENCE_EXPOSURE
+LICENSE / MARKETING NOTES
+RESTRICTIONS
 ```
 
-## Rule
+## Canon rule
 
-An asset record does not change core world truth. Adaptation and licensing status remain separate from literary canon.
+Being useful for games, film, merchandising, or marketing does not promote an asset into canon.
