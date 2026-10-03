@@ -67,7 +67,6 @@ with the reason recorded.
 A valid handoff must retain enough artifact identity and state information for a new session/model to re-open the project without relying on hidden conversation memory.
 
 
-
 ===== BOOTSTRAP =====
 
 # WRITER-TOOLKIT v0.3 — CANONICAL BOOTSTRAP
