@@ -1,0 +1,270 @@
+WRITER-TOOLKIT v0.3 — DEVELOPMENT
+=================================
+
+===== DEV.01_STORY_CORE.md =====
+# DEV.01_STORY_CORE
+
+**ID:** `DEV.01_STORY_CORE`
+
+## CANONICAL FIELDS
+
+```text
+PREMISE
+CENTRAL_CONFLICT
+PROTAGONIST
+DESIRE
+NEED
+STAKES
+PROMISE
+ENDING
+THEMATIC_PRESSURE
+```
+
+## RULE
+
+No field may become universal genre logic.
+
+The fields describe the project; they do not force a specific genre, framework,
+arc shape or ending.
+
+## GATE
+
+Story core must be sufficiently explicit for the selected development mode,
+without inventing missing author decisions as accepted facts.
+
+===== DEV.02_DEVELOPMENT_MODE.md =====
+# DEV.02_DEVELOPMENT_MODE
+
+**ID:** `DEV.02_DEVELOPMENT_MODE`
+
+## ALLOWED MODES
+
+```text
+ARCHITECT
+DISCOVERY
+HYBRID
+```
+
+## ARCHITECT
+
+Plan before drafting.
+
+## DISCOVERY
+
+Draft/explore first, then extract and stabilize state.
+
+Minimum discipline for Discovery:
+
+```text
+DRAFT / EXPLORE
+→ EXTRACT STATE
+→ STABILIZE ACCEPTED PROSE/CANON
+→ REOPEN DEVELOPMENT QUESTIONS AS NEEDED
+```
+
+## HYBRID
+
+Alternate planning and discovery as the project requires.
+
+## RULE
+
+The toolkit must not force an architect-first process when the project uses
+Discovery Mode.
+
+## GATE
+
+Selected mode is recorded in project state and applied consistently enough to
+prevent accidental workflow drift.
+
+===== DEV.03_SYNOPSIS_GATE.md =====
+# DEV.03_SYNOPSIS_GATE
+
+**ID:** `DEV.03_SYNOPSIS_GATE`
+
+## OUTPUT
+
+```text
+APPROVE
+APPROVE_WITH_CHANGES
+REWORK
+RETHINK_CORE
+```
+
+The synopsis must expose:
+
+```text
+AI-DECIDED
+AUTHOR-DECIDED
+DEFERRED
+OPEN
+```
+
+## GATE
+
+Only `APPROVE` or `APPROVE_WITH_CHANGES` after changes are implemented allows
+standard production.
+
+`REWORK` and `RETHINK_CORE` block standard production.
+
+## RULE
+
+Approval of the synopsis does not retroactively convert an undisclosed AI
+assumption into an author decision.
+
+## AUTHOR RULE
+
+This is an explicit author gate.
+
+===== DEV.04_CHARACTER.md =====
+# DEV.04_CHARACTER
+
+**ID:** `DEV.04_CHARACTER`
+
+## TRACK
+
+```text
+IDENTITY
+DESIRE
+NEED
+FEARS
+VALUES
+CONTRADICTIONS
+ARC
+RELATIONSHIPS
+VOICE
+KNOWLEDGE
+CAPABILITIES
+LIMITATIONS
+```
+
+## RULE
+
+Character state is project-specific.
+
+Character knowledge must remain compatible with `CORE.06_KNOWLEDGE_DISCIPLINE`.
+
+Character capabilities/limitations must remain compatible with established world,
+form and genre contracts where those modules are active.
+
+===== DEV.05_CAUSALITY.md =====
+# DEV.05_CAUSALITY
+
+**ID:** `DEV.05_CAUSALITY`
+
+## CANONICAL CHAIN
+
+```text
+CAUSE
+→ CHOICE / ACTION
+→ CONSEQUENCE
+→ NEW SITUATION
+```
+
+## FAIL
+
+- coincidence performs load-bearing causal work without justification;
+- protagonist lacks causal agency where agency is promised.
+
+## RULE
+
+Causality is a diagnostic model. It is not a command to impose the same
+beat structure on every literary form.
+
+===== DEV.06_COINCIDENCE_AUDIT.md =====
+# DEV.06_COINCIDENCE_AUDIT
+
+**ID:** `DEV.06_COINCIDENCE_AUDIT`
+
+## COINCIDENCE MAY INTRODUCE
+
+- situation;
+- encounter;
+- information.
+
+## COINCIDENCE SHOULD NOT
+
+Silently resolve the central conflict unless the effect is intentionally designed
+and supported by the work.
+
+## AUDIT QUESTION
+
+Does coincidence perform load-bearing causal work that should instead be supported
+by established causality, character choice/action, or deliberate design?
+
+## OUTPUT
+
+Finding + evidence + proposed action where applicable.
+
+The audit does not edit the manuscript.
+
+===== DEV.07_SCENE_ENGINE.md =====
+# DEV.07_SCENE_ENGINE
+
+**ID:** `DEV.07_SCENE_ENGINE`
+
+## SCENE FIELDS
+
+```text
+FUNCTION
+DESIRE
+OBSTACLE
+CHOICE
+TURN
+CONSEQUENCE
+PRESSURE
+EXIT
+```
+
+## RULE
+
+Not every form requires the same scene model.
+
+For forms where these fields are not applicable, the engine must not fabricate
+scene-level mechanics merely to satisfy the toolkit.
+
+Framework-derived notions remain diagnostic lenses, not immutable laws.
+
+===== DEVELOPMENT_ENGINE.md =====
+# DEVELOPMENT ENGINE
+
+**Layer:** ENGINE  
+**Activation:** when story development is required or useful  
+**Dependencies:** Core authority/state/evidence/causality/knowledge
+
+## PURPOSE
+
+Разработать story core, выбрать development path без принуждения к единственной
+структурной модели и провести Working Development Synopsis через author gate.
+
+## DEVELOPMENT MODES
+
+```text
+ARCHITECT
+DISCOVERY
+HYBRID
+```
+
+### ARCHITECT
+
+Plan before drafting.
+
+### DISCOVERY
+
+Draft/explore first, then extract and stabilize state.
+
+### HYBRID
+
+Alternate between planning and discovery.
+
+## RULE
+
+Discovery is a valid path, not an error.
+
+## OUTPUTS
+
+- STORY CORE
+- DEVELOPMENT MODE
+- character and causal state
+- scene/sequence architecture where applicable
+- WORKING DEVELOPMENT SYNOPSIS
+- author review result
