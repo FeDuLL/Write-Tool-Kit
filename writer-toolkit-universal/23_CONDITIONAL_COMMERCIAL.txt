@@ -1,0 +1,128 @@
+WRITER-TOOLKIT v0.3 — COMMERCIAL
+================================
+
+===== COM.01_COMMERCIAL_HYPOTHESIS.md =====
+# COM.01 — Commercial Hypothesis
+
+## Purpose
+
+Treat commercial reasoning as evidence-based hypothesis generation, not as an automatic quality score.
+
+## Record
+
+```text
+QUESTION
+HYPOTHESIS
+EVIDENCE_SOURCE
+POPULATION / MARKET SCOPE
+TIMEFRAME
+SUPPORTED_FACTS
+INTERPRETATIONS
+UNCERTAINTIES
+STATUS
+```
+
+## Rule
+
+A market hypothesis is not a literary verdict. Evidence should be dated and scoped where relevant.
+
+===== COM.02_COMMERCIAL_FIREWALL.md =====
+# COM.02 — Commercial Firewall
+
+## Purpose
+
+Keep commercial optimization from becoming unauthorized artistic optimization.
+
+## Required transition
+
+Before a commercial finding changes a load-bearing literary element:
+
+```text
+FINDING
+→ PROPOSED TRADE-OFF
+→ AUTHOR DECISION
+```
+
+## Forbidden silent mutations
+
+The model must not silently:
+
+- flatten style;
+- simplify psychology;
+- alter the ending for presumed marketability;
+- insert genre signals the project did not choose;
+- change world truth;
+- expand or compress scope solely for a speculative commercial assumption.
+
+===== COM.03_SUBMISSION_PACKAGE.md =====
+# COM.03 — Submission Package
+
+## Purpose
+
+Build a publication / submission layer that accurately represents the approved manuscript.
+
+## Possible components
+
+```text
+TITLE
+ONE-LINE PITCH
+LOGLINE / PREMISE
+SYNOPSIS
+AUTHOR BIO (when supplied)
+GENRE / POSITIONING
+TARGET AUDIENCE
+COMPARABLES / MARKET CONTEXT
+SUBMISSION NOTE
+```
+
+## Integrity rule
+
+Submission materials may simplify presentation, but must not contradict the manuscript or invent achievements, audience data, or market facts.
+
+Any commercial claim without adequate evidence remains qualified or `UNTESTED`.
+
+===== COMMERCIAL_MODULE.md =====
+# Commercial Module
+
+## Module ID
+
+`COND.30_COMMERCIAL`
+
+## Activation
+
+Activate only on explicit author request or when commercial evaluation is a declared project requirement.
+
+## Commercial hypothesis states
+
+```text
+HYPOTHESIS
+EVIDENCE
+STATUS
+SUPPORTED
+MIXED
+WEAKENED
+UNTESTED
+```
+
+## Commercial scope
+
+Commercial evidence may inform:
+
+- positioning;
+- title / blurb / package;
+- target audience definition;
+- channel or submission strategy;
+- format or market hypotheses.
+
+## Commercial firewall
+
+Commercial considerations cannot silently rewrite:
+
+- artistic core;
+- character psychology;
+- ending;
+- theme;
+- approved world truth;
+- authorial meaning.
+
+Any such change requires an explicit proposal and the appropriate author decision.
