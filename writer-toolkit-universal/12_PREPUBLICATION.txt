@@ -1,0 +1,38 @@
+WRITER-TOOLKIT v0.3 — PREPUBLICATION
+
+# 45. PUBLICATION READINESS CONTRACT
+
+`PUBLICATION READY` requires:
+
+```text
+DRAFT_COMPLETE = PASS
+FULL_AUDIT = PASS
+REVISION = COMPLETE or NOT_REQUIRED
+REQUIRED_INDEPENDENT_CHECKS = PASS
+NO_BLOCKING_UNVERIFIED = TRUE
+CHANGE_LOG_COMPLETE = TRUE
+MANUSCRIPT_PERSISTED = TRUE
+EXPORT_COMPLETE = TRUE
+```
+
+Additional project-specific publication requirements may be added.
+
+Commercial success is never implied.
+
+---
+
+
+## Gate G10 — PREPUBLICATION
+
+PASS when:
+
+- final manuscript persisted;
+- final audit complete;
+- required independent checks passed;
+- blocking findings resolved;
+- export/package complete.
+
+FAIL:
+`PREPUBLICATION_BLOCKED`
+
+---
