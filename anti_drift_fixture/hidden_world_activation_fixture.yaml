@@ -1,0 +1,4 @@
+active_modules:
+  hidden_world: ON
+activation_source: AUTHOR_DECISION
+reveal_required: true
