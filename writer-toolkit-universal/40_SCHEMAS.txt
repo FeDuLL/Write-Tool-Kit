@@ -1,0 +1,435 @@
+WRITER-TOOLKIT v0.3 — SCHEMAS
+=============================
+
+===== active_modules.schema =====
+schema_version: "0.3"
+name: active_modules
+example_shape:
+  hidden_world: OFF
+  reveal: OFF
+  series: OFF
+  ip: OFF
+  cross_media: OFF
+  commercial: OFF
+  genre_contract: OFF
+  locale: RU
+  screenplay: OFF
+  romance: OFF
+activation_sources:
+  - Creative Brief
+  - HARD requirements
+  - explicit author decisions
+  - form
+rule: old-project memory is never an activation source
+
+===== ai_decided.schema =====
+schema_version: "0.3"
+name: ai_decided
+required:
+  - id
+  - field
+  - proposal
+  - reason
+  - source_context
+  - reversible
+  - author_action_required
+  - decision_state
+properties:
+  reversible: true|false
+  author_action_required: true|false
+  decision_state:
+    enum: PROPOSED | ACCEPTED | REJECTED | DEFERRED
+rule: AI-DECIDED records expose assumptions and prevent them from disappearing into prose
+rule_2: DERIVED or AI-originated does not imply AUTHOR acceptance
+
+===== audit_coverage.schema =====
+schema_version: "0.3"
+name: audit_coverage
+required:
+  - audit_id
+  - scope
+  - passes
+properties:
+  scope:
+    enum: CHAPTER | SCENE | SEQUENCE | EPISODE | MANUSCRIPT | PROJECT | OTHER
+  passes:
+    type: list
+    item_required:
+      - pass_id
+      - required
+      - executed
+      - evidence_available
+      - independence_required
+      - independence_available
+      - result
+    item_properties:
+      result:
+        enum: PASS | FAIL | UNVERIFIED | NOT_APPLICABLE
+rule: no FULLY_CHECKED claim until all required passes have a recorded state
+rule_2: unit-level coverage does not automatically equal full-manuscript coverage
+
+===== bootstrap_status.schema =====
+schema_version: "0.3"
+name: bootstrap_status
+required:
+  - toolkit_version
+  - schema_version
+  - project_id
+  - current_stage
+  - current_unit
+  - active_modules
+  - capability_profile
+  - blockers
+  - next_authorized_action
+  - bootstrap_result
+bootstrap_result:
+  enum:
+    - READY
+    - BLOCKED
+    - UNVERIFIED
+
+===== capability_profile.schema =====
+schema_version: "0.3"
+name: capability_profile
+properties:
+  file_persistence: true|false
+  manuscript_access: true|false
+  full_manuscript_context: YES|NO|PARTIAL
+  exact_counting: true|false
+  output_capacity:
+    value: ...
+    exactness: EXACT|ESTIMATED|UNKNOWN
+  independent_review: true|false
+  state_transfer: true|false
+  external_tools: []
+  chunking: true|false
+  append_to_artifact: true|false
+
+===== change_log.schema =====
+schema_version: "0.3"
+name: change_log
+entry_required:
+  - change_id
+  - authority_classification
+  - target
+  - before
+  - after
+  - reason
+  - author_authorized
+  - checkpoint
+properties:
+  authority_classification:
+    enum: REPAIR | OPTIMIZATION | DEVELOPMENT PROPOSAL | AUTHOR DECISION
+  change_id: stable change identifier
+  target: manuscript, state, style, canon, or other artifact target
+  before: prior recorded value or description
+  after: resulting value or description
+  reason: rationale
+  author_authorized: true|false
+  checkpoint: checkpoint/version reference
+rule: no silent substantive revision
+rule_2: audit findings do not mutate the change log as manuscript approval; revision or explicit author action commits changes
+
+===== creative_brief.schema =====
+schema_version: "0.3"
+name: creative_brief
+required:
+  - PROJECT_ID
+  - PROJECT_NAME
+  - FORM
+  - SCOPE_RECORD
+  - GENRE
+  - SUBGENRE
+  - TONE
+  - EMOTIONAL_EFFECT
+  - AUDIENCE
+  - POV
+  - STRUCTURAL_MODE
+  - PROSE_TEXTURE
+  - DARKNESS
+  - HUMOR
+  - ROMANCE
+  - PHILOSOPHICAL_DENSITY
+  - ENDING
+  - SERIES_STATUS
+  - PARTICIPATION_MODE
+  - LANGUAGE
+  - LOCALE
+  - COMMERCIAL_INTENT
+  - CROSS_MEDIA_INTENT
+field_contract:
+  decision_state:
+    enum: UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
+  source:
+    enum: AUTHOR | AI | DERIVED | EXTERNAL
+rule: DERIVED does not mean accepted
+acceptance_rule: only ACCEPTED values under applicable authority rules are author decisions
+scope_boundary: schema records brief data; it does not choose genre, prose style, scope, or structural mode for the author
+
+===== deviation_record.schema =====
+schema_version: "0.3"
+name: deviation_record
+required:
+  - id
+  - parameter
+  - target
+  - actual
+  - deviation
+  - reason
+  - consequence
+  - status
+  - author_authorized
+  - checkpoint
+properties:
+  status:
+    enum: PROPOSED | AUTHOR-ACCEPTED | REJECTED
+  author_authorized: true|false
+rule: PROPOSED never equals AUTHOR-ACCEPTED
+authorization_rule: ACCEPTED DEVIATION requires an explicit author act; silence is insufficient
+
+===== evidence.schema =====
+schema_version: "0.3"
+name: evidence
+required:
+  - source
+  - locator
+  - excerpt
+  - interpretation
+  - result
+properties:
+  result:
+    enum: PASS | FAIL | UNVERIFIED | NOT_APPLICABLE
+  source: artifact or review source identifier
+  locator: stable location within source
+  excerpt: relevant evidence fragment
+  interpretation: why the evidence supports the recorded result
+rule: production report alone is invalid evidence for a HARD-* PASS
+rule_2: when independent evidence is required but unavailable, result is UNVERIFIED
+
+===== handoff.schema =====
+schema_version: "0.3"
+name: handoff
+required_order:
+  - VERSION
+  - PROJECT_ID
+  - CURRENT_STAGE
+  - CURRENT_UNIT
+  - PROJECT_STATUS
+  - AUTHOR_DECISIONS
+  - AI_DECIDED
+  - DEFERRED
+  - OPEN_BLOCKERS
+  - SCOPE_RECORD
+  - STYLE_LOCK
+  - ACTIVE_MODULES
+  - CAPABILITY_PROFILE
+  - RECENT_MANUSCRIPT_CONTEXT
+  - CONTINUITY
+  - NEXT_AUTHORIZED_ACTION
+  - DO_NOT_DO
+properties:
+  VERSION: toolkit/bootstrap/schema version information
+  PROJECT_ID: stable project identifier
+  CURRENT_STAGE: stage identifier
+  CURRENT_UNIT: production unit or null
+  PROJECT_STATUS: project execution status
+  AUTHOR_DECISIONS: accepted author decisions relevant to continuation
+  AI_DECIDED: ref: ai_decided.schema
+  DEFERRED: unresolved decisions that are not yet accepted
+  OPEN_BLOCKERS: current blockers
+  SCOPE_RECORD: ref: scope_record.schema
+  STYLE_LOCK: ref: style_lock.schema
+  ACTIVE_MODULES: ref: active_modules.schema
+  CAPABILITY_PROFILE: ref: capability_profile.schema
+  RECENT_MANUSCRIPT_CONTEXT: navigation context from persisted manuscript
+  CONTINUITY: relevant continuity state
+  NEXT_AUTHORIZED_ACTION: next allowed operation
+  DO_NOT_DO: explicit handoff constraints and protected decisions
+rules:
+  - handoff is a portable reconstruction aid, not a replacement for manuscript/state
+  - DO_NOT_DO is especially important on model/runtime switching
+  - unresolved DEFERRED items remain unresolved unless explicitly authorized and decided
+
+===== hard_requirements.schema =====
+schema_version: "0.3"
+name: hard_requirements
+item_required:
+  - id
+  - statement
+  - authority_class
+  - decision_state
+  - source
+properties:
+  id: stable requirement identifier
+  statement: requirement that must be preserved or checked
+  authority_class:
+    enum: PROJECT-HARD | DOMAIN-HARD | LITERARY-HARD | SOFT
+  decision_state:
+    enum: UNKNOWN | OPEN | DEFERRED | PROPOSED | ACCEPTED | REJECTED
+  source:
+    enum: AUTHOR | AI | DERIVED | EXTERNAL
+rule: explicit HARD requirements are auditable; unresolved load-bearing HARD requirements block authorized production
+
+===== manuscript.schema =====
+schema_version: "0.3"
+name: manuscript
+required:
+  - manuscript_id
+  - version
+  - form
+  - persisted
+  - location
+  - current_length
+  - completed_units
+  - checksum_or_integrity_marker
+properties:
+  manuscript_id: stable manuscript identifier
+  version: manuscript version/checkpoint version
+  form: declared project form
+  persisted: true|false
+  location: persisted artifact location or null when runtime cannot persist
+  current_length:
+    value: ...
+    metric: project/form-defined metric
+    exactness: EXACT | ESTIMATED | UNKNOWN
+  completed_units: list of production-unit identifiers
+  checksum_or_integrity_marker: adapter-dependent integrity marker or null
+authority: MANUSCRIPT is authoritative for literal text
+completion_rule: unit completion requires TEXT_PERSISTED = YES
+conflict_rule: conflicts with state are inspected and resolved explicitly; no blanket precedence rule
+
+===== project_state.schema =====
+schema_version: "0.3"
+name: project_state
+required:
+  - toolkit_version
+  - schema_version
+  - project_id
+  - project_name
+  - current_stage
+  - current_unit
+  - form
+  - scope_record
+  - participation_mode
+  - complexity
+  - active_modules
+  - hard_requirements
+  - style_lock
+  - capability_profile
+  - ai_decided
+  - deviations
+  - blockers
+  - last_checkpoint
+properties:
+  current_stage: project lifecycle stage; stage labels are governed by the stage model
+  current_unit: project-defined production unit or null
+  form: project-declared form
+  scope_record: ref: scope_record.schema
+  participation_mode:
+    enum: HIGH-COLLABORATION | BALANCED | AUTONOMOUS-WITH-GATES
+  complexity:
+    enum: T1 | T2 | T3
+  active_modules: ref: active_modules.schema
+  hard_requirements: ref: hard_requirements.schema
+  style_lock: ref: style_lock.schema
+  capability_profile: ref: capability_profile.schema
+  ai_decided: list of ref: ai_decided.schema
+  deviations: list of ref: deviation_record.schema
+  blockers: list of explicit blocker records
+  last_checkpoint: checkpoint identifier or null
+  optional_persistent_state:
+    - domain_state
+    - character_state
+    - continuity_state
+    - stable_digest_reference
+rule: STATE is authoritative for project decisions and execution state, not literal manuscript prose
+
+===== scope_record.schema =====
+schema_version: "0.3"
+name: scope_record
+
+scope_record:
+  mode: EXACT | RANGE | APPROX | FORM-DERIVED | UNKNOWN | NON-BINDING | DISCOVERY
+  metric: AL | CHARACTERS | WORDS | PAGES | MINUTES | OTHER
+  target_value: null
+  target_min: null
+  target_max: null
+  current_value: null
+  current_exactness: EXACT | ESTIMATED | UNKNOWN
+  deviation: null
+  deviation_status: NONE | WITHIN | OVER | UNDER | AUTHOR-ACCEPTED
+  owner: AUTHOR
+  binding: YES | NO
+  source: AUTHOR | DERIVED | PROJECT
+
+===== style_baseline.schema =====
+schema_version: "0.3"
+name: style_baseline
+required:
+  - baseline_id
+  - excerpts
+  - target_notes
+  - permitted_variations
+  - source_model
+  - source_runtime
+properties:
+  baseline_id: stable identifier for the accepted calibration baseline
+  excerpts:
+    type: list
+    item:
+      type: narrative | dialogue | interiority | description
+      text: preserved exemplar text
+  target_notes: prose contract notes grounded in the calibration
+  permitted_variations: allowed variation without treating it as drift
+  source_model: model/runtime provenance for the exemplar
+  source_runtime: runtime provenance for the exemplar
+acceptance_rule: baseline is established only when calibration artifact is preserved and the applicable author interaction is complete
+forbidden_claim: adjective-only description is not a sufficient baseline
+
+===== style_lock.schema =====
+schema_version: "0.3"
+name: style_lock
+required:
+  - baseline_id
+  - locked_at
+  - model_profile
+  - runtime_profile
+  - permitted_variation
+  - status
+properties:
+  baseline_id: reference to style_baseline.schema baseline_id
+  locked_at: timestamp or checkpoint reference
+  model_profile: current model/runtime profile at lock time
+  runtime_profile: execution environment profile at lock time
+  permitted_variation: allowed stylistic variation
+  status:
+    enum: LOCKED | OPEN | SUPERSEDED
+rule: Style Lock is an execution reference, not an artistic prison
+change_rule: intentional load-bearing deviation requires PROPOSE -> AUTHOR DECISION -> UPDATE STYLE LOCK or REGISTER LOCAL DEVIATION
+
+===== SCHEMA_INVENTORY.md =====
+# WRITER-TOOLKIT v0.3 — SCHEMA INVENTORY
+
+Canonical implementation inventory. All 15 Build Spec schemas are physically materialized in this distribution.
+
+```text
+creative_brief.schema
+project_state.schema
+scope_record.schema
+style_baseline.schema
+style_lock.schema
+capability_profile.schema
+active_modules.schema
+hard_requirements.schema
+deviation_record.schema
+ai_decided.schema
+audit_coverage.schema
+evidence.schema
+change_log.schema
+manuscript.schema
+handoff.schema
+```
+
+Schema authority is the canonical Build Spec plus the field contracts represented in these files.
+
+Design rule: schemas express project/runtime state and persistence contracts; they do not invent artistic defaults.
