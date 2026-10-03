@@ -1,5 +1,6 @@
 schema_version: "0.3"
-name: bootstrap_status
+name: "bootstrap_status"
+
 required:
   - toolkit_version
   - schema_version
@@ -11,8 +12,42 @@ required:
   - blockers
   - next_authorized_action
   - bootstrap_result
-bootstrap_result:
-  enum:
-    - READY
-    - BLOCKED
-    - UNVERIFIED
+
+properties:
+  toolkit_version: string
+  schema_version: string
+  project_id: string
+  project_status: string
+  current_stage: string
+  current_unit: string
+  manuscript_status: string
+  state_status: string
+  digest_status: string
+  active_modules: list
+  style_status: string
+  style_lock: string
+  style_baseline: string
+  capability_profile:
+    type: object
+    required:
+      - file_persistence
+      - manuscript_access
+      - full_manuscript_in_context
+      - exact_counting
+      - output_capacity
+      - independent_review
+      - state_transfer
+      - external_tools
+      - chunking
+      - append_to_artifact
+  blockers: list
+  deferred_load_bearing: list
+  open_items: list
+  invalidated_verdicts: list
+  next_authorized_action: string
+  do_not_do: list
+  bootstrap_result:
+    enum:
+      - READY
+      - BLOCKED
+      - UNVERIFIED
