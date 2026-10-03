@@ -1,4 +1,4 @@
-WRITER-TOOLKIT v0.3 — HIDDEN WORLD
+WRITER-TOOLKIT v0.3 — HIDDEN_WORLD
 ==================================
 
 ===== HIDDEN_WORLD_MODULE.md =====
@@ -86,7 +86,7 @@ These are not interchangeable.
 
 ## Gate
 
-A reveal plan is not complete until every load-bearing hidden fact has a declared reveal state and an epistemic route appropriate to the project form.
+A reveal plan is not complete until every load-bearing hidden fact has a declared reveal state and an ehistemic route appropriate to the project form.
 
 ===== HW.02_ONTOLOGY_AND_SURFACE.md =====
 # HW.02 — Ontology and Surface
@@ -119,7 +119,7 @@ Could the current character infer this from available evidence?
 Does the wording leak ontology through terminology or authorial framing?
 ```
 
-An answer of `NO` to the first two questions is a block against direct assertion, not a license to invent a different fact.
+An answer of `NO@ to the first two questions is a block against direct assertion, not a license to invent a different fact.
 
 ===== HW.03_DISCOVERY_FAIRNESS.md =====
 # HW.03 — Discovery Fairness
@@ -146,7 +146,6 @@ For a claim about what a fresh reader would infer on first read:
 ```text
 INDEPENDENT_READER = REQUIRED
 ```
-
 Without suitable independent evidence:
 
 ```text
@@ -155,8 +154,7 @@ UNVERIFIED
 
 A writer session that already knows the secret cannot certify first-read discovery behavior by role-play alone.
 
-===== HW.04_REVEAL_AUDITS.md =====
-# HW.04 — Reveal Audits
+===== HW.04 — Reveal Audits
 
 ## Audit classes
 
@@ -169,7 +167,7 @@ Checks whether the reveal has sufficient information support for the promised re
 ### Retrospective Coherence Audit
 Checks whether the revealed truth makes prior evidence more coherent without requiring impossible knowledge.
 
-### Epistemic Integrity Audit
+## Epistemic Integrity Audit
 Checks character knowledge, narrator access, and reader access separately.
 
 ## Read-only rule
@@ -194,15 +192,3 @@ READER_KNOWLEDGE_STATE
 PUBLIC_BELIEF_STATE
 RESERVED_REVEAL
 LAST_CHECKED_UNIT
-OPEN_RISKS
-```
-
-## Authority
-
-`STATE` is authoritative for decisions and reveal status.
-
-`MANUSCRIPT` remains authoritative for literal prose.
-
-`DIGEST` is navigation only.
-
-Conflicts are resolved by inspection; there is no blanket rule that a snapshot overrides the manuscript.
