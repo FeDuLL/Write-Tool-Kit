@@ -1,0 +1,83 @@
+WRITER-TOOLKIT v0.3 — STATE
+
+# 21. DEVIATION RECORD
+
+## `STATE.04_DEVIATION`
+
+Schema:
+
+```yaml
+deviation:
+  id: ...
+  parameter: ...
+  target: ...
+  actual: ...
+  deviation: ...
+  reason: ...
+  consequence: ...
+  status: PROPOSED | AUTHOR-ACCEPTED | REJECTED
+  author_authorized: true|false
+  checkpoint: ...
+```
+
+### Rule
+
+`PROPOSED` never equals `ACCEPTED`.
+
+---
+
+
+===== HANDOFF =====
+
+# 34. FORM OF HANDOFF
+
+## `STATE.07_HANDOFF`
+
+Canonical order:
+
+```text
+VERSION
+PROJECT_ID
+CURRENT_STAGE
+CURRENT_UNIT
+PROJECT_STATUS
+AUTHOR_DECISIONS
+AI_DECIDED
+DEFERRED
+OPEN_BLOCKERS
+SCOPE_RECORD
+STYLE_LOCK
+ACTIVE_MODULES
+CAPABILITY_PROFILE
+RECENT_MANUSCRIPT_CONTEXT
+CONTINUITY
+NEXT_AUTHORIZED_ACTION
+DO_NOT_DO
+```
+
+`DO_NOT_DO` is especially useful for model switching.
+
+---
+
+
+===== ACTIVE MODULES =====
+
+schema_version: "0.3"
+name: active_modules
+example_shape:
+  hidden_world: OFF
+  reveal: OFF
+  series: OFF
+  ip: OFF
+  cross_media: OFF
+  commercial: OFF
+  genre_contract: OFF
+  locale: RU
+  screenplay: OFF
+  romance: OFF
+activation_sources:
+  - Creative Brief
+  - HARD requirements
+  - explicit author decisions
+  - form
+rule: old-project memory is never an activation source
