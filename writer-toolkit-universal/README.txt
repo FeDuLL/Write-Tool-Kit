@@ -1,0 +1,3 @@
+WRITER-TOOLKIT v0.3 — UNIVERSAL TXT
+Status: PHASE_H_FORM_REPAIR_APPLIED
+FORM is explicitly available as 04_FORM.txt.
