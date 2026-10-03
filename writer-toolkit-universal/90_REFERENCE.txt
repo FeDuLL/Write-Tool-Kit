@@ -1626,7 +1626,9 @@ That build specification should turn every item above into:
 
 Only after that should the v0.3 modules be written.
 
+
 ===== BUILD SPEC =====
+
 # WRITER-TOOLKIT v0.3 — BUILD SPECIFICATION
 
 **Status:** BUILD SPEC / canonical implementation contract  
@@ -4054,7 +4056,9 @@ Writer-Toolkit v0.3 is considered correctly implemented only if the following pr
 
 That is the primary engineering acceptance test of v0.3.
 
+
 ===== DISTRIBUTION SOURCE MAP =====
+
 # DISTRIBUTION SOURCE MAP
 
 Canonical:
