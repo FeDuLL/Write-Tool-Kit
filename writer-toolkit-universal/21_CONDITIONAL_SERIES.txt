@@ -1,0 +1,118 @@
+WRITER-TOOLKIT v0.3 — SERIES
+============================
+
+===== SER.01_SERIES_ARCHITECTURE.md =====
+# SER.01 — Series Architecture
+
+## Purpose
+
+Model the relationship between the current book and any approved larger arc without allowing future plans to distort the current manuscript by default.
+
+## Required fields
+
+```text
+CURRENT_BOOK_PROMISE
+CURRENT_BOOK_SCOPE
+BOOK_RESOLUTION
+SERIES_ARC_STATUS
+FUTURE_SEEDS
+RESERVED_REVEALS
+ESCALATION_PLAN
+UNUSED_OPTIONALITY
+```
+
+## Rule
+
+A future seed is a design reserve, not an accepted event.
+
+A future reveal is not current canon unless explicitly accepted as such.
+
+===== SER.02_BOOK_LOCK.md =====
+# SER.02 — Book Lock
+
+## Purpose
+
+Protect the current book from uncontrolled series expansion during production.
+
+## Book Lock records
+
+```text
+LOCKED_BOOK_SCOPE
+LOCKED_END_STATE
+LOCKED_LOAD_BEARING_ARCS
+RESERVED_SERIES_SPACE
+OPEN_SERIES_OPTIONS
+DEFERRED_SERIES_DECISIONS
+```
+
+## Gate
+
+When the current-book lock is active, a series idea that changes a load-bearing current-book element becomes a development proposal and requires the appropriate author decision.
+
+Silence is not approval.
+
+===== SER.03_SERIES_CONTINUITY.md =====
+# SER.03 — Series Continuity
+
+## Purpose
+
+Track continuity across books after each book is locked or completed.
+
+## Checks
+
+- dates and chronology;
+- character state;
+- knowledge state;
+- world-rule consistency;
+- reserved reveals;
+- unresolved promises;
+- deliberate contradictions / deviations.
+
+## Authority rule
+
+Series digest is a navigation aid. Exact contradictions are resolved against the manuscript and authoritative project state, not by trusting summary prose.
+
+## Audit outcome
+
+Continuity findings may be:
+
+```text
+MATCH
+CONFLICT
+UNVERIFIED
+INTENTIONAL_DEVIATION
+OPEN
+```
+
+===== SERIES_MODULE.md =====
+# Series Module
+
+## Module ID
+
+`COND.10_SERIES`
+
+## Activation
+
+```text
+SERIES = ON
+```
+
+or another explicit series intent / multi-book plan / episodic architecture flag.
+
+## Fields
+
+```text
+BOOK_STATE
+SERIES_ARC
+RESERVED_REVEALS
+ESCALATION
+LONG_TERM_CONTINUITY
+```
+
+## Scope rule
+
+The current book has its own author-approved scope. Future-book possibilities are tracked separately and do not become current-book canon automatically.
+
+## Inactive behavior
+
+Standalone projects do not inherit series-specific obligations, hooks, seeds, cliffhangers, or continuity machinery merely because they may later become expandable.
