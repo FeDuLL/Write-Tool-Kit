@@ -1,16 +1,21 @@
 # IP.02 — Medium Separation
 
-## Required layers
+## Four-layer model
 
-```text
-CORE_WORLD_TRUTH
-MEDIUM_ADAPTATION
-AUDIENCE_KNOWLEDGE
-MARKETING / LICENSE EXPRESSION
-```
+### CORE_WORLD_TRUTH
+What is true within the approved world model.
 
-## Rule
+### MEDIUM_ADAPTATION
+What is altered for a specific medium's constraints or affordances.
 
-A medium-specific representation may simplify or reinterpret presentation without silently rewriting approved core truth.
+### AUDIENCE_KNOWLEDGE
+What a specific audience or release actually exposes.
 
-Any load-bearing contradiction is surfaced as a proposal requiring the appropriate author decision.
+### MARKETING / LICENSE EXPRESSION
+How the property is represented commercially without necessarily stating canon.
+
+## Change rule
+
+Every proposed cross-media difference must be classified before adoption.
+
+If a change would alter core world truth, it becomes an author-level canon decision rather than an adaptation convenience.
