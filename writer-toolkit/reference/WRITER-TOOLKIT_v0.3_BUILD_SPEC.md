@@ -997,3 +997,1002 @@ OPEN BLOCKERS
 `READY_TO_WRITE` or blocker list.
 
 ---
+## `PROD.03_WRITE_UNIT`
+
+Allowed only when:
+
+```text
+NO BLOCKING HARD CONFLICT
+NO REQUIRED UNRESOLVED LOAD-BEARING DECISION
+```
+
+AI may proceed if the unit follows accepted plan.
+
+---
+
+## `PROD.04_UNIT_PERSISTENCE`
+
+A unit is not `DONE` until its manuscript text is persisted.
+
+State may not say:
+
+```text
+COMPLETED
+```
+
+while manuscript artifact is absent.
+
+### Gate
+
+```text
+TEXT_PERSISTED = YES
+```
+
+---
+
+# 19. RESPONSE OUTPUT ADAPTER
+
+## `ADAPTER.01_OUTPUT_BUDGET`
+
+Inputs:
+
+```text
+PRACTICAL_OUTPUT_CAPACITY
+RESERVE
+CHUNKING_AVAILABLE
+FILE_APPEND_AVAILABLE
+```
+
+### Behavior
+
+If unit fits:
+
+`SINGLE OUTPUT`
+
+If unit does not fit and chunking is available:
+
+`CHUNKED OUTPUT`
+
+If file append is available:
+
+`ASSEMBLED ARTIFACT`
+
+If no persistence/chunking:
+
+`MUST STOP before silently changing artistic unit`.
+
+---
+
+# 20. STATE ENGINE
+
+## `STATE.01_PROJECT_STATE`
+
+Minimum:
+
+```yaml
+project_state:
+  toolkit_version: 0.3
+  schema_version: 0.3
+  project_id: ...
+  project_name: ...
+  current_stage: ...
+  current_unit: ...
+  form: ...
+  scope_record: ...
+  participation_mode: ...
+  complexity: ...
+  active_modules: ...
+  hard_requirements: ...
+  style_lock: ...
+  capability_profile: ...
+  ai_decided: ...
+  deviations: ...
+  blockers: ...
+  last_checkpoint: ...
+```
+
+---
+
+## `STATE.02_MANUSCRIPT`
+
+Primary artifact record:
+
+```yaml
+manuscript:
+  manuscript_id: ...
+  version: ...
+  form: ...
+  persisted: true|false
+  location: ...
+  current_length:
+    value: ...
+    metric: ...
+    exactness: EXACT|ESTIMATED|UNKNOWN
+  completed_units: [...]
+  checksum_or_integrity_marker: ...
+```
+
+The exact checksum mechanism is adapter-dependent.
+
+---
+
+## `STATE.03_STABLE_DIGEST`
+
+Digest purpose:
+
+navigation only.
+
+Required disclaimer:
+
+```text
+DIGEST IS NOT AUTHORITATIVE FOR LITERAL MANUSCRIPT CONTENT.
+```
+
+---
+
+# 21. DEVIATION RECORD
+
+## `STATE.04_DEVIATION`
+
+Schema:
+
+```yaml
+deviation:
+  id: ...
+  parameter: ...
+  target: ...
+  actual: ...
+  deviation: ...
+  reason: ...
+  consequence: ...
+  status: PROPOSED | AUTHOR-ACCEPTED | REJECTED
+  author_authorized: true|false
+  checkpoint: ...
+```
+
+### Rule
+
+`PROPOSED` never equals `ACCEPTED`.
+
+---
+
+# 22. AI-DECIDED RECORD
+
+## `STATE.05_AI_DECIDED`
+
+Schema:
+
+```yaml
+ai_decided:
+  id: ...
+  field: ...
+  proposal: ...
+  reason: ...
+  source_context: ...
+  reversible: true|false
+  author_action_required: true|false
+  decision_state: PROPOSED | ACCEPTED | REJECTED | DEFERRED
+```
+
+This record prevents AI assumptions from disappearing into prose.
+
+---
+
+# 23. CAPABILITY ADAPTER
+
+## `ADAPTER.10_CAPABILITY_PROFILE`
+
+Schema:
+
+```yaml
+capabilities:
+  file_persistence: true|false
+  manuscript_access: true|false
+  full_manuscript_context: YES|NO|PARTIAL
+  exact_counting: true|false
+  output_capacity:
+    value: ...
+    exactness: EXACT|ESTIMATED|UNKNOWN
+  independent_review: true|false
+  state_transfer: true|false
+  external_tools: []
+  chunking: true|false
+  append_to_artifact: true|false
+```
+
+Capability profile may change between sessions/models.
+
+---
+
+# 24. AUDIT ENGINE
+
+## `AUD.01_COVERAGE`
+
+Schema:
+
+```yaml
+audit_coverage:
+  audit_id: ...
+  scope: CHAPTER | SEQUENCE | MANUSCRIPT | PROJECT
+  passes:
+    - pass_id: ...
+      required: true|false
+      executed: true|false
+      evidence_available: true|false
+      independence_required: true|false
+      independence_available: true|false
+      result: PASS | FAIL | UNVERIFIED | NOT_APPLICABLE
+```
+
+### Rule
+
+No `FULLY_CHECKED` claim until all required passes have a recorded state.
+
+---
+
+# 25. AUDIT PASS CLASSIFICATION
+
+## HARD FALSIFIABLE
+
+Examples:
+
+- forbidden terms;
+- chronology;
+- continuity;
+- hard requirement;
+- exact state match;
+- explicit epistemic bridge.
+
+Result:
+`PASS/FAIL`.
+
+## SOFT DIAGNOSTIC
+
+Examples:
+
+- repetition;
+- prose drift;
+- monotony.
+
+Result:
+`FINDING / NO_SIGNIFICANT_FINDING`.
+
+Not a universal binary quality verdict.
+
+## INDEPENDENT READER
+
+Examples:
+
+- reveal inference;
+- first-read effect.
+
+Result:
+
+```text
+PASS
+FAIL
+UNVERIFIED
+```
+
+`UNVERIFIED` if independent capability unavailable.
+
+---
+
+# 26. AUDITOR ROLE
+
+## `AUD.02_ROLE`
+
+Roles:
+
+```text
+AUTHOR
+WRITER
+AUDITOR
+```
+
+One model may perform multiple roles sequentially.
+
+The current role must be explicit.
+
+### Example
+
+```text
+ROLE = WRITER
+ACTION = DRAFT
+```
+
+then:
+
+```text
+ROLE = AUDITOR
+ACTION = HARD_CONTINUITY_CHECK
+```
+
+Role switch does not automatically create independence.
+
+---
+
+# 27. AUDIT EVIDENCE
+
+For every HARD-* PASS:
+
+```yaml
+evidence:
+  source: ...
+  locator: ...
+  excerpt: ...
+  interpretation: ...
+  result: PASS
+```
+
+A production report alone is invalid evidence.
+
+---
+
+# 28. AUDIT MUTATION FIREWALL
+
+Forbidden during audit:
+
+```text
+MANUSCRIPT EDIT
+STATE EDIT
+AUTHORITY EDIT
+DEVIATION ACCEPTANCE
+STYLE LOCK UPDATE
+CANON UPDATE
+```
+
+Allowed:
+
+```text
+FIND
+DESCRIBE
+CLASSIFY
+PROPOSE
+```
+
+Only Revision or explicit Author action can commit changes.
+
+---
+
+# 29. REVISION ENGINE
+
+## `REV.01_REVISION_LOOP`
+
+Exact order:
+
+```text
+DIAGNOSE
+→ LOCATE
+→ PROPOSE
+→ TEST
+→ REWRITE
+→ RE-AUDIT
+→ RECORD
+```
+
+### Rule
+
+Use smallest effective change.
+
+Do not rewrite entire text to fix local issue.
+
+Do not flatten voice to solve structural issue.
+
+---
+
+# 30. CHANGE LOG
+
+## `STATE.06_CHANGE_LOG`
+
+Every substantive revision:
+
+```yaml
+change:
+  id: ...
+  artifact: ...
+  location: ...
+  before: ...
+  after: ...
+  reason: ...
+  category: REPAIR | OPTIMIZATION | DEVELOPMENT_PROPOSAL | AUTHOR_DECISION
+  severity: ...
+  author_voice_risk: LOW | MEDIUM | HIGH
+  authorized_by: AUTHOR | PRE_AUTHORIZED | N_A
+  status: PROPOSED | APPLIED | REJECTED
+```
+
+No silent substantive revision.
+
+---
+
+# 31. AUTO-PROCEED CONTRACT
+
+## `CORE.09_INTERACTION`
+
+### MAY PROCEED
+
+- already approved plan;
+- mechanical repairs;
+- persistence;
+- state bookkeeping;
+- allowed diagnostics;
+- application of Style Lock;
+- routine production.
+
+### MUST STOP
+
+- load-bearing new decision;
+- hard conflict;
+- unresolved DEFERRED;
+- major scope change;
+- ending change;
+- form change;
+- authority change;
+- capability blocker;
+- required independent audit unavailable.
+
+### MUST PRESENT
+
+When optimization could help but is not already authorized.
+
+---
+
+# 32. PARTICIPATION MODE
+
+Schema:
+
+```text
+HIGH-COLLABORATION
+BALANCED
+AUTONOMOUS-WITH-GATES
+```
+
+## High collaboration
+
+Author checkpoint at frequent production boundaries.
+
+## Balanced
+
+Author checkpoints at defined major gates.
+
+## Autonomous
+
+Routine production proceeds without per-unit approval.
+
+Still requires:
+
+- MUST STOP gates;
+- state persistence;
+- revision/audit controls.
+
+Silence never equals approval.
+
+---
+
+# 33. BOOTSTRAP CORE
+
+## `BOOT.01_CANONICAL`
+
+### Universal preflight
+
+```text
+1. VERIFY TOOLKIT VERSION
+2. VERIFY SCHEMA VERSION
+3. VERIFY ARTIFACT INTEGRITY
+4. LOAD MANUSCRIPT
+5. LOAD PROJECT STATE
+6. LOAD ACTIVE MODULES
+7. LOAD STYLE LOCK
+8. LOAD CAPABILITIES
+9. IDENTIFY CURRENT STAGE
+10. IDENTIFY BLOCKERS
+11. IDENTIFY NEXT AUTHORIZED ACTION
+```
+
+### Fail
+
+- version mismatch;
+- missing required artifact;
+- manuscript unavailable when required;
+- state corruption;
+- schema mismatch;
+- incompatible audit status.
+
+---
+
+## `BOOT.02_NEW_CHAT`
+
+Trigger:
+
+new conversation, same project/model/runtime.
+
+Additional behavior:
+
+```text
+RESTORE
+→ VERIFY INTEGRITY
+→ DETERMINE LAST STABLE CHECKPOINT
+→ CONTINUE NEXT AUTHORIZED ACTION
+```
+
+Do not reinterpret settled decisions from scratch.
+
+---
+
+## `BOOT.03_NEW_MODEL`
+
+Trigger:
+
+same project moves to different model/runtime.
+
+Additional:
+
+```text
+PROFILE CAPABILITIES
+→ RECHECK OUTPUT LIMIT
+→ RE-ANCHOR STYLE FROM BASELINE
+→ CHECK ACTIVE MODULE COMPATIBILITY
+→ INVALIDATE CAPABILITY-DEPENDENT VERDICTS IF UNSUPPORTED
+→ CONTINUE
+```
+
+Style descriptions are not considered sufficient for transfer; preserved exemplars are.
+
+---
+
+# 34. FORM OF HANDOFF
+
+## `STATE.07_HANDOFF`
+
+Canonical order:
+
+```text
+VERSION
+PROJECT_ID
+CURRENT_STAGE
+CURRENT_UNIT
+PROJECT_STATUS
+AUTHOR_DECISIONS
+AI_DECIDED
+DEFERRED
+OPEN_BLOCKERS
+SCOPE_RECORD
+STYLE_LOCK
+ACTIVE_MODULES
+CAPABILITY_PROFILE
+RECENT_MANUSCRIPT_CONTEXT
+CONTINUITY
+NEXT_AUTHORIZED_ACTION
+DO_NOT_DO
+```
+
+`DO_NOT_DO` is especially useful for model switching.
+
+---
+
+# 35. STAGE GATES — EXACT BUILD CONTRACT
+
+## Gate G0 — INTAKE
+
+PASS when:
+
+- project identity exists;
+- minimum brief fields known or marked;
+- no hidden hard assumption;
+- no test value imported.
+
+FAIL:
+`BRIEF_INCOMPLETE`
+
+---
+
+## Gate G1 — BRIEF LOCK
+
+PASS when:
+
+- author decisions recorded;
+- deferred/unknown separated;
+- AI-decided exposed;
+- active modules determined;
+- scope mode declared;
+- participation mode declared.
+
+FAIL:
+`BRIEF_AUTHORITY_UNCLEAR`
+
+---
+
+## Gate G2 — PROSE CONTRACT
+
+PASS when:
+
+- prose texture exists or is validly deferred;
+- form-compatible prose contract exists;
+- style calibration trigger determined.
+
+FAIL:
+`PROSE_TARGET_UNRESOLVED`
+
+if writing cannot proceed without it.
+
+---
+
+## Gate G3 — STYLE LOCK
+
+PASS when:
+
+- baseline persisted;
+- diagnostic completed;
+- author interaction completed where required;
+- lock record stored.
+
+FAIL:
+`STYLE_BASELINE_MISSING`
+
+or:
+
+`STYLE_CALIBRATION_NOT_COMPLETE`
+
+---
+
+## Gate G4 — DEVELOPMENT READY
+
+PASS when:
+
+- development path selected;
+- approved synopsis/architecture exists;
+- AI assumptions exposed;
+- active conditional modules loaded.
+
+FAIL:
+`DEVELOPMENT_NOT_AUTHORIZED`
+
+---
+
+## Gate G5 — PRODUCTION UNIT READY
+
+PASS when:
+
+- current unit defined;
+- no blocker;
+- state loaded;
+- style lock available;
+- required previous context accessible;
+- no unresolved load-bearing deferred decision.
+
+FAIL:
+`UNIT_NOT_READY`
+
+---
+
+## Gate G6 — UNIT COMPLETE
+
+PASS when:
+
+- manuscript text persisted;
+- artifact state updated;
+- required diagnostics performed;
+- continuity checked;
+- no blocking finding.
+
+FAIL:
+`UNIT_NOT_PERSISTED`
+
+---
+
+## Gate G7 — DRAFT COMPLETE
+
+PASS when:
+
+- production coverage complete;
+- synopsis/plan diff checked;
+- HARD requirements checked;
+- story completion criteria met;
+- scope status recorded if active.
+
+FAIL:
+`DRAFT_INCOMPLETE`
+
+---
+
+## Gate G8 — FULL AUDIT COMPLETE
+
+PASS when:
+
+- all required passes executed;
+- coverage record complete;
+- independent-required passes verified or explicitly accepted as unresolved according to project policy.
+
+Normal publication gate should not accept blocking `UNVERIFIED`.
+
+FAIL:
+`AUDIT_INCOMPLETE`
+
+---
+
+## Gate G9 — REVISION COMPLETE
+
+PASS when:
+
+- target defects addressed;
+- change log complete;
+- relevant audits re-run;
+- no silent mutations.
+
+FAIL:
+`REVISION_UNVERIFIED`
+
+---
+
+## Gate G10 — PREPUBLICATION
+
+PASS when:
+
+- final manuscript persisted;
+- final audit complete;
+- required independent checks passed;
+- blocking findings resolved;
+- export/package complete.
+
+FAIL:
+`PREPUBLICATION_BLOCKED`
+
+---
+
+# 36. FAILURE CODE REGISTRY
+
+```text
+BRIEF_INCOMPLETE
+BRIEF_AUTHORITY_UNCLEAR
+SCOPE_MODE_MISSING
+SCOPE_CONFLICT
+DEFERRED_BLOCKER
+AI_DECISION_HIDDEN
+PROSE_TARGET_UNRESOLVED
+STYLE_BASELINE_MISSING
+STYLE_CALIBRATION_NOT_COMPLETE
+STYLE_DRIFT_UNRESOLVED
+MODULE_MISSING
+MODULE_NOT_AUTHORIZED
+CAPABILITY_PROFILE_MISSING
+MANUSCRIPT_MISSING
+MANUSCRIPT_NOT_PERSISTED
+STATE_INTEGRITY_ERROR
+STATE_MANUSCRIPT_CONFLICT
+UNIT_NOT_READY
+UNIT_NOT_PERSISTED
+DRAFT_INCOMPLETE
+AUDIT_INCOMPLETE
+AUDIT_UNVERIFIED
+AUDIT_MUTATION_DETECTED
+REVISION_UNVERIFIED
+PREPUBLICATION_BLOCKED
+VERSION_MISMATCH
+SCHEMA_MISMATCH
+BOOTSTRAP_INTEGRITY_ERROR
+```
+
+---
+
+# 37. SCHEMA INVENTORY
+
+The following files must exist before v0.3 can be called implementation-complete:
+
+```text
+schemas/
+├── creative_brief.schema
+├── project_state.schema
+├── scope_record.schema
+├── style_baseline.schema
+├── style_lock.schema
+├── capability_profile.schema
+├── active_modules.schema
+├── hard_requirements.schema
+├── deviation_record.schema
+├── ai_decided.schema
+├── audit_coverage.schema
+├── evidence.schema
+├── change_log.schema
+├── manuscript.schema
+└── handoff.schema
+```
+
+---
+
+# 38. TEMPLATE INVENTORY
+
+```text
+templates/
+├── creative_brief.txt
+├── ai_decided.txt
+├── synopsis_review.txt
+├── style_calibration.txt
+├── checkpoint.txt
+├── audit_finding.txt
+├── audit_coverage.txt
+├── revision_log.txt
+├── handoff.txt
+├── external_audit_package.txt
+└── bootstrap_status.txt
+```
+
+---
+
+# 39. CONDITIONAL FILE INVENTORY
+
+```text
+conditional/
+├── hidden_world/
+│   ├── MODULE.txt
+│   ├── reveal_state.schema
+│   ├── discovery_fairness.txt
+│   └── blind_reader_audit.txt
+│
+├── series/
+│   ├── MODULE.txt
+│   ├── series_state.schema
+│   └── escalation.txt
+│
+├── ip/
+│   ├── MODULE.txt
+│   └── ip_asset_register.schema
+│
+├── commercial/
+│   ├── MODULE.txt
+│   └── commercial_hypothesis.schema
+│
+├── genre/
+│   ├── MODULE.txt
+│   └── genre_contract.schema
+│
+└── locale/
+    ├── MODULE.txt
+    └── locale_rules.schema
+```
+
+---
+
+# 40. ADAPTER CONTRACT
+
+Every adapter must provide the same logical interface, regardless of implementation.
+
+Required operations:
+
+```text
+LOAD_ARTIFACT
+SAVE_ARTIFACT
+LOAD_STATE
+SAVE_STATE
+CHECK_CAPABILITIES
+GET_OUTPUT_BUDGET
+ASSEMBLE_CHUNKS
+VERIFY_ARTIFACT_INTEGRITY
+EXPORT
+```
+
+Unavailable operation must return:
+
+```text
+UNAVAILABLE
+```
+
+not a fabricated success.
+
+---
+
+# 41. CHAT-ONLY ADAPTER
+
+When no file system exists:
+
+- use explicit fenced persistence blocks;
+- output manuscript text in stable units;
+- output state separately;
+- require user persistence when automatic persistence is impossible;
+- never claim file saved when no file was created.
+
+Minimum checkpoint:
+
+```text
+[MANUSCRIPT CHECKPOINT]
+[PROJECT STATE CHECKPOINT]
+[STYLE STATE]
+[ACTIVE MODULES]
+[NEXT ACTION]
+```
+
+---
+
+# 42. FILE-CAPABLE ADAPTER
+
+When file persistence exists:
+
+- persist manuscript immediately after accepted production units;
+- persist state at checkpoint;
+- keep manuscript and state separately;
+- support chunk assembly;
+- produce integrity marker if possible;
+- export from persisted manuscript, not conversation reconstruction.
+
+---
+
+# 43. SMALL-CONTEXT ADAPTER
+
+When full manuscript cannot fit:
+
+- use indexed persisted manuscript;
+- retrieve only relevant segments;
+- do not claim full-manuscript audit without full coverage;
+- mark inaccessible sections;
+- use `UNVERIFIED`;
+- assemble final audit coverage explicitly.
+
+---
+
+# 44. AUDIT COVERAGE CONTRACT
+
+An audit pass must specify:
+
+```text
+PASS_ID
+TARGET_SCOPE
+REQUIRED_SECTIONS
+INPUT_ARTIFACTS
+INDEPENDENCE_REQUIRED
+INDEPENDENCE_AVAILABLE
+EVIDENCE_MODE
+RESULT
+UNVERIFIED_REASON
+```
+
+No generic:
+
+`AUDIT PASSED`
+
+without scope.
+
+---
+
+# 45. PUBLICATION READINESS CONTRACT
+
+`PUBLICATION READY` requires:
+
+```text
+DRAFT_COMPLETE = PASS
+FULL_AUDIT = PASS
+REVISION = COMPLETE or NOT_REQUIRED
+REQUIRED_INDEPENDENT_CHECKS = PASS
+NO_BLOCKING_UNVERIFIED = TRUE
+CHANGE_LOG_COMPLETE = TRUE
+MANUSCRIPT_PERSISTED = TRUE
+EXPORT_COMPLETE = TRUE
+```
+
+Additional project-specific publication requirements may be added.
+
+Commercial success is never implied.
+
+---
+
+# 46. TEST SPECIFICATION
+
+Minimum regression suite:
+
+## TEST-01 Short literary story
+
+Properties:
+
+```text
+SHORT FORM
+NO HIDDEN WORLD
+NO SERIES
+NO IP
+SCOPE = UNKNOWN initially
+```
+
+Must verify:
+
+- compact process;
+- no forced novel pipeline;
+- no forced target volume;
+- style baseline works.
