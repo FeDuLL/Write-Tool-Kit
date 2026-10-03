@@ -997,6 +997,7 @@ Exit:
 - genre contract exists where relevant;
 - prose contract exists;
 - style calibration trigger known.
+
 ## STAGE 3 — STYLE CALIBRATION
 
 Exit:
