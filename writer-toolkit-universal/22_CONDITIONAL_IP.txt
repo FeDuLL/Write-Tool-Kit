@@ -1,4 +1,4 @@
-WRITER-TOOLKIT v0.3 — IP / CROSS-MEDIA
+WRITER-TOOLKIT v0.3 — IP_CROSSMEDIA
 ===================================
 
 ===== IP.01_ASSET_REGISTER.md =====
@@ -6,61 +6,69 @@ WRITER-TOOLKIT v0.3 — IP / CROSS-MEDIA
 
 ## Purpose
 
-Track reusable intellectual-property assets without confusing adaptation assets with core canon.
+Track potentially reusable or cross-media-sensitive assets without conflating reuse value with canon status.
 
 ## Suggested fields
 
 ```text
 ASSET_ID
-ASSET_TYPE
+ASSET_NAME
+TYPE
+CANON_STATUS
 CORE_TRUTH_REF
-MEDIUM
-STATUS
-OWNER
+MEDIUMS
 ADAPTATION_NOTES
-AUDIENCE_KNOWLEDGE
-LICENSE / MARKETING_STATUS
+AUDIENCE_EXPOSURE
+LICENSE / MARKETING NOTES
+RESTRICTIONS
 ```
 
-## Rule
+## Canon rule
 
-An asset record does not change core world truth. Adaptation and licensing status remain separate from literary canon.
+Being useful for games, film, merchandising, or marketing does not promote an asset into canon.
 
 ===== IP.02_MEDIUM_SEPARATION.md =====
 # IP.02 — Medium Separation
 
-## Required layers
+## Four-layer model
 
-```text
-CORE_WORLD_TRUTH
-MEDIUM_ADAPTATION
-AUDIENCE_KNOWLEDGE
-MARKETING / LICENSE EXPRESSION
-```
+### CORE_WORLD_TRUTH
+What is true within the approved world model.
 
-## Rule
+### MEDIUM_ADAPTATION
+What is altered for a specific medium's constraints or affordances.
 
-A medium-specific representation may simplify or reinterpret presentation without silently rewriting approved core truth.
+### AUDIENCE_KNOWLEDGE
+What a specific audience or release actually exposes.
 
-Any load-bearing contradiction is surfaced as a proposal requiring the appropriate author decision.
+### MARKETING / LICENSE EXPRESSION
+How the property is represented commercially without necessarily stating canon.
+
+## Change rule
+
+Every proposed cross-media difference must be classified before adoption.
+
+If a change would alter core world truth, it becomes an author-level canon decision rather than an adaptation convenience.
 
 ===== IP.03_NOVEL_FIRST_GATE.md =====
 # IP.03 — Novel-First Gate
 
 ## Purpose
 
-When the literary work is the primary product, protect its independent integrity before cross-media optimization.
+Prevent speculative franchise logic from displacing the primary literary work.
 
 ## Gate questions
 
-- Is the literary artifact complete enough for its declared project stage?
-- Are cross-media changes clearly separated from core literary decisions?
-- Has marketing language been prevented from becoming canon?
-- Are adaptation conveniences documented as adaptations?
+```text
+Is the literary promise still intact?
+Does the current manuscript work on its own terms?
+Is a proposed cross-media feature necessary to solve a literary problem?
+Does the change preserve canon boundaries?
+```
 
-## Rule
+## Outcome
 
-Cross-media opportunity is not authority to weaken the literary artifact.
+Cross-media ideas that do not improve or protect the literary work remain external proposals rather than hidden production requirements.
 
 ===== IP_CROSSMEDIA_MODULE.md =====
 # IP / Cross-Media Module
