@@ -14,7 +14,7 @@ Author reviews/approves the brief.
 
 ## MANDATORY OUTPUT
 
-```
+```text
 AUTHOR DECISIONS
 AI-DECIDED / NOT-YOUR-DECISION-YET
 DEFERRED
