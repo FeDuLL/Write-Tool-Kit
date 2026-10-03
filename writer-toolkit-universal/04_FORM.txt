@@ -1,45 +1,234 @@
 WRITER-TOOLKIT v0.3 — FORM
+==========================
 
-## Form Contract
+===== FORM.01_CONTRACT.md =====
+# FORM.01_CONTRACT
 
-FORM is an operational routing layer, not a genre rule.
+**ID:** `FORM.01_CONTRACT`
+**Layer:** FORM
+**Activation:** always at project setup/restore because every project has a declared form.
 
-Every project resolves:
-- VOLUME_METRIC
-- STRUCTURAL_UNIT
-- PRODUCTION_UNIT
-- LOCK_UNIT
-- DONE_CRITERIA
-- AUDIT_PROFILE
-- PERSISTENCE_PROFILE
+## PURPOSE
+
+Translate the project `FORM` into an operational contract without imposing a universal literary shape.
+
+## INPUT
+
+```text
+FORM
+SCOPE_RECORD
+PARTICIPATION_MODE
+CURRENT_PROJECT_STATE
+```
+
+## OUTPUT
+
+```text
+VOLUME_METRIC
+STRUCTURAL_UNIT
+PRODUCTION_UNIT
+LOCK_UNIT
+DONE_CRITERIA
+AUDIT_PROFILE
+PERSISTENCE_PROFILE
+```
+
+## FORM RULE
+
+The declared project form determines the legal structural and production units.
 
 The runtime does not choose the literary form.
 
-### Prose
+### Prose forms
 
-Possible units include CHAPTER, SCENE, SEQUENCE, EPISODE or another project-defined unit.
+Allowed structural/production units may include:
+
+```text
+CHAPTER
+SCENE
+SEQUENCE
+EPISODE
+OTHER
+```
+
+The exact unit remains project-defined.
 
 ### Screenplay
 
+```text
 STRUCTURAL_UNIT = SCENE / SEQUENCE
 PRODUCTION_UNIT = SCENE / SEQUENCE
-CHAPTER_MODEL = OFF
-VOLUME_METRIC = project-defined
+```
 
-## Complexity
+A screenplay has no mandatory chapter model.
 
+Its volume metric remains project-defined and may use:
+
+```text
+PAGES
+MINUTES
+SCENES
+SEQUENCES
+OTHER
+```
+
+## GATE
+
+`FORM.CONTRACT_READY`
+
+## FAIL CONDITIONS
+
+```text
+FORM_UNDECLARED
+FORM_PIPELINE_CONFLICT
+PROSE_RULE_APPLIED_TO_SCREENPLAY
+INAPPROPRIATE_VOLUME_METRIC
+```
+
+## INVARIANTS
+
+- No universal chapter requirement.
+- No universal numeric volume target.
+- Response budget cannot redefine structural unit.
+- Production, persistence and applicable audit routing use the form contract.
+
+===== FORM.02_COMPLEXITY.md =====
+# FORM.02_COMPLEXITY
+
+**ID:** `FORM.02_COMPLEXITY`
+**Layer:** FORM
+**Activation:** when complexity/resource depth is declared.
+
+## ALLOWED MODES
+
+```text
 T1 = COMPACT
 T2 = STANDARD
 T3 = HIGH-COMPLEXITY
+```
 
-Complexity controls process depth/resources only. It does not activate hidden world, mystery, series, IP or commercial modules.
+## RULE
 
-## Screenplay routing
+Complexity controls process depth and resource requirements only.
 
-Never import prose chapter logic into screenplay production or audit.
+It does not activate:
+
+- mystery;
+- hidden world;
+- series;
+- IP;
+- commercial layer.
+
+## GATE
+
+`COMPLEXITY.DECLARED`
+
+## FAIL
+
+`COMPLEXITY_UNDECLARED` when explicit complexity routing is required.
+
+===== FORM.03_SCREENPLAY_PROFILE.md =====
+# FORM.03_SCREENPLAY_PROFILE
+
+**ID:** `FORM.03_SCREENPLAY_PROFILE`
+**Layer:** FORM
+**Trigger:**
+
+```text
+FORM = SCREENPLAY
+```
+
+## PURPOSE
+
+Provide the required screenplay routing without importing prose chapter logic.
+
+## OPERATIONAL PROFILE
+
+```text
+STRUCTURAL_UNIT = SCENE / SEQUENCE
+PRODUCTION_UNIT = SCENE / SEQUENCE
+LOCK_UNIT = SCENE / SEQUENCE / SEQUENCE_BATCH
+VOLUME_METRIC = PROJECT-DEFINED
+CHAPTER_MODEL = OFF
+SCREENPLAY_AUDIT_PROFILE = ON
+```
+
+## PRODUCTION RULES
+
+- Do not require chapters.
+- Do not measure completion by chapter count.
+- Do not force prose chapter transitions.
+- Preserve scene/sequence identity across chunked output.
+- A scene/sequence may be produced across multiple runtime outputs when the adapter requires it.
+
+## SCREENPLAY AUDIT SET
+
+At minimum:
+
+```text
+FORM_UNIT_INTEGRITY
+SCENE_SEQUENCE_CONTINUITY
+SCREENPLAY_FORMAT_CONSISTENCY
+DIALOGUE_ACTION_SEPARATION
+CHAPTER_RULE_CONTAMINATION
+```
+
+Generic causality, continuity, character, knowledge and manuscript audits remain applicable where relevant.
+
+## DONE CRITERIA
+
+A screenplay unit is complete when:
+
+- its declared scene/sequence function is fulfilled;
+- required form representation is present;
+- continuity with adjacent units is preserved;
+- the unit is persisted;
+- applicable diagnostics are complete.
+
+## GATE
+
+`SCREENPLAY.FORM_READY`
+
+## FAIL
+
+```text
+SCREENPLAY_CHAPTER_CONTAMINATION
+SCREENPLAY_UNIT_UNDEFINED
+SCREENPLAY_AUDIT_PROFILE_MISSING
+```
+
+===== FORM_ENGINE.md =====
+# FORM ENGINE
+
+**Layer:** ENGINE
+**Dependencies:** Creative Brief, Scope Record, Production, Audit, Persistence, Adapters.
+
+## PURPOSE
+
+Resolve the project form into an executable contract and route it to production, persistence and audit.
+
+## EXECUTION
+
+```text
+READ FORM
+→ BUILD FORM CONTRACT
+→ VALIDATE UNIT / METRIC
+→ ROUTE PRODUCTION UNIT
+→ ROUTE DONE CRITERIA
+→ ROUTE AUDIT PROFILE
+→ ROUTE PERSISTENCE PROFILE
+```
+
+## SAFETY RULES
+
+No production module may assume `CHAPTER` is universally valid.
+
+No audit may apply prose-only rules when `FORM = SCREENPLAY`.
+
+## RUNTIME RULE
 
 Output budget may cause chunking but may not change the selected structural unit.
 
-## Gate
+## GATE
 
-FORM.CONTRACT_READY
+`FORM.CONTRACT_READY`
