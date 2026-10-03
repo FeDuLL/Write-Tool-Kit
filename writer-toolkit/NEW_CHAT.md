@@ -1,10 +1,28 @@
 # WRITER-TOOLKIT v0.3 — NEW CHAT LAUNCHER
 
-Thin launcher only. It does not redefine Toolkit rules.
+**Wrapper:** BOOT.02_NEW_CHAT
 
-Load and execute `BOOTSTRAP.md`, then use the NEW CHAT branch:
+This is a thin launcher. It does not redefine Toolkit rules.
 
+## Instruction
+
+Load and execute:
+
+`BOOTSTRAP.md`
+
+Use the BOOT.02 — NEW CHAT branch after canonical preflight.
+
+Context:
+
+```text
+NEW CONVERSATION
+SAME PROJECT
+SAME MODEL / RUNTIME
 ```
+
+Required continuation:
+
+```text
 RESTORE
 → VERIFY INTEGRITY
 → DETERMINE LAST STABLE CHECKPOINT
@@ -13,4 +31,5 @@ RESTORE
 
 Return canonical bootstrap status before taking the next project action.
 
-Canonical source: `BOOTSTRAP.md`
+Canonical source:
+`BOOTSTRAP.md`
