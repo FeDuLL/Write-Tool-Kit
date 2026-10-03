@@ -4,21 +4,101 @@
   "fail": 0,
   "total": 16,
   "results": [
-    {"id":"AD-01","check":"Screenplay contract routes structural and production units to SCENE/SEQUENCE","result":"PASS","detail":"screenplay routing explicitly uses SCENE/SEQUENCE"},
-    {"id":"AD-02","check":"Screenplay has no mandatory chapter model","result":"PASS","detail":"CHAPTER_MODEL=OFF and universal chapter requirement prohibited"},
-    {"id":"AD-03","check":"Screenplay audit profile contains required form-specific checks","result":"PASS","detail":"all five minimum screenplay audit checks present"},
-    {"id":"AD-04","check":"Screenplay completion is unit/function based, not chapter-count based","result":"PASS","detail":"profile explicitly rejects chapter-count completion and defines unit completion"},
-    {"id":"AD-05","check":"DISCOVERY is an explicit development mode","result":"PASS","detail":"all three allowed modes are explicitly enumerated"},
-    {"id":"AD-06","check":"DISCOVERY workflow does not require architect-first planning","result":"PASS","detail":"discovery sequence and non-forcing rule present"},
-    {"id":"AD-07","check":"SCOPE supports UNKNOWN and DISCOVERY without a fixed target","result":"PASS","detail":"scope schema permits unknown/discovery and nullable targets"},
-    {"id":"AD-08","check":"No universal numeric volume target is imposed by scope/form contracts","result":"PASS","detail":"no hard-coded prior test volume found in core/form/scope"},
-    {"id":"AD-09","check":"Discovery fixture can begin drafting while architecture remains open","result":"PASS","detail":"draft begins with unresolved architecture and unknown scope"},
-    {"id":"AD-10","check":"Discovery extraction stabilizes accepted observations without silently canonizing deferred decisions","result":"PASS","detail":"accepted observations and deferred load-bearing decision remain distinct"},
-    {"id":"AD-11","check":"Load-bearing deferred decision remains non-canonical","result":"PASS","detail":"deferred load-bearing decision and open scope remain unresolved"},
-    {"id":"AD-12","check":"Hidden-world module is not activated by old-project memory","result":"PASS","detail":"activation is explicit and old-project memory is not a valid source"},
-    {"id":"AD-13","check":"Hidden-world module requires explicit trigger/contract rather than being a Core default","result":"PASS","detail":"hidden-world trigger concepts are explicit"},
-    {"id":"AD-14","check":"Hidden-world epistemic layers remain separated","result":"PASS","detail":"hidden ontology, surface model, public belief, character interpretation, and reader interpretation are distinct"},
-    {"id":"AD-15","check":"Constrained runtime preserves artistic production unit instead of changing form","result":"PASS","detail":"budget adapter chooses chunking/assembly or stop, not silent unit mutation"},
-    {"id":"AD-16","check":"Form contract is active for every project and runtime cannot choose literary form","result":"PASS","detail":"form is project-declared and runtime-independent"}
+    {
+      "id": "AD-01",
+      "check": "Screenplay contract routes structural and production units to SCENE/SEQUENCE",
+      "result": "PASS",
+      "detail": "screenplay routing explicitly uses SCENE/SEQUENCE"
+    },
+    {
+      "id": "AD-02",
+      "check": "Screenplay has no mandatory chapter model",
+      "result": "PASS",
+      "detail": "CHAPTER_MODEL=OFF and universal chapter requirement prohibited"
+    },
+    {
+      "id": "AD-03",
+      "check": "Screenplay audit profile contains required form-specific checks",
+      "result": "PASS",
+      "detail": "all five minimum screenplay audit checks present"
+    },
+    {
+      "id": "AD-04",
+      "check": "Screenplay completion is unit/function based, not chapter-count based",
+      "result": "PASS",
+      "detail": "profile explicitly rejects chapter-count completion and defines unit completion"
+    },
+    {
+      "id": "AD-05",
+      "check": "DISCOVERY is an explicit development mode",
+      "result": "PASS",
+      "detail": "all three allowed modes are explicitly enumerated"
+    },
+    {
+      "id": "AD-06",
+      "check": "DISCOVERY workflow does not require architect-first planning",
+      "result": "PASS",
+      "detail": "discovery sequence and non-forcing rule present"
+    },
+    {
+      "id": "AD-07",
+      "check": "SCOPE supports UNKNOWN and DISCOVERY without a fixed target",
+      "result": "PASS",
+      "detail": "scope schema permits unknown/discovery and nullable targets"
+    },
+    {
+      "id": "AD-08",
+      "check": "No universal numeric volume target is imposed by scope/form contracts",
+      "result": "PASS",
+      "detail": "no hard-coded prior test volume found in core/form/scope"
+    },
+    {
+      "id": "AD-09",
+      "check": "Discovery fixture can begin drafting while architecture remains open",
+      "result": "PASS",
+      "detail": "draft begins with unresolved architecture and unknown scope"
+    },
+    {
+      "id": "AD-10",
+      "check": "Discovery extraction stabilizes accepted observations without silently canonizing deferred decisions",
+      "result": "PASS",
+      "detail": "accepted observations and deferred load-bearing decision remain distinct"
+    },
+    {
+      "id": "AD-11",
+      "check": "Load-bearing deferred decision remains non-canonical",
+      "result": "PASS",
+      "detail": "deferred load-bearing decision and open scope remain unresolved"
+    },
+    {
+      "id": "AD-12",
+      "check": "Hidden-world module is not activated by old-project memory",
+      "result": "PASS",
+      "detail": "activation is explicit and old-project memory is not a valid source"
+    },
+    {
+      "id": "AD-13",
+      "check": "Hidden-world module requires explicit trigger/contract rather than being a Core default",
+      "result": "PASS",
+      "detail": "hidden-world trigger concepts are explicit"
+    },
+    {
+      "id": "AD-14",
+      "check": "Hidden-world epistemic layers remain separated",
+      "result": "PASS",
+      "detail": "hidden ontology, surface model, public belief, character interpretation, and reader interpretation are distinct"
+    },
+    {
+      "id": "AD-15",
+      "check": "Constrained runtime preserves artistic production unit instead of changing form",
+      "result": "PASS",
+      "detail": "budget adapter chooses chunking/assembly or stop, not silent unit mutation"
+    },
+    {
+      "id": "AD-16",
+      "check": "Form contract is active for every project and runtime cannot choose literary form",
+      "result": "PASS",
+      "detail": "form is project-declared and runtime-independent"
+    }
   ]
 }
