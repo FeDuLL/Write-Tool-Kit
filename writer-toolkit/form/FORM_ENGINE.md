@@ -9,7 +9,7 @@ Resolve the project form into an executable contract and route it to production,
 
 ## EXECUTION
 
-```
+```text
 READ FORM
 → BUILD FORM CONTRACT
 → VALIDATE UNIT / METRIC
