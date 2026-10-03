@@ -1,0 +1,710 @@
+WRITER-TOOLKIT v0.3 — RUNTIME / ADAPTERS
+========================================
+
+===== ADAPTER.00_ABSTRACT_CONTRACT.md =====
+# ADAPTER.00 — ABSTRACT CONTRACT
+
+**ID:** ADAPTER.00  
+**Type:** Canonical abstract adapter  
+**Activation:** Always
+
+## 1. PURPOSE
+
+Define the logical interface that every runtime adapter must satisfy.
+
+## 2. REQUIRED OPERATIONS
+
+| Operation | Purpose |
+|---|---|
+| `LOAD_ARTIFACT` | Load persisted manuscript or other required artifact. |
+| `SAVE_ARTIFACT` | Persist artifact changes. |
+| `LOAD_STATE` | Load Project State and other required state. |
+| `SAVE_STATE` | Persist state/checkpoint. |
+| `CHECK_CAPABILITIES` | Produce current capability profile. |
+| `GET_OUTPUT_BUDGET` | Report usable response/output capacity. |
+| `ASSEMBLE_CHUNKS` | Combine chunked outputs into a durable unit/artifact. |
+| `VERIFY_ARTIFACT_INTEGRITY` | Check that persisted artifact is intact and addressable. |
+| `EXPORT` | Produce requested export from persisted artifacts. |
+
+## 3. OPERATION CONTRACT
+
+Each operation must identify:
+
+```text
+operation
+status
+inputs
+artifacts_touched
+state_touched
+outputs
+verification_evidence
+error_or_blocker
+```
+
+## 4. UNAVAILABLE RULE
+
+When an operation cannot be provided by the runtime:
+
+```text
+status = UNAVAILABLE
+```
+
+The adapter must not simulate the missing operation.
+
+## 5. SOURCE-OF-TRUTH RULE
+
+`MANUSCRIPT` remains authoritative for literal manuscript content.
+`STATE` remains authoritative for project decisions and workflow state.
+`DIGEST` is navigation only.
+
+Adapters may transport or persist these artifacts but may not redefine their authority.
+
+## 6. CAPABILITY-DEPENDENT VERDICTS
+
+Any verdict that depends on an unavailable capability must not be presented as a verified result.
+
+Examples:
+
+```text
+FULL-MANUSCRIPT-AUDIT + PARTIAL ACCESS
+→ UNVERIFIED
+
+SAVE_ARTIFACT + NO PERSISTENCE
+→ UNAVAILABLE
+
+EXACT_COUNT + NO EXACT_COUNTING
+→ UNVERIFIED
+```
+
+## 7. DEPENDENCIES
+
+- Capability Profile;
+- Response Output Budget;
+- Manuscript/State persistence contracts;
+- Audit coverage contract;
+- Handoff contract.
+
+===== ADAPTER.01_OUTPUT_BUDGET.md =====
+# ADAPTER.01 — OUTPUT BUDGET
+
+**ID:** ADAPTER.01  
+**Purpose:** Separate runtime response capacity from literary form and project scope.
+
+## 1. INPUTS
+
+```text
+PRACTICAL_OUTPUT_CAPACITY
+RESERVE
+CHUNKING_AVAILABLE
+FILE_APPEND_AVAILABLE
+```
+
+The capacity may be `EXACT`, `ESTIMATED`, or `UNKNOWN`.
+
+## 2. DECISION
+
+### Unit fits
+
+```text
+→ SINGLE_OUTPUT
+```
+
+### Unit does not fit + chunking is available
+
+```text
+→ CHUNKED_OUTPUT
+```
+
+The production unit identity remains stable across chunks.
+
+### Unit does not fit + chunking is unavailable
+
+```text
+→ BLOCKED
+→ report capacity constraint
+→ propose a safe structural boundary only as a proposal
+```
+
+The adapter does **not** silently shrink the unit or redefine the author's scope.
+
+## 3. CHUNK CONTRACT
+
+Each chunk should carry enough identity to be reassembled unambiguously:
+
+```text
+PROJECT_ID
+UNIT_ID
+CHUNK_INDEX
+CHUNK_COUNT (known/unknown)
+CONTENT
+CONTINUATION_STATUS
+```
+
+## 4. PERSISTENCE RULE
+
+Where artifact persistence is available:
+
+```text
+WRITE CHUNK
+→ APPEND/PERSIST
+→ VERIFY
+→ NEXT CHUNK
+```
+
+A completed production unit is marked complete only after its assembled artifact is persisted.
+
+## 5. NO FORM LEAK
+
+Output budget cannot alter:
+
+- chapter size;
+- scene function;
+- prose texture;
+- artistic scope;
+- structural mode.
+
+===== ADAPTER.02_CAPABILITY_PROFILE.md =====
+# ADAPTER.02 — CAPABILITY PROFILE
+
+**ID:** ADAPTER.02  
+**Purpose:** Describe the current runtime, not the literary project.
+
+## 1. CANONICAL SCHEMA
+
+```yaml
+capabilities:
+  file_persistence: true|false
+  manuscript_access: true|false
+  full_manuscript_context: YES|NO|PARTIAL
+  exact_counting: true|false
+  output_capacity:
+    value: ...
+    exactness: EXACT|ESTIMATED|UNKNOWN
+  independent_review: true|false
+  state_transfer: true|false
+  external_tools: []
+  chunking: true|false
+  append_to_artifact: true|false
+```
+
+## 2. SEMANTICS
+
+### `file_persistence`
+Whether the runtime can durably save project artifacts.
+
+### `manuscript_access`
+Whether the runtime can retrieve the current manuscript artifact.
+
+### `full_manuscript_context`
+Whether the full manuscript can be held in the current working context at once.
+
+### `exact_counting`
+Whether the runtime can provide exact counts required by a task rather than estimates.
+
+### `output_capacity`
+Current practical output capacity. This is a runtime value, not a chapter-size target.
+
+### `independent_review`
+Whether a genuinely independent review capability is available to the current workflow.
+
+### `state_transfer`
+Whether required project state can be transferred into the current session without hidden prior memory.
+
+### `external_tools`
+The tools actually available to the runtime. An empty list means no declared external tools.
+
+### `chunking`
+Whether the runtime can safely produce and assemble a logical unit across multiple outputs.
+
+### `append_to_artifact`
+Whether the runtime can append/persist content to the target artifact between chunks.
+
+## 3. CAPABILITY FIREWALL
+
+Capability declarations must not become project decisions.
+
+```text
+CAPABILITY = runtime fact
+DECISION = project fact
+```
+
+Example:
+
+`FULL_MANUSCRIPT_CONTEXT = NO` does not mean that the manuscript is short.
+It means the current runtime cannot hold the whole manuscript in context simultaneously.
+
+## 4. CHANGE RULE
+
+Capability profile may change between sessions or models.
+
+On model/runtime switch:
+
+```text
+LOAD STATE
+→ RECHECK CAPABILITIES
+→ RECHECK OUTPUT BUDGET
+→ INVALIDATE UNSUPPORTED CAPABILITY-DEPENDENT VERDICTS
+```
+
+===== ADAPTER.03_CHAT_ONLY.md =====
+# ADAPTER.03 — CHAT-ONLY
+
+**ID:** ADAPTER.03  
+**Activation:** No durable file persistence is available.
+
+## 1. PURPOSE
+
+Provide portable project persistence through explicit chat output when automatic file storage is impossible.
+
+## 2. REQUIRED BEHAVIOR
+
+- use stable, explicitly fenced persistence blocks;
+- output manuscript text in identifiable production units;
+- output Project State separately from manuscript text;
+- require external/user persistence when automatic saving is impossible;
+- never claim that a file was saved unless a file was actually created.
+
+## 3. MINIMUM CHECKPOINT
+
+```text
+[MANUSCRIPT CHECKPOINT]
+[PROJECT STATE CHECKPOINT]
+[STYLE STATE]
+[ACTIVE MODULES]
+[NEXT ACTION]
+```
+
+## 4. MANUSCRIPT RULE
+
+The manuscript checkpoint contains the actual text needed to reconstruct the current durable draft.
+A prose summary is not a substitute for the manuscript checkpoint.
+
+## 5. STATE RULE
+
+Project State remains separate so that:
+
+```text
+MANUSCRIPT ≠ STATE ≠ DIGEST
+```
+
+## 6. FAILURE CONDITIONS
+
+### Cannot create file
+
+Report:
+
+```text
+SAVE_ARTIFACT = UNAVAILABLE
+```
+
+### Context may be lost before checkpoint
+
+The unit must not be reported as durably persisted.
+
+## 7. SAFE USE
+
+Chat-only mode can still support development, drafting, diagnostics, and revision, but persistence claims remain limited to what has actually been emitted and externally retained.
+
+===== ADAPTER.04_FILE_CAPABLE.md =====
+# ADAPTER.04 — FILE-CAPABLE
+
+**ID:** ADAPTER.04  
+**Activation:** Durable file persistence is available.
+
+## 1. PURPOSE
+
+Use persisted artifacts as the durable project substrate instead of relying on conversation reconstruction.
+
+## 2. REQUIRED BEHAVIOR
+
+After an accepted production unit:
+
+```text
+PERSIST MANUSCRIPT
+→ VERIFY
+```
+
+At checkpoint:
+
+```text
+PERSIST STATE
+→ VERIFY
+```
+
+Keep manuscript and state as separate artifacts.
+
+## 3. CHUNK ASSEMBLY
+
+When a production unit is larger than one output:
+
+```text
+UNIT
+├── CHUNK 1
+├── CHUNK 2
+├── ...
+└── CHUNK N
+      ↓
+ASSEMBLE
+      ↓
+VERIFY
+      ↓
+PERSISTED UNIT
+```
+
+Unit completion is not declared merely because the chat produced the final chunk.
+
+## 4. INTEGRITY
+
+Where supported, record an integrity marker such as:
+
+```text
+artifact_id
+version
+byte/character count (when exact)
+checksum/integrity marker
+last_persisted_unit
+```
+
+The exact checksum mechanism is adapter-dependent.
+
+## 5. EXPORT
+
+Exports must be generated from the persisted manuscript/state artifacts, not by reconstructing the project from a conversation transcript.
+
+## 6. FAILURE CONDITIONS
+
+If persistence fails:
+
+```text
+SAVE_ARTIFACT = FAIL
+```
+
+Do not mark the corresponding artifact or production unit as durably complete.
+
+If integrity cannot be established:
+
+```text
+VERIFY_ARTIFACT_INTEGRITY = UNVERIFIED
+```
+
+unless the adapter has other explicit evidence that establishes integrity.
+
+===== ADAPTER.05_SMALL_CONTEXT.md =====
+# ADAPTER.05 — SMALL-CONTEXT
+
+**ID:** ADAPTER.05  
+**Activation:** Full manuscript cannot reliably fit in current context.
+
+## 1. PURPOSE
+
+Permit safe work on large manuscripts without pretending that partial context is complete context.
+
+## 2. REQUIRED BEHAVIOR
+
+Use persisted, addressable manuscript segments or an equivalent indexed representation.
+
+```text
+MANUSCRIPT INDEX
+→ retrieve relevant segments
+→ inspect required context
+→ perform task
+```
+
+## 3. COVERAGE RULE
+
+Every audit or verification pass declares its actual coverage.
+
+```text
+FULL
+PARTIAL
+TARGETED
+UNVERIFIED
+```
+
+A small-context runtime must not report a full-manuscript audit when required sections were inaccessible.
+
+## 4. INACCESSIBLE SECTIONS
+
+When required sections cannot be inspected:
+
+```text
+RESULT = UNVERIFIED
+UNVERIFIED_REASON = inaccessible manuscript coverage
+```
+
+The runtime may still produce targeted diagnostics for accessible sections.
+
+## 5. AUTHORITY RULE
+
+Index entries, summaries, and digests are navigation mechanisms.
+They do not become substitutes for manuscript text when literal wording matters.
+
+## 6. AUDIT ASSEMBLY
+
+A final manuscript audit requires an explicit coverage record showing which required sections were actually inspected.
+
+## 7. COMPOSITION
+
+Small-context is an execution overlay. It can coexist with:
+
+```text
+FILE-CAPABLE
+TOOL-ENABLED
+```
+
+It does not require a separate project mode.
+
+===== ADAPTER.06_TOOL_ENABLED.md =====
+# ADAPTER.06 — TOOL-ENABLED
+
+**ID:** ADAPTER.06  
+**Activation:** One or more external runtime tools are actually available.
+
+## 1. PURPOSE
+
+Expose verified tool capability to the Writer-Toolkit without allowing tools to redefine project authority.
+
+## 2. DECLARATION
+
+Tools are declared through:
+
+```yaml
+external_tools:
+  - tool_identifier
+  - tool_identifier
+```
+
+Only tools actually available in the current runtime may be declared.
+
+## 3. TOOL USE RULE
+
+A tool result is evidence or an execution result. It is not automatically:
+
+- author approval;
+- canon;
+- quality approval;
+- a completed audit;
+- a saved artifact.
+
+These distinctions remain governed by the Core/state contracts.
+
+## 4. EXAMPLES OF VALID TOOL USE
+
+A tool may be used to:
+
+- load a persisted manuscript;
+- save an artifact;
+- count exact characters when exact counting is available;
+- assemble chunks;
+- verify an integrity marker;
+- export a file;
+- obtain an explicitly independent review when such capability is actually available.
+
+The adapter must record what the tool actually returned.
+
+## 5. UNAVAILABLE TOOL
+
+If a requested tool operation is not available:
+
+```text
+UNAVAILABLE
+```
+
+Do not replace it with an inferred success.
+
+## 6. AUTHORITY FIREWALL
+
+Tool output cannot silently mutate:
+
+- canon;
+- manuscript;
+- Project State;
+- Style Lock;
+- author decisions.
+
+Mutation requires the normal governed operation and its required evidence.
+
+## 7. INDEPENDENT REVIEW
+
+Having tools does not by itself mean that an audit is independent.
+Independence remains a separate capability claim in the Capability Profile.
+
+===== ADAPTER.07_INTEGRITY_EXPORT.md =====
+# ADAPTER.07 — INTEGRITY / EXPORT
+
+**ID:** ADAPTER.07  
+**Purpose:** Define how adapters prove artifact persistence and produce exports.
+
+## 1. VERIFY_ARTIFACT_INTEGRITY
+
+Verification should establish, to the extent supported by the runtime:
+
+```text
+artifact exists
+artifact is addressable
+artifact version is known
+content is retrievable
+integrity marker/checksum is available when supported
+```
+
+The adapter must distinguish:
+
+```text
+VERIFIED
+UNVERIFIED
+FAIL
+```
+
+## 2. EXPORT CONTRACT
+
+`EXPORT` must declare:
+
+```text
+source_artifact
+source_version
+export_format
+export_location (when available)
+export_status
+automation/evidence
+```
+
+The export source must be persisted project artifacts, not an inferred reconstruction from chat history.
+
+## 3. NO ARTIFACT FABRICATION
+
+The adapter must never report:
+
+```text
+FILE SAVED
+EXPORT COMPLETE
+INTEGRITY VERIFIED
+```
+
+unless the corresponding runtime evidence exists.
+
+## 4. PARTIAL EXPORT
+
+When only part of a requested export is accessible:
+
+```text
+EXPORT = UNVERIFIED or BLOCKED
+```
+
+with the reason recorded.
+
+## 5. HANDOFF COMPATIBILITY
+
+A valid handoff must retain enough artifact identity and state information for a new session/model to re-open the project without relying on hidden conversation memory.
+
+===== ADAPTER_RUNTIME_ENGINE.md =====
+# ADAPTER RUNTIME ENGINE
+
+**ID:** ADAPTER-ENGINE  
+**Layer:** Runtime Adapter  
+**Phase:** E
+
+## 1. PURPOSE
+
+Provide a single execution boundary between canonical Writer-Toolkit logic and the current model/runtime.
+
+## 2. CORE PRINCIPLE
+
+The toolkit defines literary/project semantics.
+
+The adapter defines what the current environment can actually do.
+
+```text
+CANONICAL TOOLKIT
+      ↓
+ADAPTER CONTRACT
+      ↓
+CURRENT CAPABILITY PROFILE
+      ↓
+RUNTIME EXECUTION
+```
+
+Runtime capability is not project authority.
+
+## 3. ADAPTER COMPOSITION
+
+The canonical adapter is always present. Runtime profiles are overlays:
+
+```text
+BASE ADAPTER
+├── CHAT_ONLY
+├── FILE_CAPABLE
+├── SMALL_CONTEXT
+└── TOOL_ENABLED
+```
+
+The overlays may coexist.
+
+Examples:
+
+```text
+CHAT-ONLY
+FILE-CAPABLE + TOOL-ENABLED
+FILE-CAPABLE + SMALL-CONTEXT
+FILE-CAPABLE + SMALL-CONTEXT + TOOL-ENABLED
+```
+
+A profile must never activate a literary/project module merely because a runtime capability exists.
+
+## 4. SESSION START
+
+At session start:
+
+```text
+CHECK_CAPABILITIES
+→ GET_OUTPUT_BUDGET
+→ LOAD_ARTIFACT (when required)
+→ LOAD_STATE
+→ verify adapter/module compatibility
+```
+
+Capability values describe the current execution environment only.
+
+## 5. OPERATION RESULT RULE
+
+Every adapter operation must expose whether it actually succeeded.
+
+Minimum semantic outcomes:
+
+- `SUCCESS` — operation completed and evidence exists;
+- `UNAVAILABLE` — operation is not supported in this runtime;
+- `BLOCKED` — operation is supported but cannot proceed because a required condition is absent;
+- `FAIL` — operation was attempted and failed;
+- `UNVERIFIED` — result cannot be established with available evidence.
+
+`UNAVAILABLE` must never be translated into `SUCCESS` by inference.
+
+## 6. LITERARY-SCOPE FIREWALL
+
+Adapter logic must not silently:
+
+- shorten a chapter because of output capacity;
+- change the scene function;
+- rewrite prose texture;
+- alter planned structure;
+- convert a deferred decision into canon;
+- claim persistence without persistence evidence;
+- claim full-manuscript audit without full coverage.
+
+When technical limits prevent the requested operation, the adapter reports the condition and uses the smallest safe technical alternative, such as chunking or persistence.
+
+## 7. STATE UPDATE RULE
+
+Production state is updated only after the corresponding artifact state is actually durable enough for the current adapter.
+
+For chunked production:
+
+```text
+WRITE CHUNK
+→ PERSIST CHUNK
+→ VERIFY CHUNK
+→ continue
+→ complete UNIT
+→ update UNIT STATE
+```
+
+A conversation-only draft must not be reported as persisted manuscript.
