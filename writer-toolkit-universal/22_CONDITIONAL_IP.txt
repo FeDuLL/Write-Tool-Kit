@@ -1,0 +1,105 @@
+WRITER-TOOLKIT v0.3 — IP / CROSS-MEDIA
+===================================
+
+===== IP.01_ASSET_REGISTER.md =====
+# IP.01 — Asset Register
+
+## Purpose
+
+Track reusable intellectual-property assets without confusing adaptation assets with core canon.
+
+## Suggested fields
+
+```text
+ASSET_ID
+ASSET_TYPE
+CORE_TRUTH_REF
+MEDIUM
+STATUS
+OWNER
+ADAPTATION_NOTES
+AUDIENCE_KNOWLEDGE
+LICENSE / MARKETING_STATUS
+```
+
+## Rule
+
+An asset record does not change core world truth. Adaptation and licensing status remain separate from literary canon.
+
+===== IP.02_MEDIUM_SEPARATION.md =====
+# IP.02 — Medium Separation
+
+## Required layers
+
+```text
+CORE_WORLD_TRUTH
+MEDIUM_ADAPTATION
+AUDIENCE_KNOWLEDGE
+MARKETING / LICENSE EXPRESSION
+```
+
+## Rule
+
+A medium-specific representation may simplify or reinterpret presentation without silently rewriting approved core truth.
+
+Any load-bearing contradiction is surfaced as a proposal requiring the appropriate author decision.
+
+===== IP.03_NOVEL_FIRST_GATE.md =====
+# IP.03 — Novel-First Gate
+
+## Purpose
+
+When the literary work is the primary product, protect its independent integrity before cross-media optimization.
+
+## Gate questions
+
+- Is the literary artifact complete enough for its declared project stage?
+- Are cross-media changes clearly separated from core literary decisions?
+- Has marketing language been prevented from becoming canon?
+- Are adaptation conveniences documented as adaptations?
+
+## Rule
+
+Cross-media opportunity is not authority to weaken the literary artifact.
+
+===== IP_CROSSMEDIA_MODULE.md =====
+# IP / Cross-Media Module
+
+## Module ID
+
+`COND.20_IP`
+
+## Activation
+
+Activate when:
+
+```text
+IP = ON
+```
+
+or
+
+```text
+CROSS_MEDIA = ON
+```
+
+## Separation contract
+
+```text
+CORE_WORLD_TRUTH
+MEDIUM_ADAPTATION
+AUDIENCE_KNOWLEDGE
+MARKETING / LICENSE EXPRESSION
+```
+
+## Rule
+
+A medium-specific convenience must not silently become a change to core world truth.
+
+A marketing expression is not itself canon.
+
+Audience knowledge may differ from internal world truth.
+
+## Literary-primary rule
+
+When literature is the primary product, the novel/script remains the authoritative literary artifact. Cross-media opportunities are evaluated around it rather than silently reshaping it.
